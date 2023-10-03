@@ -2,8 +2,11 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 create table Person(
 	Id UUID primary key DEFAULT uuid_generate_v4(),
-	Name Varchar(100) not null
+	Name Varchar(100) not null,
+	Email Varchar(255) not null,
+	Password Varchar (255) not null
 );
+
 create table Staff(
 	Id UUID primary key Default uuid_generate_v4(),
 	Person_id UUID,
