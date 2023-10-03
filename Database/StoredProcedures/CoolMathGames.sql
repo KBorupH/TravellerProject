@@ -2,7 +2,6 @@ create table Person(
 	Id UUID primary key DEFAULT uuid_generate_v4(),
 	Name Varchar(100) not null
 );
-drop table Staff, Person
 create table Staff(
 	Id UUID primary key Default uuid_generate_v4(),
 	Person_id UUID,
