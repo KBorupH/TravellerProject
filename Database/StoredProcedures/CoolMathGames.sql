@@ -1,8 +1,3 @@
-create table stations (
-	Id uuid primary key default uuid_generate_v4(),
-	Name varchar(255) not null,
-	Platforms int not null
-);
 create table Person(
 	Id UUID primary key DEFAULT uuid_generate_v4(),
 	Name Varchar(100) not null
