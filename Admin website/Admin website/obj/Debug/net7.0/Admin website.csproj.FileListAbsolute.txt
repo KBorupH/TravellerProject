@@ -1,0 +1,60 @@
+C:\Users\zbc23jakl\source\repos\Admin website\Admin website\bin\Debug\net7.0\appsettings.Development.json
+C:\Users\zbc23jakl\source\repos\Admin website\Admin website\bin\Debug\net7.0\appsettings.json
+C:\Users\zbc23jakl\source\repos\Admin website\Admin website\bin\Debug\net7.0\Admin website.staticwebassets.runtime.json
+C:\Users\zbc23jakl\source\repos\Admin website\Admin website\bin\Debug\net7.0\Admin website.exe
+C:\Users\zbc23jakl\source\repos\Admin website\Admin website\bin\Debug\net7.0\Admin website.deps.json
+C:\Users\zbc23jakl\source\repos\Admin website\Admin website\bin\Debug\net7.0\Admin website.runtimeconfig.json
+C:\Users\zbc23jakl\source\repos\Admin website\Admin website\bin\Debug\net7.0\Admin website.dll
+C:\Users\zbc23jakl\source\repos\Admin website\Admin website\bin\Debug\net7.0\Admin website.pdb
+C:\Users\zbc23jakl\source\repos\Admin website\Admin website\obj\Debug\net7.0\Admin website.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\zbc23jakl\source\repos\Admin website\Admin website\obj\Debug\net7.0\Admin website.AssemblyInfoInputs.cache
+C:\Users\zbc23jakl\source\repos\Admin website\Admin website\obj\Debug\net7.0\Admin website.AssemblyInfo.cs
+C:\Users\zbc23jakl\source\repos\Admin website\Admin website\obj\Debug\net7.0\Admin website.csproj.CoreCompileInputs.cache
+C:\Users\zbc23jakl\source\repos\Admin website\Admin website\obj\Debug\net7.0\Admin website.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\zbc23jakl\source\repos\Admin website\Admin website\obj\Debug\net7.0\Admin website.RazorAssemblyInfo.cache
+C:\Users\zbc23jakl\source\repos\Admin website\Admin website\obj\Debug\net7.0\Admin website.RazorAssemblyInfo.cs
+C:\Users\zbc23jakl\source\repos\Admin website\Admin website\obj\Debug\net7.0\staticwebassets\msbuild.Admin website.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\zbc23jakl\source\repos\Admin website\Admin website\obj\Debug\net7.0\staticwebassets\msbuild.build.Admin website.props
+C:\Users\zbc23jakl\source\repos\Admin website\Admin website\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.Admin website.props
+C:\Users\zbc23jakl\source\repos\Admin website\Admin website\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.Admin website.props
+C:\Users\zbc23jakl\source\repos\Admin website\Admin website\obj\Debug\net7.0\staticwebassets.pack.json
+C:\Users\zbc23jakl\source\repos\Admin website\Admin website\obj\Debug\net7.0\staticwebassets.build.json
+C:\Users\zbc23jakl\source\repos\Admin website\Admin website\obj\Debug\net7.0\staticwebassets.development.json
+C:\Users\zbc23jakl\source\repos\Admin website\Admin website\obj\Debug\net7.0\scopedcss\Pages\Shared\_Layout.cshtml.rz.scp.css
+C:\Users\zbc23jakl\source\repos\Admin website\Admin website\obj\Debug\net7.0\scopedcss\bundle\Admin website.styles.css
+C:\Users\zbc23jakl\source\repos\Admin website\Admin website\obj\Debug\net7.0\scopedcss\projectbundle\Admin website.bundle.scp.css
+C:\Users\zbc23jakl\source\repos\Admin website\Admin website\obj\Debug\net7.0\Admin website.dll
+C:\Users\zbc23jakl\source\repos\Admin website\Admin website\obj\Debug\net7.0\refint\Admin website.dll
+C:\Users\zbc23jakl\source\repos\Admin website\Admin website\obj\Debug\net7.0\Admin website.pdb
+C:\Users\zbc23jakl\source\repos\Admin website\Admin website\obj\Debug\net7.0\Admin website.genruntimeconfig.cache
+C:\Users\zbc23jakl\source\repos\Admin website\Admin website\obj\Debug\net7.0\ref\Admin website.dll
+C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin website\bin\Debug\net7.0\appsettings.Development.json
+C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin website\bin\Debug\net7.0\appsettings.json
+C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin website\bin\Debug\net7.0\Admin website.staticwebassets.runtime.json
+C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin website\bin\Debug\net7.0\Admin website.exe
+C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin website\bin\Debug\net7.0\Admin website.deps.json
+C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin website\bin\Debug\net7.0\Admin website.runtimeconfig.json
+C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin website\bin\Debug\net7.0\Admin website.dll
+C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin website\bin\Debug\net7.0\Admin website.pdb
+C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin website\obj\Debug\net7.0\Admin website.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin website\obj\Debug\net7.0\Admin website.AssemblyInfoInputs.cache
+C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin website\obj\Debug\net7.0\Admin website.AssemblyInfo.cs
+C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin website\obj\Debug\net7.0\Admin website.csproj.CoreCompileInputs.cache
+C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin website\obj\Debug\net7.0\Admin website.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin website\obj\Debug\net7.0\Admin website.RazorAssemblyInfo.cache
+C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin website\obj\Debug\net7.0\Admin website.RazorAssemblyInfo.cs
+C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin website\obj\Debug\net7.0\staticwebassets\msbuild.Admin website.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin website\obj\Debug\net7.0\staticwebassets\msbuild.build.Admin website.props
+C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin website\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.Admin website.props
+C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin website\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.Admin website.props
+C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin website\obj\Debug\net7.0\staticwebassets.pack.json
+C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin website\obj\Debug\net7.0\staticwebassets.build.json
+C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin website\obj\Debug\net7.0\staticwebassets.development.json
+C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin website\obj\Debug\net7.0\scopedcss\Pages\Shared\_Layout.cshtml.rz.scp.css
+C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin website\obj\Debug\net7.0\scopedcss\bundle\Admin website.styles.css
+C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin website\obj\Debug\net7.0\scopedcss\projectbundle\Admin website.bundle.scp.css
+C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin website\obj\Debug\net7.0\Admin website.dll
+C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin website\obj\Debug\net7.0\refint\Admin website.dll
+C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin website\obj\Debug\net7.0\Admin website.pdb
+C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin website\obj\Debug\net7.0\Admin website.genruntimeconfig.cache
+C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin website\obj\Debug\net7.0\ref\Admin website.dll
