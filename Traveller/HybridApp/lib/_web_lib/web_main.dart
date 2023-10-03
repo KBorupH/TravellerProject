@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:traveller_app/_web_lib/screens/web_home_screen.dart';
 import 'package:traveller_app/_web_lib/screens/web_ticket_screen.dart';
+import 'package:traveller_app/_web_lib/widgets/web_navigation_bar.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 final GlobalKey<NavigatorState> _shellNavigatorKey = GlobalKey<NavigatorState>();
@@ -13,60 +14,7 @@ final GoRouter _router = GoRouter(
       ShellRoute(
         navigatorKey: _shellNavigatorKey,
         builder: (context, state, child) {
-          return Scaffold(
-            appBar: AppBar(
-              backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-              title: Row(
-                children: [
-                  const Text("Traveller Web"),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(30, 0, 5, 0),
-                    child: ElevatedButton(
-                      onPressed: () => context.go('/'),
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Icon(Icons.train),
-                          SizedBox(
-                            width: 3,
-                          ),
-                          Text("Routes")
-                        ],
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              actions: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
-                  child: ElevatedButton(
-                    onPressed: () => context.go('/tickets'),
-                    child: const Row(
-                      children: [
-                        Icon(Icons.sticky_note_2),
-                        Text("Tickets"),
-                      ],
-                    ),
-                  ),
-                ),
-                Padding(
-                    padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      child: const Row(
-                        children: [
-                          Icon(Icons.login),
-                          Text("Login"),
-                        ],
-                      ),
-                    )),
-              ],
-            ),
-            body: SafeArea(
-              child: child,
-            ),
-          );
+          return WebNavigationBar(body: child);
         },
         routes: [
           // This screen is displayed on the ShellRoute's Navigator.
