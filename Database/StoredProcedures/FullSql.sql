@@ -1,3 +1,4 @@
+-- CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 create table stations (
 	Id uuid primary key default uuid_generate_v4(),
 	Name varchar(255) not null,
