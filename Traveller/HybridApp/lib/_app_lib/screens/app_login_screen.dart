@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../data/models/account.dart';
+import '../../data/models/login.dart';
 
 class AppLoginScreen extends StatefulWidget {
   const AppLoginScreen({super.key});
@@ -52,7 +52,7 @@ class _AppLoginScreenState extends State<AppLoginScreen> {
                 child: const Text("Submit"),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    late Account account = Account(
+                    late Login account = Login(
                         email: ctrEmail.value.text,
                         password: ctrPassword.value.text);
                     //Add to bloc

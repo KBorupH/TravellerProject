@@ -64,6 +64,7 @@ class _AppHomePageState extends State<AppHomePage> {
       key: _scaffoldKey,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        leading: const Image(image: AssetImage('assets/images/LogoSmall.png')),
         title: const Text("Traveller App"),
       ),
       body: SafeArea(child: widgetScreens[_selectedIndex]),

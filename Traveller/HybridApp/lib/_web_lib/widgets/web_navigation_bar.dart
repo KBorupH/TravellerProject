@@ -14,7 +14,14 @@ class WebNavigationBar extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Row(
           children: [
-            const Text("Traveller Web"),
+            SizedBox(
+              width: 150,
+              child: IconButton(
+                icon: Image.asset('assets/images/Logo.png'),
+                iconSize: 10,
+                onPressed: () => context.go('/'),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.fromLTRB(30, 0, 5, 0),
               child: ElevatedButton(
