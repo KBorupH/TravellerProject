@@ -3,32 +3,14 @@ import 'package:traveller_app/_app_lib/screens/app_home_screen.dart';
 import 'package:traveller_app/_app_lib/screens/app_login_screen.dart';
 import 'package:traveller_app/_app_lib/screens/app_ticket_screen.dart';
 
-class AppMain extends StatelessWidget {
+class AppMain extends StatefulWidget {
   const AppMain({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Traveller',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      debugShowCheckedModeBanner: false,
-
-      home: const AppHomePage(),
-    );
-  }
+  State<AppMain> createState() => _AppMainState();
 }
 
-class AppHomePage extends StatefulWidget {
-  const AppHomePage({super.key});
-
-  @override
-  State<AppHomePage> createState() => _AppHomePageState();
-}
-
-class _AppHomePageState extends State<AppHomePage> {
+class _AppMainState extends State<AppMain> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   int _selectedIndex = 0;
 
@@ -63,10 +45,18 @@ class _AppHomePageState extends State<AppHomePage> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        leading: const Image(image: AssetImage('assets/images/LogoSmall.png')),
-        title: const Text("Traveller App"),
-      ),
+          automaticallyImplyLeading: false,
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          title: Stack(
+            children: [
+              IconButton(
+                  onPressed: () => toggleDrawer(),
+                  icon: const Icon(Icons.menu)),
+              const Center(
+                  child:
+                      Image(image: AssetImage('assets/images/LogoWhite.png')))
+            ],
+          )),
       body: SafeArea(child: widgetScreens[_selectedIndex]),
       drawer: Drawer(
         child: ListView(

@@ -11,13 +11,13 @@ class WebNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         title: Row(
           children: [
             SizedBox(
               width: 150,
               child: IconButton(
-                icon: Image.asset('assets/images/Logo.png'),
+                icon: Image.asset('assets/images/LogoWhite.png'),
                 iconSize: 10,
                 onPressed: () => context.go('/'),
               ),
