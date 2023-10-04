@@ -4,21 +4,34 @@
 	ViewData["Title"] = "Home page";
 }
 
-<Main style="height: 2080px;">
+<Main style="height: 1800px;">
 	<div class="wrapper">
 		<nav>
-			<div class="TopBox TopBoxLeft"></div>
+			<div class="TopBox" id="TopBoxLeft"></div>
 			<h1 class="HeadLiner">Traveller</h1>
-			<div class="TopBox TopBoxRight"></div>
+			<div class="TopBox" id="TopBoxRight"></div>
 		</nav>
 		<div class="StatsBoxes">
-			<div class="grid-item"><h1 class="gridText">Workers</h1></div>
-			<div class="grid-item"><h1 class="gridText">Trains</h1></div>
-			<div class="grid-item"><h1 class="gridText">Tickets</h1></div>
-			<div class="grid-item"><h1 class="gridText">Passengers</h1></div>
+			<div class="grid-item box"><h1 class="gridText">Workers</h1></div>
+			<div class="grid-item box"><h1 class="gridText">Trains</h1></div>
+			<div class="grid-item box"><h1 class="gridText">Tickets</h1></div>
+			<div class="grid-item box"><h1 class="gridText">Passengers</h1></div>
 		</div>
-		<trainlog>
+		<div class="TrainLog box">
 
-		</trainlog>
+		</div>
+		<div id="LeftBox">
+			<div class="Earnings-graph box">
+
+			</div>
+			<div class="Train-routes box">
+				<input id="InputTrainRoutes" type="text" placeholder="Search..">
+			</div>
+			<div id="NewWorker" class="box">
+				<input type="text" placeholder="Name">
+				<input type="text" placeholder="id">
+				<button>Opret</button>
+			</div>
+		</div>
 	</div>
 </Main>
