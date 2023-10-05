@@ -18,3 +18,9 @@ LANGUAGE SQL
 INSERT INTO roadmaps(destination, start, estimated_time)
         VALUES(_destination, _start, _estimated_time);
         $$;
+
+create procedure NewPassenger(_id uuid)
+LANGUAGE SQL
+        AS $$
+INSERT INTO passenger(person_id) SELECT "id" FROM person WHERE ("id" = _id);
+        $$;
