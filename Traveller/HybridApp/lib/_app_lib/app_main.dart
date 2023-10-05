@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:traveller_app/_app_lib/screens/app_home_screen.dart';
 import 'package:traveller_app/_app_lib/screens/app_login_screen.dart';
@@ -41,6 +42,24 @@ class _AppMainState extends State<AppMain> {
       AppTicketScreen(),
       AppLoginScreen()
     ];
+
+      FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      print('Got a message whilst in the foreground!');
+      print('Message data: ${message.data}');
+
+      if (message.notification != null) {
+        print('Message also contained a notification: ${message.notification}');
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: const Text('Yay! A notification!'),
+          action: SnackBarAction(
+            label: 'Undo',
+            onPressed: () {
+              // Some code to undo the change.
+            },
+          ),
+        ));
+      }
+    });
 
     return Scaffold(
       key: _scaffoldKey,
