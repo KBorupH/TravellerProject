@@ -20,17 +20,17 @@ class HttpTokenService{
   late final String _baseUrl;
 
 
-  Future<String> GetAccessToken() async {
+  Future<String> getAccessToken() async {
     String token = await _readTokenSecureStorage();
 
     if (token == ""){
-      token = await _GetAccessTokenServer();
+      token = await _getAccessTokenServer();
     }
 
     return token;
   }
 
-  Future<String> _GetAccessTokenServer() async {
+  Future<String> _getAccessTokenServer() async {
     final login = <String, dynamic>{};
     login.addAll({"username": "TestName"});
     login.addAll({"password": "TestPass"});
@@ -44,6 +44,8 @@ class HttpTokenService{
       String responseBody = await response.transform(utf8.decoder).join();
       String token = json.decode(responseBody)['fullToken'];
 
+      _writeTokenSecureStorage(token);
+
       return token;
     }else {
       // If the server did not return a 200 OK response,
@@ -54,7 +56,6 @@ class HttpTokenService{
   }
 
   Future<void> _writeTokenSecureStorage(String token) async {
-    await _storage.delete(key: _storageTokenKey);
     await _storage.write(key: _storageTokenKey, value: token);
   }
 

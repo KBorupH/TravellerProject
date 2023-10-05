@@ -21,11 +21,15 @@ class TravellerDataMockup {
     return await [];
   }
 
+  Future<List<Route>> getRelevantRoutes(String startStation, String endStation, String startTime, String endTime) async {
+    return await [];
+  }
+
   Future<List<Ticket>> getAllTickets() async {
     return await [];
   }
 
-  Future<List<Ticket>> checkLogin() async {
+  Future<List<Ticket>> checkLogin(String email, String password) async {
     return await [];
   }
 }
