@@ -42,9 +42,11 @@
 .grid-item {
     padding: 10px;
     width: 100%;
+    border: none;
 }
 .gridText {
  text-align: center;
+
 }
 
 .TrainLog {

@@ -1,36 +1,38 @@
-﻿@page
-@model IndexModel
+﻿
+@page
+@model Admin_website.Pages.indexModel
 @{
-	ViewData["Title"] = "Home page";
+	ViewData["Title"] = "Home Page";
 }
 
-<Main style="height: 1800px;">
+
+<Main style="height: 1550px;">
 	<div class="wrapper">
 		<nav>
 			<div class="TopBox" id="TopBoxLeft"></div>
 			<h1 class="HeadLiner">Traveller</h1>
 			<div class="TopBox" id="TopBoxRight"></div>
 		</nav>
-		<div class="StatsBoxes">
-			<div class="grid-item box"><h1 class="gridText">Workers</h1></div>
+		<div class="StatsBoxes">	
+			<form method="post" class="grid-item box">
+				<input type="submit" asp-page-handler="Test" value="Klik mig" />
+			</form>
 			<div class="grid-item box"><h1 class="gridText">Trains</h1></div>
 			<div class="grid-item box"><h1 class="gridText">Tickets</h1></div>
 			<div class="grid-item box"><h1 class="gridText">Passengers</h1></div>
+
+
 		</div>
 		<div class="TrainLog box">
-
 		</div>
 		<div id="LeftBox">
 			<div class="Earnings-graph box">
-
 			</div>
 			<div class="Train-routes box">
-				<input id="InputTrainRoutes" type="text" placeholder="Search..">
-			</div>
-			<div id="NewWorker" class="box">
-				<input type="text" placeholder="Name">
-				<input type="text" placeholder="id">
-				<button>Opret</button>
+				<div>
+					<ol>
+					</ol>
+				</div>
 			</div>
 		</div>
 	</div>

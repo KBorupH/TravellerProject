@@ -16,20 +16,28 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin website
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/zbc23jakl/Source/Repos/Kevin-Borup/TravellerProject/Admin website/Admin website/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/zbc23jakl/Source/Repos/Kevin-Borup/TravellerProject/Admin website/Admin website/Pages/MyCustomComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTXlDdXN0b21Db21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/zbc23jakl/Source/Repos/Kevin-Borup/TravellerProject/Admin website/Admin website/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zbc23jakl/Source/Repos/Kevin-Borup/TravellerProject/Admin website/Admin website/Pages/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/zbc23jakl/Source/Repos/Kevin-Borup/TravellerProject/Admin website/Admin website/Pages/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
+[C:/Users/zbc23jakl/Source/Repos/Kevin-Borup/TravellerProject/Admin website/Admin website/Pages/index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcaW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/zbc23jakl/Source/Repos/Kevin-Borup/TravellerProject/Admin website/Admin website/Pages/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/zbc23jakl/Source/Repos/Kevin-Borup/TravellerProject/Admin website/Admin website/Pages/WorkerPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcV29ya2VyUGFnZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/zbc23jakl/Source/Repos/Kevin-Borup/TravellerProject/Admin website/Admin website/Pages/_ViewImports.cshtml]
