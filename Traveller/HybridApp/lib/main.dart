@@ -8,9 +8,23 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:url_strategy/url_strategy.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
-
+import 'firebase_options.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+  final ForegroundNotificationService foregroundNotificationService =
+  ForegroundNotificationService();
+
+  foregroundNotificationService.requestNotificationPermission();
+  foregroundNotificationService.firebaseInit();
+
   const String title = "Traveller";
   ThemeData themeData = ThemeData(
       colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xff003366)),
@@ -28,27 +42,6 @@ Future<void> main() async {
       routerConfig: getWebRouter(),
     ));
   } else {
-    WidgetsFlutterBinding.ensureInitialized();
-    await Firebase.initializeApp();
-    print(await getDeviceToken());
-
-    FirebaseMessaging messaging = FirebaseMessaging.instance;
-
-    NotificationSettings settings = await messaging.requestPermission(
-      alert: true,
-      announcement: false,
-      badge: true,
-      carPlay: false,
-      criticalAlert: false,
-      provisional: false,
-      sound: true,
-    );
-
-
-
-    print('User granted permission: ${settings.authorizationStatus}');
-    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-
     runApp(MaterialApp(
       title: title,
       theme: themeData,

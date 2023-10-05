@@ -43,24 +43,6 @@ class _AppMainState extends State<AppMain> {
       AppLoginScreen()
     ];
 
-      FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      print('Got a message whilst in the foreground!');
-      print('Message data: ${message.data}');
-
-      if (message.notification != null) {
-        print('Message also contained a notification: ${message.notification}');
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: const Text('Yay! A notification!'),
-          action: SnackBarAction(
-            label: 'Undo',
-            onPressed: () {
-              // Some code to undo the change.
-            },
-          ),
-        ));
-      }
-    });
-
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
@@ -70,7 +52,7 @@ class _AppMainState extends State<AppMain> {
             children: [
               IconButton(
                   onPressed: () => toggleDrawer(),
-                  icon: const Icon(Icons.menu)),
+                  icon: const Icon(Icons.menu, color: Colors.white,)),
               const Center(
                   child:
                       Image(image: AssetImage('assets/images/LogoWhite.png')))

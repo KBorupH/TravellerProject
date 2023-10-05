@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
 import 'package:intl/intl.dart';
 
-class WebSearchWidget extends StatefulWidget {
-  const WebSearchWidget({super.key});
+class AppSearchWidget extends StatefulWidget {
+  const AppSearchWidget({super.key});
 
   @override
-  State<WebSearchWidget> createState() => _WebSearchWidgetState();
+  State<AppSearchWidget> createState() => _AppSearchWidgetState();
 }
 
-class _WebSearchWidgetState extends State<WebSearchWidget> {
+class _AppSearchWidgetState extends State<AppSearchWidget> {
   late String _selectedTime = DateTime.now().toString();
   late final List<DropdownMenuItem<String>> timeEntries;
   late List<String> timeOptions = [];
@@ -58,31 +57,29 @@ class _WebSearchWidgetState extends State<WebSearchWidget> {
     return Container(
       margin: const EdgeInsets.all(15.0),
       padding: const EdgeInsets.all(20.0),
-      decoration: BoxDecoration(border: Border.all(color: Colors.blueAccent, width: 5)),
+      decoration:
+          BoxDecoration(border: Border.all(color: Colors.blueAccent, width: 5)),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: TextFormField(
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Enter start station',
-                  ),
-                ),
+          Expanded(
+            child: TextFormField(
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Enter start station',
               ),
-              const Padding(padding: EdgeInsets.fromLTRB(20, 0, 20, 0)),
-              Expanded(
-                  child: TextFormField(
-                      decoration: const InputDecoration(
+            ),
+          ),
+          const Padding(padding: EdgeInsets.only(top: 10)),
+          Expanded(
+            child: TextFormField(
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Enter end station',
-              ))),
-            ],
+              ),
+            ),
           ),
+          const Padding(padding: EdgeInsets.only(top: 10)),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

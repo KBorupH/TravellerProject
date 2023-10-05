@@ -59,7 +59,6 @@ class _AppLoginScreenState extends State<AppLoginScreen> {
                           email: ctrEmail.value.text,
                           password: ctrPassword.value.text);
                       //Add to bloc
-                      context.go('/');
                     }
                   })
             ],

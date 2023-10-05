@@ -50,6 +50,20 @@ class _WebTicketScreenState extends State<WebTicketScreen> {
                         endTime: "11:15",
                         platformNr: "2",
                         seatNr: "325"),
+                    WebTicketWidget(
+                        startStation: "Næstved",
+                        endStation: "Sorø",
+                        startTime: "11:15 ",
+                        endTime: "09:45",
+                        platformNr: "3",
+                        seatNr: "314"),
+                    WebTicketWidget(
+                        startStation: "Sorø",
+                        endStation: "Skagen",
+                        startTime: "09:45",
+                        endTime: "15:54",
+                        platformNr: "5",
+                        seatNr: "201")
                   ],
                 ),
               ),
