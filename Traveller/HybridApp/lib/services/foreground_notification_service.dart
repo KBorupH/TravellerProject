@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:windows_notification/notification_message.dart';
+import 'package:windows_notification/windows_notification.dart';
 
 void requestNotificationPermission() async {
 }
@@ -11,7 +13,8 @@ class ForegroundNotificationService {
   final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
   void firebaseInit() {
-    FirebaseMessaging.instance.subscribeToTopic("route_status");
+
+    if(!kIsWeb) FirebaseMessaging.instance.subscribeToTopic("route_status");
 
     FirebaseMessaging.onMessage.listen((message) {
       RemoteNotification? notification = message.notification;
@@ -66,49 +69,67 @@ class ForegroundNotificationService {
   }
 
   void _showNotification(RemoteMessage message) {
-    NotificationDetails notificationDetails = NotificationDetails();
 
-    if (Platform.isAndroid) {
-      AndroidNotificationChannel androidChannel = AndroidNotificationChannel(
-        message.notification!.android!.channelId.toString(),
-        message.notification!.android!.channelId.toString(),
-        importance: Importance.max,
-        playSound: true,
-        showBadge: true,
-        enableVibration: true,
+    if (Platform.isWindows) {
+      final _winNotifyPlugin = WindowsNotification(applicationId: "898056cc-074e-4fc3-b334-d443fba63e0b");
+
+
+      // create new NotificationMessage instance with id, title, body, and images
+      NotificationMessage message = NotificationMessage.fromPluginTemplate(
+          "test1",
+          "TEXT",
+          "TEXT",
+          image: "assets"
       );
 
-      AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
-        androidChannel.id.toString(),
-        androidChannel.name.toString(),
-      );
+      // show notification
+      _winNotifyPlugin.showNotificationPluginTemplate(message);
+    }
+    else
+    {
+      NotificationDetails notificationDetails = NotificationDetails();
+      if (Platform.isAndroid) {
+        AndroidNotificationChannel androidChannel = AndroidNotificationChannel(
+          message.notification!.android!.channelId.toString(),
+          message.notification!.android!.channelId.toString(),
+          importance: Importance.max,
+          playSound: true,
+          showBadge: true,
+          enableVibration: true,
+        );
 
-      notificationDetails = NotificationDetails(android: androidDetails);
-    } else if (Platform.isIOS) {
-      const DarwinNotificationDetails darwinDetails = DarwinNotificationDetails(
+        AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
+          androidChannel.id.toString(),
+          androidChannel.name.toString(),
+        );
+
+        notificationDetails = NotificationDetails(android: androidDetails);
+      } else if (Platform.isIOS) {
+        const DarwinNotificationDetails darwinDetails = DarwinNotificationDetails(
           presentAlert: true,
           presentBadge: true,
           presentSound: true,
           presentBanner: true,
-      );
-      notificationDetails = const NotificationDetails(iOS: darwinDetails);
+        );
+        notificationDetails = const NotificationDetails(iOS: darwinDetails);
+      }
+
+      var ext = '';
+
+      for (MapEntry<String, dynamic> item in message.data.entries) {
+        ext += item.value as String;
+        ext += '|';
+      }
+
+      Future.delayed(Duration.zero, () {
+        _flutterLocalNotificationsPlugin.show(
+            0,
+            message.notification?.title,
+            message.notification?.body,
+            notificationDetails,
+            payload: ext);
+      });
     }
-
-    var ext = '';
-
-    for (MapEntry<String, dynamic> item in message.data.entries) {
-      ext += item.value as String;
-      ext += '|';
-    }
-
-    Future.delayed(Duration.zero, () {
-      _flutterLocalNotificationsPlugin.show(
-          0,
-          message.notification?.title,
-          message.notification?.body,
-          notificationDetails,
-          payload: ext);
-    });
   }
 
   void _messageHandler(NotificationResponse payload, RemoteMessage message) {

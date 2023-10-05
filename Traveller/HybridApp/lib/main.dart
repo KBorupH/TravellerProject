@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:traveller_app/_app_lib/app_main.dart';
@@ -48,6 +50,8 @@ Future<void> main() async {
       debugShowCheckedModeBanner: false,
       home: const AppMain(),
     ));
+
+    // 898056cc-074e-4fc3-b334-d443fba63e0b
   }
 }
 

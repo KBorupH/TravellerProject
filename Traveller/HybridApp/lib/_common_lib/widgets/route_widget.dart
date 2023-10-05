@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class WebRouteWidget extends StatefulWidget {
-  const WebRouteWidget(
+class RouteWidget extends StatefulWidget {
+  const RouteWidget(
       {super.key,
       required this.startStation,
       required this.endStation,
@@ -14,15 +14,15 @@ class WebRouteWidget extends StatefulWidget {
   final String endTime;
 
   @override
-  State<WebRouteWidget> createState() => _WebRouteWidgetState();
+  State<RouteWidget> createState() => _RouteWidgetState();
 }
 
-class _WebRouteWidgetState extends State<WebRouteWidget> {
+class _RouteWidgetState extends State<RouteWidget> {
   @override
   Widget build(BuildContext context) {
     return Card(
       child: Container(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
         child: Column(
           children: [
             Row(

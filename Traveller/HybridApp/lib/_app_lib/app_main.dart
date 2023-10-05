@@ -38,9 +38,9 @@ class _AppMainState extends State<AppMain> {
 
     // Widget list to cycle through
     List<Widget> widgetScreens = <Widget>[
-      AppHomeScreen(),
-      AppTicketScreen(),
-      AppLoginScreen()
+      const AppHomeScreen(),
+      const AppTicketScreen(),
+      const AppLoginScreen()
     ];
 
     return Scaffold(
@@ -52,7 +52,11 @@ class _AppMainState extends State<AppMain> {
             children: [
               IconButton(
                   onPressed: () => toggleDrawer(),
-                  icon: const Icon(Icons.menu, color: Colors.white,)),
+                  icon: const Icon(
+                    Icons.menu,
+                    color: Colors.white,
+                    size: 20,
+                  )),
               const Center(
                   child:
                       Image(image: AssetImage('assets/images/LogoWhite.png')))
@@ -63,7 +67,13 @@ class _AppMainState extends State<AppMain> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            const DrawerHeader(child: Text("Menu")),
+            const DrawerHeader(
+              margin: EdgeInsets.all(0),
+              padding: EdgeInsets.all(0),
+              child: Image(
+                image: AssetImage('assets/images/Logo.png'),
+              ),
+            ),
             ListTile(
               leading: const Icon(Icons.home),
               title: const Text("Home"),

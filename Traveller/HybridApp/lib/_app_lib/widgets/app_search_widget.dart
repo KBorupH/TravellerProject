@@ -55,31 +55,33 @@ class _AppSearchWidgetState extends State<AppSearchWidget> {
     final String initialTime = getInitialTime();
 
     return Container(
-      margin: const EdgeInsets.all(15.0),
-      padding: const EdgeInsets.all(20.0),
-      decoration:
-          BoxDecoration(border: Border.all(color: Colors.blueAccent, width: 5)),
+      margin: const EdgeInsets.only(top: 0),
+      padding: const EdgeInsets.all(30),
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Color(0xff6b97c9), Colors.white],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Expanded(
-            child: TextFormField(
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Enter start station',
-              ),
+          TextFormField(
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: 'Enter start station',
             ),
           ),
-          const Padding(padding: EdgeInsets.only(top: 10)),
-          Expanded(
-            child: TextFormField(
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Enter end station',
-              ),
+          const Padding(padding: EdgeInsets.only(top: 15)),
+          TextFormField(
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white)),
+              labelText: 'Enter end station',
             ),
           ),
-          const Padding(padding: EdgeInsets.only(top: 10)),
+          const Padding(padding: EdgeInsets.only(top: 15)),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -100,8 +102,7 @@ class _AppSearchWidgetState extends State<AppSearchWidget> {
                   onPressed: () {
                     //call bloc with _selectedTime
                   },
-                  child: const Text("Search")
-              )
+                  child: const Text("Search")),
             ],
           ),
         ],

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class WebTicketWidget extends StatefulWidget {
-  const WebTicketWidget(
+class TicketWidget extends StatefulWidget {
+  const TicketWidget(
       {super.key,
-      required this.startStation,
-      required this.endStation,
-      required this.startTime,
-      required this.endTime,
-      required this.platformNr,
-      required this.seatNr});
+        required this.startStation,
+        required this.endStation,
+        required this.startTime,
+        required this.endTime,
+        required this.platformNr,
+        required this.seatNr});
 
   final String startStation;
   final String endStation;
@@ -18,10 +18,10 @@ class WebTicketWidget extends StatefulWidget {
   final String seatNr;
 
   @override
-  State<WebTicketWidget> createState() => _WebTicketWidgetState();
+  State<TicketWidget> createState() => _TicketWidgetState();
 }
 
-class _WebTicketWidgetState extends State<WebTicketWidget> {
+class _TicketWidgetState extends State<TicketWidget> {
   @override
   Widget build(BuildContext context) {
     return Card(
