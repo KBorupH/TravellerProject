@@ -10,9 +10,9 @@ namespace Admin_website.Pages
         public void OnGet()
         {
         }
-		public void OnPostTest()
+		public IActionResult OnPostTest()
 		{
-			NavigationManager.NavigateTo("/Worker");
+			return RedirectToPage("WorkerPage");
 		}
 
 	}

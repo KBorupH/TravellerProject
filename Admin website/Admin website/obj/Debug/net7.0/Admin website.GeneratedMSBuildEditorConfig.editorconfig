@@ -16,12 +16,20 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin website
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/zbc23jakl/Source/Repos/Kevin-Borup/TravellerProject/Admin website/Admin website/Pages/Index.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+[C:/Users/zbc23jakl/Source/Repos/Kevin-Borup/TravellerProject/Admin website/Admin website/Pages/CustomComponents/EarningsGraph.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ3VzdG9tQ29tcG9uZW50c1xFYXJuaW5nc0dyYXBoLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zbc23jakl/Source/Repos/Kevin-Borup/TravellerProject/Admin website/Admin website/Pages/MyCustomComponent.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTXlDdXN0b21Db21wb25lbnQucmF6b3I=
+[C:/Users/zbc23jakl/Source/Repos/Kevin-Borup/TravellerProject/Admin website/Admin website/Pages/CustomComponents/TrainLog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ3VzdG9tQ29tcG9uZW50c1xUcmFpbkxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/zbc23jakl/Source/Repos/Kevin-Borup/TravellerProject/Admin website/Admin website/Pages/CustomComponents/Worker.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ3VzdG9tQ29tcG9uZW50c1xXb3JrZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/zbc23jakl/Source/Repos/Kevin-Borup/TravellerProject/Admin website/Admin website/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/zbc23jakl/Source/Repos/Kevin-Borup/TravellerProject/Admin website/Admin website/Pages/Error.cshtml]
