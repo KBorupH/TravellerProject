@@ -30,3 +30,13 @@ LANGUAGE SQL
         AS $$
 INSERT INTO staff(person_id) SELECT "id" FROM person WHERE ("id" = _id);
         $$;
+
+create procedure FindStaffByName(_name VarChar(100))
+LANGUAGE SQL
+        AS $$
+SELECT 
+person.name, staff.id
+FROM person, staff
+WHERE ("name" = _name) 
+AND (staff.person_id = person.id) ;
+        $$;
