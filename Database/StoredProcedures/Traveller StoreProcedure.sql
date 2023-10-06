@@ -40,3 +40,14 @@ FROM person, staff
 WHERE ("name" = _name) 
 AND (staff.person_id = person.id) ;
         $$;
+
+create procedure UpdateStaffNameById(_id UUID, _name VarChar(100))
+LANGUAGE SQL
+        AS $$
+UPDATE
+person
+set name = _name
+FROM staff
+WHERE (staff.id = _id
+AND person.id = staff.person_id) ;
+        $$;
