@@ -59,3 +59,9 @@ DELETE
 FROM staff
 WHERE (staff.id = _id) ;
         $$;
+
+create procedure GetPassengers()
+LANGUAGE SQL
+        AS $$
+SELECT * FROM passenger;
+        $$;
