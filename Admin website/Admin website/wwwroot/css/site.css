@@ -96,7 +96,13 @@
     padding: 1vw;
 }
 
-
+#ListOfWorksBox {
+    position: absolute;
+    right: 15px;
+    margin-top: 150px;
+    width: 1055px;
+    height: 1000px;
+}
 nav {
     /*position: fixed;
     width: 100%;
