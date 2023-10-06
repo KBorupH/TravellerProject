@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../data/models/account.dart';
+import '../../data/models/login.dart';
 
 class AppLoginScreen extends StatefulWidget {
   const AppLoginScreen({super.key});
@@ -20,48 +20,51 @@ class _AppLoginScreenState extends State<AppLoginScreen> {
     return Scaffold(
       body: Form(
         key: _formKey,
-        child: Column(
-          children: <Widget>[
-            TextFormField(
-              controller: ctrEmail,
-              decoration: const InputDecoration(
-                labelText: 'Email',
-                hintText: "Insert email",
-                icon: Icon(Icons.email),
+        child: Center(
+          child: FractionallySizedBox(widthFactor: 0.7, child: Column(
+            crossAxisAlignment:  CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              TextFormField(
+                controller: ctrEmail,
+                decoration: const InputDecoration(
+                  labelText: 'Email',
+                  hintText: "Insert email",
+                  icon: Icon(Icons.email),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty)
+                    return "Please insert email";
+                  return null;
+                },
               ),
-              validator: (value) {
-                if (value == null || value.isEmpty)
-                  return "Please insert email";
-                return null;
-              },
-            ),
-            TextFormField(
-              controller: ctrPassword,
-              decoration: const InputDecoration(
-                labelText: 'Password',
-                hintText: "Insert password",
-                icon: Icon(Icons.password),
+              TextFormField(
+                controller: ctrPassword,
+                decoration: const InputDecoration(
+                  labelText: 'Password',
+                  hintText: "Insert password",
+                  icon: Icon(Icons.password),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty)
+                    return "Please insert password";
+                  return null;
+                },
               ),
-              validator: (value) {
-                if (value == null || value.isEmpty)
-                  return "Please insert password";
-                return null;
-              },
-            ),
-            ElevatedButton(
-                child: const Text("Submit"),
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    late Account account = Account(
-                        email: ctrEmail.value.text,
-                        password: ctrPassword.value.text);
-                    //Add to bloc
-                    context.go('/tickets');
-                  }
-                })
-          ],
+              ElevatedButton(
+                  child: const Text("Submit"),
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      late Login account = Login(
+                          email: ctrEmail.value.text,
+                          password: ctrPassword.value.text);
+                      //Add to bloc
+                    }
+                  })
+            ],
+          ),
         ),
-      ),
+      ),)
     );
   }
 }

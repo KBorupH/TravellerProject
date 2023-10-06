@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:traveller_app/data/models/account.dart';
+import 'package:traveller_app/data/models/login.dart';
 
 class WebLoginWidget extends StatefulWidget {
   const WebLoginWidget({super.key});
@@ -65,7 +65,7 @@ class _WebLoginWidgetState extends State<WebLoginWidget> {
             child: const Text("Submit"),
             onPressed: () {
               if (_formKey.currentState!.validate()) {
-                late Account account = Account(email: ctrEmail.value.text, password: ctrPassword.value.text);
+                late Login account = Login(email: ctrEmail.value.text, password: ctrPassword.value.text);
                 //Add to bloc
                 context.go('/tickets');
               }

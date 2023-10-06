@@ -1,34 +1,17 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:traveller_app/_app_lib/screens/app_home_screen.dart';
 import 'package:traveller_app/_app_lib/screens/app_login_screen.dart';
 import 'package:traveller_app/_app_lib/screens/app_ticket_screen.dart';
 
-class AppMain extends StatelessWidget {
+class AppMain extends StatefulWidget {
   const AppMain({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Traveller',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      debugShowCheckedModeBanner: false,
-
-      home: const AppHomePage(),
-    );
-  }
+  State<AppMain> createState() => _AppMainState();
 }
 
-class AppHomePage extends StatefulWidget {
-  const AppHomePage({super.key});
-
-  @override
-  State<AppHomePage> createState() => _AppHomePageState();
-}
-
-class _AppHomePageState extends State<AppHomePage> {
+class _AppMainState extends State<AppMain> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   int _selectedIndex = 0;
 
@@ -55,23 +38,42 @@ class _AppHomePageState extends State<AppHomePage> {
 
     // Widget list to cycle through
     List<Widget> widgetScreens = <Widget>[
-      AppHomeScreen(),
-      AppTicketScreen(),
-      AppLoginScreen()
+      const AppHomeScreen(),
+      const AppTicketScreen(),
+      const AppLoginScreen()
     ];
 
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("Traveller App"),
-      ),
+          automaticallyImplyLeading: false,
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          title: Stack(
+            children: [
+              IconButton(
+                  onPressed: () => toggleDrawer(),
+                  icon: const Icon(
+                    Icons.menu,
+                    color: Colors.white,
+                    size: 20,
+                  )),
+              const Center(
+                  child:
+                      Image(image: AssetImage('assets/images/LogoWhite.png')))
+            ],
+          )),
       body: SafeArea(child: widgetScreens[_selectedIndex]),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            const DrawerHeader(child: Text("Menu")),
+            const DrawerHeader(
+              margin: EdgeInsets.all(0),
+              padding: EdgeInsets.all(0),
+              child: Image(
+                image: AssetImage('assets/images/Logo.png'),
+              ),
+            ),
             ListTile(
               leading: const Icon(Icons.home),
               title: const Text("Home"),
