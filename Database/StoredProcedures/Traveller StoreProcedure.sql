@@ -51,3 +51,11 @@ FROM staff
 WHERE (staff.id = _id
 AND person.id = staff.person_id) ;
         $$;
+
+create procedure DeleteStaffNameById(_id UUID)
+LANGUAGE SQL
+        AS $$
+DELETE
+FROM staff
+WHERE (staff.id = _id) ;
+        $$;
