@@ -9,17 +9,17 @@
 <Main style="height: 1550px;">
 	<div class="wrapper">
 		<nav>
-			<div class="TopBox" id="TopBoxLeft"></div>
-			<h1 class="HeadLiner">Traveller</h1>
-			<div class="TopBox" id="TopBoxRight"></div>
+			<component type="typeof(Pages.CustomComponents.Nav)" render-mode="ServerPrerendered" />
 		</nav>
 		<div class="StatsBoxes">	
 			
-			<component type="typeof(Pages.CustomComponents.Worker)" render-mode="ServerPrerendered" />
+			<form method="post">
+				<input type="submit" asp-page-handler="Test" value="Klik mig" class="grid-item box gridText inputButton">
+			</form>
+			<component type="typeof(Pages.CustomComponents.Trains)" render-mode="ServerPrerendered" />
+			<component type="typeof(Pages.CustomComponents.Tickets)" render-mode="ServerPrerendered" />
+			<component type="typeof(Pages.CustomComponents.Passengers)" render-mode="ServerPrerendered" />
 
-			<div class="grid-item box"><h1 class="gridText">Trains</h1></div>
-			<div class="grid-item box"><h1 class="gridText">Tickets</h1></div>
-			<div class="grid-item box"><h1 class="gridText">Passengers</h1></div>
 
 
 		</div>
@@ -27,13 +27,8 @@
 
 		<div id="LeftBox">
 			<component type="typeof(Pages.CustomComponents.EarningsGraph)" render-mode="ServerPrerendered" />
+			<component type="typeof(Pages.CustomComponents.TrainRoutes)" render-mode="ServerPrerendered" />
 
-			<div class="Train-routes box">
-				<div>
-					<ol>
-					</ol>
-				</div>
-			</div>
 		</div>
 	</div>
 </Main>

@@ -1,15 +1,26 @@
 ﻿using Microsoft.Data.SqlClient;
+using System.Diagnostics;
 using System.Text;
+using System;
+using Npgsql;
 
 namespace Admin_website.Model
 {
-	//ip adders 10.108.149.14
 	public class DataAccess
 	{
 		// returns connection string for linked database
-		public SqlConnection GetConnection()
+		public NpgsqlConnection GetConnection()
 		{
-			return new SqlConnection(@"Data Source = 10.108.149.14,5432; Initial Catalog = Traveller; Trusted_Connection=true; TrustServerCertificate=true;");
+			return new NpgsqlConnection(@"Server = 192.168.1.128;Port=5432; User Id=DataBaseAdmin;Password=Kode1234!;Database = TravellerDB;");
+		}
+		public void test()
+		{			
+
+			NpgsqlConnection conn = GetConnection();
+			conn.Open();
+
+			
+			
 		}
 		
 	}

@@ -94,3 +94,4 @@ C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin
 C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin website\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin website\obj\Debug\net7.0\Admin website.csproj.AssemblyReference.cache
 C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin website\obj\Debug\net7.0\Admin website.csproj.CopyComplete
+C:\Users\zbc23jakl\Source\Repos\Kevin-Borup\TravellerProject\Admin website\Admin website\bin\Debug\net7.0\Npgsql.dll

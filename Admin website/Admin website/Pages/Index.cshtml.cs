@@ -1,3 +1,4 @@
+using Admin_website.Model;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -12,7 +13,10 @@ namespace Admin_website.Pages
         }
 		public IActionResult OnPostTest()
 		{
+			DataAccess DataAccess = new DataAccess();
+			DataAccess.test();
 			return RedirectToPage("WorkerPage");
+
 		}
 
 	}

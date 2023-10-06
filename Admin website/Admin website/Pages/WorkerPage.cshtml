@@ -1,12 +1,8 @@
 ﻿@page
 @model Admin_website.Pages.WorkerPageModel
 @{
-	ViewData["Title"] = "Worker page";
+	ViewData["Title"] = "WorkerPage";
 }
 <Main style="height: 1550px;">
-	<nav>
-		<div class="TopBox" id="TopBoxLeft"></div>
-		<h1 class="HeadLiner">Traveller</h1>
-		<div class="TopBox" id="TopBoxRight"></div>
-	</nav>
+	<component type="typeof(Pages.CustomComponents.Nav)" render-mode="ServerPrerendered" />
 </Main>

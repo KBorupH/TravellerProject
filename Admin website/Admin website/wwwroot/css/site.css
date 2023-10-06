@@ -46,21 +46,26 @@
 }
 .gridText {
  text-align: center;
+ font-size: 50px;
+ font-family: 'Times New Roman', Times, serif;
+ border: none;
+}
 
+.inputButton{
+    height: 100%;
 }
 
 .TrainLog {
     position: absolute;
     right: 1vw;
     width: 600px;
-    height: 1470px;
+    height: 1130px;
     margin-top: 300px;
 }
 
 #LeftBox {
-
     position: absolute;
-    height: 1470px;
+    height: 1130px;
     width: 1230px;
     margin-top: 300px;
     left: 1vw;
@@ -90,6 +95,7 @@
     height: 340px;
     padding: 1vw;
 }
+
 
 nav {
     /*position: fixed;
