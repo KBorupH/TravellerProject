@@ -65,3 +65,21 @@ LANGUAGE SQL
         AS $$
 SELECT * FROM passenger;
         $$;
+
+create procedure GetTickets()
+LANGUAGE SQL
+        AS $$
+SELECT * FROM ticket;
+        $$;
+
+create procedure GetTrains()
+LANGUAGE SQL
+        AS $$
+SELECT * FROM trains;
+        $$;
+
+create procedure GetStaff()
+LANGUAGE SQL
+        AS $$
+SELECT * FROM staff;
+        $$;
