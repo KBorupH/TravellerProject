@@ -15,6 +15,7 @@ namespace Admin_website.Pages
 		{
 			DataAccess DataAccess = new DataAccess();
 			DataAccess.test();
+
 			return RedirectToPage("WorkerPage");
 
 		}

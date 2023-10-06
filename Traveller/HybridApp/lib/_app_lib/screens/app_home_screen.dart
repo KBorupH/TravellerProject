@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../_common_lib/widgets/route_widget.dart';
 import '../widgets/app_search_widget.dart';
+import '../../data/models/train_route.dart';
 
 class AppHomeScreen extends StatefulWidget {
   const AppHomeScreen({super.key});
@@ -13,7 +14,7 @@ class AppHomeScreen extends StatefulWidget {
 class _AppHomeScreenState extends State<AppHomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -25,51 +26,20 @@ class _AppHomeScreenState extends State<AppHomeScreen> {
                   widthFactor: 0.8,
                   child: Column(
                     children: [
-                      RouteWidget(
-                          startStation: "Ringsted",
-                          endStation: "Køge",
-                          startTime: "08:20",
-                          endTime: "08:40"),
-                      RouteWidget(
-                          startStation: "København H",
-                          endStation: "Odense",
-                          startTime: "18:30",
-                          endTime: "20:40"),
-                      RouteWidget(
-                          startStation: "Skagen",
-                          endStation: "Aarhus",
-                          startTime: "14:10",
-                          endTime: "17:50"),
-                      RouteWidget(
-                          startStation: "Sorø",
-                          endStation: "Næstved",
-                          startTime: "09:45",
-                          endTime: "11:15"),
-                      RouteWidget(
-                          startStation: "Sorø",
-                          endStation: "Næstved",
-                          startTime: "09:45",
-                          endTime: "11:15"),
-                      RouteWidget(
-                          startStation: "Sorø",
-                          endStation: "Næstved",
-                          startTime: "09:45",
-                          endTime: "11:15"),
-                      RouteWidget(
-                          startStation: "Sorø",
-                          endStation: "Næstved",
-                          startTime: "09:45",
-                          endTime: "11:15"),
-                      RouteWidget(
-                          startStation: "Sorø",
-                          endStation: "Næstved",
-                          startTime: "09:45",
-                          endTime: "11:15"),
-                      RouteWidget(
-                          startStation: "Sorø",
-                          endStation: "Næstved",
-                          startTime: "09:45",
-                          endTime: "11:15"),
+                      RouteWidget(route: TrainRoute("1","Ringsted","Køge","08:20","08:40"),     ),
+                      RouteWidget(route: TrainRoute("2","København H","Odense","18:30","20:40") ),
+                      RouteWidget(route: TrainRoute("3","Skagen","Aarhus","14:10","17:50")      ),
+                      RouteWidget(route: TrainRoute("4","Sorø","Næstved","09:45","11:15")       ),
+                      RouteWidget(route: TrainRoute("5","Sorø","Næstved","09:45","11:15")       ),
+                      RouteWidget(route: TrainRoute("4","Sorø","Næstved","09:45","11:15")       ),
+                      RouteWidget(route: TrainRoute("4","Sorø","Næstved","09:45","11:15")       ),
+                      RouteWidget(route: TrainRoute("4","Sorø","Næstved","09:45","11:15")       ),
+                      RouteWidget(route: TrainRoute("4","Sorø","Næstved","09:45","11:15")       ),
+                      RouteWidget(route: TrainRoute("4","Sorø","Næstved","09:45","11:15")       ),
+                      RouteWidget(route: TrainRoute("4","Sorø","Næstved","09:45","11:15")       ),
+                      RouteWidget(route: TrainRoute("4","Sorø","Næstved","09:45","11:15")       ),
+                      RouteWidget(route: TrainRoute("4","Sorø","Næstved","09:45","11:15")       ),
+                      RouteWidget(route: TrainRoute("4","Sorø","Næstved","09:45","11:15")       ),
                     ],
                   ),
                 ),

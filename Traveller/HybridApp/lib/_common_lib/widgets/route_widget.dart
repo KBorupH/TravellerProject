@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
+import '../../data/models/train_route.dart' as models;
+
 
 class RouteWidget extends StatefulWidget {
   const RouteWidget(
       {super.key,
-      required this.startStation,
-      required this.endStation,
-      required this.startTime,
-      required this.endTime});
+      required this.route});
 
-  final String startStation;
-  final String endStation;
-  final String startTime;
-  final String endTime;
+  final models.TrainRoute route;
 
   @override
   State<RouteWidget> createState() => _RouteWidgetState();
@@ -28,15 +24,15 @@ class _RouteWidgetState extends State<RouteWidget> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(widget.startStation, style: const TextStyle(fontSize: 25)),
-                Text(widget.endStation, style: const TextStyle(fontSize: 25))
+                Text(widget.route.startStation, style: const TextStyle(fontSize: 25)),
+                Text(widget.route.endStation, style: const TextStyle(fontSize: 25))
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(widget.startTime, style: const TextStyle(fontSize: 20)),
-                Text(widget.endTime, style: const TextStyle(fontSize: 20))
+                Text(widget.route.startTime, style: const TextStyle(fontSize: 20)),
+                Text(widget.route.endTime, style: const TextStyle(fontSize: 20))
               ],
             ),
             IconButton(

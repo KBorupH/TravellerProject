@@ -1,21 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../../data/models/ticket.dart';
+
 class TicketWidget extends StatefulWidget {
   const TicketWidget(
       {super.key,
-        required this.startStation,
-        required this.endStation,
-        required this.startTime,
-        required this.endTime,
-        required this.platformNr,
-        required this.seatNr});
+        required this.ticket});
 
-  final String startStation;
-  final String endStation;
-  final String startTime;
-  final String endTime;
-  final String platformNr;
-  final String seatNr;
+  final Ticket ticket;
 
   @override
   State<TicketWidget> createState() => _TicketWidgetState();
@@ -32,24 +24,24 @@ class _TicketWidgetState extends State<TicketWidget> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(widget.startStation, style: const TextStyle(fontSize: 25)),
-                Text(widget.endStation, style: const TextStyle(fontSize: 25))
+                Text(widget.ticket.startStation, style: const TextStyle(fontSize: 25)),
+                Text(widget.ticket.endStation, style: const TextStyle(fontSize: 25))
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(widget.startTime, style: const TextStyle(fontSize: 20)),
-                Text(widget.endTime, style: const TextStyle(fontSize: 20))
+                Text(widget.ticket.startTime, style: const TextStyle(fontSize: 20)),
+                Text(widget.ticket.endTime, style: const TextStyle(fontSize: 20))
               ],
             ),
             const Padding(padding: EdgeInsets.only(top: 20)),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Platform: ${widget.platformNr}",
+                Text("Platform: ${widget.ticket.platformNr}",
                     style: const TextStyle(fontSize: 25)),
-                Text("Seat Nr: ${widget.seatNr}",
+                Text("Seat Nr: ${widget.ticket.seatNr}",
                     style: const TextStyle(fontSize: 25))
               ],
             ),

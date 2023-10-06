@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:traveller_app/data/api/http_client_service.dart';
 
+import '../models/login.dart';
+
 class HttpTokenService{
   HttpTokenService(HttpClientService httpService, String baseUrl){
     _httpService = httpService;
@@ -20,24 +22,14 @@ class HttpTokenService{
   late final String _baseUrl;
 
 
-  Future<String> getAccessToken() async {
-    String token = await _readTokenSecureStorage();
-
-    if (token == ""){
-      token = await _getAccessTokenServer();
-    }
-
-    return token;
+  Future<String> getLocalAccessToken() async {
+    return await _readTokenSecureStorage();
   }
 
-  Future<String> _getAccessTokenServer() async {
-    final login = <String, dynamic>{};
-    login.addAll({"username": "TestName"});
-    login.addAll({"password": "TestPass"});
-
+  Future<String> _getRemoteAccessToken(Login login) async {
     var request = await _httpService.httpClient.postUrl(Uri.parse("$_baseUrl/Authentication/Login"));
     request.headers.add(HttpHeaders.contentTypeHeader, 'application/json');
-    request.add(utf8.encode(json.encode(login)));
+    request.add(utf8.encode(json.encode(login.toJson())));
 
     var response = await request.close();
     if (response.statusCode == 200) {
