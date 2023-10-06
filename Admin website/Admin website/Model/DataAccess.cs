@@ -15,7 +15,6 @@ namespace Admin_website.Model
 		}
 		public void test()
 		{			
-
 			NpgsqlConnection conn = GetConnection();
 			conn.Open();
 
