@@ -24,3 +24,9 @@ LANGUAGE SQL
         AS $$
 INSERT INTO passenger(person_id) SELECT "id" FROM person WHERE ("id" = _id);
         $$;
+
+create procedure NewStaff(_id uuid)
+LANGUAGE SQL
+        AS $$
+INSERT INTO staff(person_id) SELECT "id" FROM person WHERE ("id" = _id);
+        $$;
