@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:traveller_app/data/bloc/events/route_events.dart';
+import 'package:traveller_app/data/bloc/route_bloc.dart';
+
+import '../../data/models/search.dart';
 
 class AppSearchWidget extends StatefulWidget {
   const AppSearchWidget({super.key});
@@ -9,7 +14,11 @@ class AppSearchWidget extends StatefulWidget {
 }
 
 class _AppSearchWidgetState extends State<AppSearchWidget> {
-  late String _selectedTime = DateTime.now().toString();
+  final _formSearchKey = GlobalKey<FormState>();
+  final ctrStartStation = TextEditingController();
+  final ctrEndStation = TextEditingController();
+
+  late String _selectedTime = getInitialTime();
   late final List<DropdownMenuItem<String>> timeEntries;
   late List<String> timeOptions = [];
 
@@ -52,7 +61,7 @@ class _AppSearchWidgetState extends State<AppSearchWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final String initialTime = getInitialTime();
+    final RouteBloc routeBloc = BlocProvider.of<RouteBloc>(context);
 
     return Container(
       margin: const EdgeInsets.only(top: 0),
@@ -64,48 +73,67 @@ class _AppSearchWidgetState extends State<AppSearchWidget> {
           end: Alignment.bottomCenter,
         ),
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          TextFormField(
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Enter start station',
-            ),
-          ),
-          const Padding(padding: EdgeInsets.only(top: 15)),
-          TextFormField(
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white)),
-              labelText: 'Enter end station',
-            ),
-          ),
-          const Padding(padding: EdgeInsets.only(top: 15)),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  DropdownButton(
-                      value: initialTime,
-                      items: timeEntries,
-                      menuMaxHeight: 300,
-                      onChanged: (value) {
-                        _selectedTime = value!;
-                      }),
-                  const Padding(padding: EdgeInsets.fromLTRB(10, 0, 10, 0)),
-                  const Text("Arrival Time"),
-                ],
+      child: Form(
+        key: _formSearchKey,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextFormField(
+              controller: ctrStartStation,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Enter start station',
               ),
-              ElevatedButton(
-                  onPressed: () {
-                    //call bloc with _selectedTime
-                  },
-                  child: const Text("Search")),
-            ],
-          ),
-        ],
+              validator: (value) {
+                if (value == null || value.isEmpty)
+                  return "Please insert a start station";
+                return null;
+              },
+            ),
+            const Padding(padding: EdgeInsets.only(top: 15)),
+            TextFormField(
+                controller: ctrEndStation,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white)),
+                  labelText: 'Enter end station',
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty)
+                    return "Please insert an end station";
+                  return null;
+                }),
+            const Padding(padding: EdgeInsets.only(top: 15)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    DropdownButton(
+                        value: _selectedTime,
+                        items: timeEntries,
+                        menuMaxHeight: 300,
+                        onChanged: (value) {
+                          _selectedTime = value!;
+                        }),
+                    const Padding(padding: EdgeInsets.fromLTRB(10, 0, 10, 0)),
+                    const Text("Arrival Time"),
+                  ],
+                ),
+                ElevatedButton(
+                    onPressed: () {
+                      if (_formSearchKey.currentState!.validate()) {
+                        final search = Search(ctrStartStation.text,
+                            ctrEndStation.text, _selectedTime);
+
+                        routeBloc.add(GetRelevantRoutesEvent(search));
+                      }
+                    },
+                    child: const Text("Search")),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

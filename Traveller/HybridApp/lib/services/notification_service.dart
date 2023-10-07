@@ -1,44 +1,48 @@
 import 'dart:io';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:windows_notification/notification_message.dart';
 import 'package:windows_notification/windows_notification.dart';
 
-void requestNotificationPermission() async {
+import '../firebase_options.dart';
+
+Future<void> notificationInit() async {
+  final NotificationService notificationService = NotificationService();
+
+  notificationService.requestNotificationPermission();
+  notificationService.firebaseInit();
+  print("Device Firebase Token: ${await notificationService.getDeviceToken()}");
 }
 
-class ForegroundNotificationService {
-  final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+class NotificationService {
+  final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
 
   void firebaseInit() {
-
-    if(!kIsWeb) FirebaseMessaging.instance.subscribeToTopic("route_status");
-
     FirebaseMessaging.onMessage.listen((message) {
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = notification?.android;
       AppleNotification? apple = notification?.apple;
 
       if (kIsWeb) {
-
       } else {
         _initLocalNotification(message);
 
         if (Platform.isIOS) {
           _enableiOSForegroundMessage();
-        } else if (Platform.isAndroid) {
-        }
+        } else if (Platform.isAndroid) {}
 
         _showNotification(message);
-
       }
     });
   }
 
   Future<void> _initLocalNotification(RemoteMessage message) async {
-    var androidInitializationSettings = const AndroidInitializationSettings('@mipmap/ic_launcher');
+    var androidInitializationSettings =
+        const AndroidInitializationSettings('@mipmap/ic_launcher');
     var iosInitializationSettings = const DarwinInitializationSettings();
 
     var initializationSetting = InitializationSettings(
@@ -46,14 +50,14 @@ class ForegroundNotificationService {
 
     await _flutterLocalNotificationsPlugin.initialize(initializationSetting,
         onDidReceiveNotificationResponse: (payload) {
-          // handle interaction when app is active for android
-          _messageHandler(payload, message);
-        });
+      // handle interaction when app is active for android
+      _foregroundMessageHandler(payload, message);
+    });
   }
 
   void requestNotificationPermission() async {
     NotificationSettings settings =
-    await FirebaseMessaging.instance.requestPermission(
+        await FirebaseMessaging.instance.requestPermission(
       alert: true,
       announcement: true,
       badge: true,
@@ -69,24 +73,18 @@ class ForegroundNotificationService {
   }
 
   void _showNotification(RemoteMessage message) {
-
     if (Platform.isWindows) {
-      final _winNotifyPlugin = WindowsNotification(applicationId: "898056cc-074e-4fc3-b334-d443fba63e0b");
-
+      final _winNotifyPlugin = WindowsNotification(
+          applicationId: "898056cc-074e-4fc3-b334-d443fba63e0b");
 
       // create new NotificationMessage instance with id, title, body, and images
       NotificationMessage message = NotificationMessage.fromPluginTemplate(
-          "test1",
-          "TEXT",
-          "TEXT",
-          image: "assets"
-      );
+          "test1", "TEXT", "TEXT",
+          image: "assets");
 
       // show notification
       _winNotifyPlugin.showNotificationPluginTemplate(message);
-    }
-    else
-    {
+    } else {
       NotificationDetails notificationDetails = NotificationDetails();
       if (Platform.isAndroid) {
         AndroidNotificationChannel androidChannel = AndroidNotificationChannel(
@@ -101,11 +99,15 @@ class ForegroundNotificationService {
         AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
           androidChannel.id.toString(),
           androidChannel.name.toString(),
+          channelAction: AndroidNotificationChannelAction.update,
+          importance: Importance.high,
+          priority: Priority.high
         );
 
         notificationDetails = NotificationDetails(android: androidDetails);
       } else if (Platform.isIOS) {
-        const DarwinNotificationDetails darwinDetails = DarwinNotificationDetails(
+        const DarwinNotificationDetails darwinDetails =
+            DarwinNotificationDetails(
           presentAlert: true,
           presentBadge: true,
           presentSound: true,
@@ -122,18 +124,11 @@ class ForegroundNotificationService {
       }
 
       Future.delayed(Duration.zero, () {
-        _flutterLocalNotificationsPlugin.show(
-            0,
-            message.notification?.title,
-            message.notification?.body,
-            notificationDetails,
+        _flutterLocalNotificationsPlugin.show(0, message.notification?.title,
+            message.notification?.body, notificationDetails,
             payload: ext);
       });
     }
-  }
-
-  void _messageHandler(NotificationResponse payload, RemoteMessage message) {
-    //Do something in the app when local notification
   }
 
   Future _enableiOSForegroundMessage() async {
@@ -145,7 +140,8 @@ class ForegroundNotificationService {
     );
   }
 
+  void _foregroundMessageHandler(
+      NotificationResponse payload, RemoteMessage message) {
+    //Do something in the app on notification
+  }
 }
-
-
-

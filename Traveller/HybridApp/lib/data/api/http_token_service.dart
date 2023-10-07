@@ -26,7 +26,7 @@ class HttpTokenService{
     return await _readTokenSecureStorage();
   }
 
-  Future<String> _getRemoteAccessToken(Login login) async {
+  Future<bool> getRemoteAccessToken(Login login) async {
     var request = await _httpService.httpClient.postUrl(Uri.parse("$_baseUrl/Authentication/Login"));
     request.headers.add(HttpHeaders.contentTypeHeader, 'application/json');
     request.add(utf8.encode(json.encode(login.toJson())));
@@ -38,8 +38,10 @@ class HttpTokenService{
 
       _writeTokenSecureStorage(token);
 
-      return token;
-    }else {
+      return true;
+    } else if (response.statusCode == 401) {
+      return false;
+    } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
       throw Exception(
