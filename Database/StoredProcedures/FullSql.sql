@@ -2,7 +2,7 @@ CREATE EXTENSION IF NOT EXISTS "UUID-ossp";
 
 CREATE TABLE person(
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    name VARCHAR(100) NOT NULL,
+    name VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE staff(
@@ -60,7 +60,7 @@ CREATE TABLE roadmaps (
     estimated_time integer NOT NULL
 );
 
-CREATE TABLE destinations (
+CREATE TABLE destination (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     departure VARCHAR(255) NOT NULL,
     arrival VARCHAR(255) NOT NULL,
@@ -83,12 +83,12 @@ CREATE TABLE routes (
             REFERENCES trains(id)
 );
 
-CREATE TABLE route_destinations(
+CREATE TABLE route_destination(
     route_id UUID NOT NULL,
     destination_id UUID NOT NULL,
-    CONSTRAINT pk_route_destinations PRIMARY KEY (route_id, destination_id) ,
-    CONSTRAINT fk_route_destinations_route FOREIGN KEY (route_id) REFERENCES routes(id),
-    CONSTRAINT fk_route_destinations_destination FOREIGN KEY (destination_id) REFERENCES destinations(id)
+    CONSTRAINT pk_route_destination PRIMARY KEY (route_id, destination_id) ,
+    CONSTRAINT fk_route_destination_route FOREIGN KEY (route_id) REFERENCES routes(id),
+    CONSTRAINT fk_route_destination_destination FOREIGN KEY (destination_id) REFERENCES destination(id)
 );
 
 CREATE TABLE assigned_staff (
@@ -99,5 +99,5 @@ CREATE TABLE assigned_staff (
     CONSTRAINT fk_assigned_staff_staff FOREIGN KEY (staff_id) REFERENCES staff(id)
 );
 
--- DROP TABLE IF EXISTS assigned_staff, route_destinations, routes, destinations, roadmaps, stations, ticket, seat, trains, passenger, staff, person CASCADE;
+-- DROP TABLE IF EXISTS assigned_staff, route_destination, routes, destination, roadmaps, stations, ticket, seat, trains, passenger, staff, person CASCADE;
 -- DROP EXTENSION IF EXISTS "UUID-ossp";
