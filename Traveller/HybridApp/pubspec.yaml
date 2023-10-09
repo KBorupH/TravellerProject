@@ -49,6 +49,7 @@ dependencies:
   flutter_local_notifications: ^15.1.2
   windows_notification: ^0.0.3
   json_annotation: ^4.8.1
+  graphview: ^1.2.0
 
 dev_dependencies:
   flutter_test:
