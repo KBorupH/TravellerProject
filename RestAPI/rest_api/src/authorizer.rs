@@ -1,3 +1,13 @@
+use aliri::{
+    jwa::Algorithm,
+    jwt::{Audience, CoreValidator},
+};
+use aliri_oauth2::Authority;
+use aliri_tower::Oauth2Authorizer;
+use anyhow::Result;
+
+const AUDIENCE: &'static str = "0.0.0.0";
+
 async fn construct_authority() -> Result<Authority> {
     let validator = CoreValidator::default()
         .add_approved_algorithm(Algorithm::RS256)
