@@ -1,5 +1,21 @@
 ﻿
-<div class="grid-item box"><h1 class="gridText">Passengers</h1></div>
+<div class="grid-item box">
+	<h1 class="gridText">Passengers</h1><h1>
+        @{
+            SomeMethodAsync();
+        }
+    </h1>
+</div>
+
+
 @code {
+
+    private int SomeMethodAsync()
+    {
+        Model.DataAccess DA = new Model.DataAccess();
+        List<string> result = DA.GetBySubject("SELECT * FROM passenger");
+        return result.Count();
+      
+    }
 
 }

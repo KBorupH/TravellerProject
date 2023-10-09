@@ -2113,24 +2113,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\zbczhhj\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\zbc23jakl\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\zbczhhj\\Source\\Repos\\Kevin-Borup\\TravellerProject\\Admin website\\Admin website\\Admin website.csproj",
+      "projectUniqueName": "C:\\Users\\zbc23jakl\\Source\\Repos\\Kevin-Borup\\TravellerProject\\Admin website\\Admin website\\Admin website.csproj",
       "projectName": "Admin website",
-      "projectPath": "C:\\Users\\zbczhhj\\Source\\Repos\\Kevin-Borup\\TravellerProject\\Admin website\\Admin website\\Admin website.csproj",
-      "packagesPath": "C:\\Users\\zbczhhj\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\zbczhhj\\Source\\Repos\\Kevin-Borup\\TravellerProject\\Admin website\\Admin website\\obj\\",
+      "projectPath": "C:\\Users\\zbc23jakl\\Source\\Repos\\Kevin-Borup\\TravellerProject\\Admin website\\Admin website\\Admin website.csproj",
+      "packagesPath": "C:\\Users\\zbc23jakl\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\zbc23jakl\\Source\\Repos\\Kevin-Borup\\TravellerProject\\Admin website\\Admin website\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\zbczhhj\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\zbc23jakl\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2138,7 +2133,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -2185,7 +2179,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }
