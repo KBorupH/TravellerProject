@@ -1,14 +1,16 @@
+import 'package:traveller_app/data/models/train_route.dart';
+
 enum RouteStates { initial, uploading, loading, deleting, complete, error }
 
 class RouteState {
   final RouteStates _state;
-  final List<int> _imgs;
+  final List<TrainRoute> _routes;
 
   RouteStates get currentState => _state;
 
-  List<int> get imgs => _imgs;
+  List<TrainRoute> get routes => _routes;
 
-  RouteState({required RouteStates state, List<int>? imgs})
+  RouteState({required RouteStates state, List<TrainRoute>? routes})
       : _state = state,
-        _imgs = imgs ?? [];
+        _routes = routes ?? [];
 }

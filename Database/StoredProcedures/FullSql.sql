@@ -1,86 +1,103 @@
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE EXTENSION IF NOT EXISTS "UUID-ossp";
 
-create table Person(
-	Id UUID primary key DEFAULT uuid_generate_v4(),
-	Name Varchar(100) not null,
-	Email Bytea not null,
-	Password bytea not null
+CREATE TABLE person(
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    name VARCHAR(100) NOT NULL,
 );
 
-create table Staff(
-	Id UUID primary key Default uuid_generate_v4(),
-	Person_id UUID,
-	constraint FK_person_Id
-		foreign key(Person_id) 
-			references Person(Id)	
+CREATE TABLE staff(
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    person_id UUID,
+    CONSTRAINT fk_person_id
+        FOREIGN KEY(person_id) 
+            REFERENCES person(id)    
 );
-create table Passenger(
-	Id uuid primary key Default uuid_generate_v4(),
-	Person_Id uuid,
-	constraint FK_person_Id
-		foreign key(Person_id) 
-			references Person(Id)
+CREATE TABLE passenger(
+    id UUID NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
+    person_id UUID NOT NULL,
+    CONSTRAINT fk_person_id
+        FOREIGN KEY(person_id) 
+            REFERENCES person(id)
 );
-create table Seat(
-	Id uuid primary key default uuid_generate_v4(),
-	Reserved bool
+CREATE TABLE trains(
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4()
 );
-create table Ticket(
-	Passenger_Id uuid ,
-	Seat_Id uuid ,
-	constraint PK_Ticket primary key(Passenger_Id, Seat_Id),
-	constraint FK_Ticket_Passenger foreign key (Passenger_Id) references Passenger(Id),
-	constraint FK_Ticket_Seat foreign key (Seat_Id) references Seat(Id)
-);
-	
-create table Trains(
-	Id uuid primary key Default uuid_generate_v4(),
-	Seat_Id uuid ,
-	Staff_Id uuid ,
-	constraint FK_Seat_Id
-		foreign key(Seat_Id) 
-			references Seat(Id),
-	constraint FK_Staff_Id
-		foreign key(Staff_id) 
-			references Staff(Id)
+
+CREATE TABLE seat(
+    id SERIAL NOT NULL,
+    train_id UUID NOT NULL,
+    reserved BOOL NOT NULL,
+    CONSTRAINT pk_seat PRIMARY KEY (id, train_id),
+    CONSTRAINT fk_seat_train_id FOREIGN KEY (train_id) REFERENCES trains(id)
 );
 
 
-create table stations (
-	Id uuid primary key default uuid_generate_v4(),
-	Name varchar(255) not null,
-	Platforms int not null
-);
-
-create table Roadmaps (
-	Id uuid primary key default uuid_generate_v4(),
-	Destination varchar(255) not null,
-	Start varchar(255) not null,
-	Estimated_Time interval not null
-);
-
-create table Destinations (
-	Id uuid primary key default uuid_generate_v4(),
-	Departure varchar(255) not null,
-	Arrival varchar(255) not null,
-	Station_Id uuid not null,
-	Roadmap_Id uuid not null ,
-	constraint FK_Station_Id 
-		foreign key (Station_Id)
-			references Stations(Id),
-	constraint FK_Roadmap_Id 
-		foreign key (Roadmap_Id) 
-			references Roadmaps(Id)
+CREATE TABLE ticket (
+    passenger_id UUID,
+    seat_id SERIAL,
+    train_id UUID,
+     CONSTRAINT pk_ticket 
+        PRIMARY KEY (passenger_id, seat_id, train_id),
+    CONSTRAINT fk_ticket_passenger 
+        FOREIGN KEY (passenger_id)
+            REFERENCES passenger("id"),
+    CONSTRAINT fk_ticket_seat FOREIGN KEY (seat_id, train_id) 
+        REFERENCES seat("id", train_id)
 );
 
 
-create table Routes (
-	Id uuid primary key default uuid_generate_v4(),
-	Destination_Id uuid references Destinations(Id),
-	Train_Id uuid not null,
-	constraint FK_Train_Id
-		foreign key (Train_Id) 
-			references Trains(Id)
+
+CREATE TABLE stations (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    name VARCHAR(255) NOT NULL,
+    platforms int NOT NULL
 );
 
---drop table trains, ticket, stations, staff, seat, routes, roadmaps, person, passenger, destinations
+CREATE TABLE roadmaps (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    destination VARCHAR(255) NOT NULL,
+    start VARCHAR(255) NOT NULL,
+    estimated_time integer NOT NULL
+);
+
+CREATE TABLE destinations (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    departure VARCHAR(255) NOT NULL,
+    arrival VARCHAR(255) NOT NULL,
+    station_id UUID NOT NULL,
+    roadmap_id UUID NOT NULL ,
+    CONSTRAINT fk_station_id
+        FOREIGN KEY (station_id)
+            REFERENCES stations(id),
+    CONSTRAINT fk_roadmap_id 
+        FOREIGN KEY (roadmap_id) 
+            REFERENCES roadmaps(id)
+);
+
+
+CREATE TABLE routes (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    train_id UUID NOT NULL,
+    CONSTRAINT fk_train_id
+        FOREIGN KEY (train_id) 
+            REFERENCES trains(id)
+);
+
+CREATE TABLE route_destinations(
+    route_id UUID NOT NULL,
+    destination_id UUID NOT NULL,
+    CONSTRAINT pk_route_destinations PRIMARY KEY (route_id, destination_id) ,
+    CONSTRAINT fk_route_destinations_route FOREIGN KEY (route_id) REFERENCES routes(id),
+    CONSTRAINT fk_route_destinations_destination FOREIGN KEY (destination_id) REFERENCES destinations(id)
+);
+
+CREATE TABLE assigned_staff (
+    train_id UUID NOT NULL,
+    staff_id UUID NOT NULL,
+    CONSTRAINT pk_assigned_staff PRIMARY KEY (train_id, staff_id) ,
+    CONSTRAINT fk_assigned_staff_train FOREIGN KEY (train_id) REFERENCES trains(id),
+    CONSTRAINT fk_assigned_staff_staff FOREIGN KEY (staff_id) REFERENCES staff(id)
+);
+
+-- DROP TABLE IF EXISTS assigned_staff, route_destinations, routes, destinations, roadmaps, stations, ticket, seat, trains, passenger, staff, person CASCADE;
+-- DROP EXTENSION IF EXISTS "UUID-ossp";

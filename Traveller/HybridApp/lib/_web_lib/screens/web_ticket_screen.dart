@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:traveller_app/_common_lib/widgets/tickets_scroll_widget.dart';
+import 'package:traveller_app/data/bloc/events/ticket_events.dart';
+import 'package:traveller_app/data/bloc/ticket_bloc.dart';
 
 class WebTicketScreen extends StatefulWidget {
   const WebTicketScreen({super.key});
@@ -9,6 +12,7 @@ class WebTicketScreen extends StatefulWidget {
 }
 
 class _WebTicketScreenState extends State<WebTicketScreen> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

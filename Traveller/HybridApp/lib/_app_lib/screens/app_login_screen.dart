@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:traveller_app/_app_lib/app_page.dart';
 
 import '../../data/models/login.dart';
+import '../../interfaces/i_api_traveller.dart';
+import '../../services/service_locator.dart';
 
 class AppLoginScreen extends StatefulWidget {
   const AppLoginScreen({super.key});
@@ -11,18 +14,20 @@ class AppLoginScreen extends StatefulWidget {
 }
 
 class _AppLoginScreenState extends State<AppLoginScreen> {
-  final _formKey = GlobalKey<FormState>();
+  final _formLoginKey = GlobalKey<FormState>();
   final ctrEmail = TextEditingController();
   final ctrPassword = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Form(
-        key: _formKey,
-        child: Center(
-          child: FractionallySizedBox(widthFactor: 0.7, child: Column(
-            crossAxisAlignment:  CrossAxisAlignment.center,
+        body: Form(
+      key: _formLoginKey,
+      child: Center(
+        child: FractionallySizedBox(
+          widthFactor: 0.7,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               TextFormField(
@@ -53,18 +58,24 @@ class _AppLoginScreenState extends State<AppLoginScreen> {
               ),
               ElevatedButton(
                   child: const Text("Submit"),
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      late Login account = Login(
+                  onPressed: () async {
+                    if (_formLoginKey.currentState!.validate()) {
+                      final _api = locator<
+                          IApiTraveller>(); //Using the locator to get the Api interface
+
+                      final login = Login(
                           email: ctrEmail.value.text,
                           password: ctrPassword.value.text);
-                      //Add to bloc
+
+                      if (await _api.checkLogin(login)) {
+                        appPageNotifier.changePage(AppPages.home);
+                      }
                     }
                   })
             ],
           ),
         ),
-      ),)
-    );
+      ),
+    ));
   }
 }

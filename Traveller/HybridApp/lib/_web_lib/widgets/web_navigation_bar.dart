@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:traveller_app/_web_lib/web_main.dart';
 import 'package:traveller_app/_web_lib/widgets/web_login_widget.dart';
 
 class WebNavigationBar extends StatelessWidget {
@@ -19,13 +20,13 @@ class WebNavigationBar extends StatelessWidget {
               child: IconButton(
                 icon: Image.asset('assets/images/LogoWhite.png'),
                 iconSize: 10,
-                onPressed: () => context.go('/'),
+                onPressed: () => context.go(WebPages.home.toPath),
               ),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(30, 0, 5, 0),
               child: ElevatedButton(
-                onPressed: () => context.go('/'),
+                onPressed: () => context.go(WebPages.home.toPath),
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -44,7 +45,7 @@ class WebNavigationBar extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
             child: ElevatedButton(
-              onPressed: () => context.go('/tickets'),
+              onPressed: () => context.go(WebPages.ticket.toPath),
               child: const Row(
                 children: [
                   Icon(Icons.sticky_note_2),

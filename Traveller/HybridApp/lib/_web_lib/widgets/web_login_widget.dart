@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:traveller_app/data/models/login.dart';
 
+import '../../interfaces/i_api_traveller.dart';
+import '../../services/service_locator.dart';
+
 class WebLoginWidget extends StatefulWidget {
   const WebLoginWidget({super.key});
 
@@ -63,11 +66,18 @@ class _WebLoginWidgetState extends State<WebLoginWidget> {
             }),
         ElevatedButton(
             child: const Text("Submit"),
-            onPressed: () {
+            onPressed: () async {
               if (_formKey.currentState!.validate()) {
-                late Login account = Login(email: ctrEmail.value.text, password: ctrPassword.value.text);
-                //Add to bloc
-                context.go('/tickets');
+                final _api = locator<
+                    IApiTraveller>(); //Using the locator to get the Api interface
+
+                final login = Login(
+                    email: ctrEmail.value.text,
+                    password: ctrPassword.value.text);
+
+                if (await _api.checkLogin(login)) {
+                  Navigator.pop(context);
+                }
               }
             }),
       ],

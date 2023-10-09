@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:traveller_app/_common_lib/widgets/ticket_widget.dart';
+import 'package:traveller_app/data/bloc/states/ticket_states.dart';
+
+import '../../data/bloc/events/ticket_events.dart';
+import '../../data/bloc/ticket_bloc.dart';
+import '../../data/models/ticket.dart';
 
 class TicketsScrollWidget extends StatefulWidget {
   const TicketsScrollWidget({super.key});
@@ -9,55 +15,40 @@ class TicketsScrollWidget extends StatefulWidget {
 }
 
 class _TicketsScrollWidgetState extends State<TicketsScrollWidget> {
+  late bool _ticketsLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    final TicketBloc ticketBloc = BlocProvider.of<TicketBloc>(context);
+    ticketBloc.add(GetAllTicketsEvent());
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(
-      child: Column(
-        children: [
-          TicketWidget(
-              startStation: "Ringsted",
-              endStation: "Køge",
-              startTime: "08:20",
-              endTime: "08:40",
-              platformNr: "4",
-              seatNr: "231"),
-          TicketWidget(
-              startStation: "København H",
-              endStation: "Odense",
-              startTime: "18:30",
-              endTime: "20:40",
-              platformNr: "1",
-              seatNr: "043"),
-          TicketWidget(
-              startStation: "Skagen",
-              endStation: "Aarhus",
-              startTime: "14:10",
-              endTime: "17:50",
-              platformNr: "5",
-              seatNr: "114"),
-          TicketWidget(
-              startStation: "Sorø",
-              endStation: "Næstved",
-              startTime: "09:45",
-              endTime: "11:15",
-              platformNr: "2",
-              seatNr: "325"),
-          TicketWidget(
-              startStation: "Næstved",
-              endStation: "Sorø",
-              startTime: "11:15 ",
-              endTime: "09:45",
-              platformNr: "3",
-              seatNr: "314"),
-          TicketWidget(
-              startStation: "Sorø",
-              endStation: "Skagen",
-              startTime: "09:45",
-              endTime: "15:54",
-              platformNr: "5",
-              seatNr: "201")
-        ],
-      ),
+    return BlocListener<TicketBloc, TicketState>(
+        listener: (listenContext, state) {
+          if (state.currentState == TicketStates.complete) {
+            setState(() {
+              _ticketsLoading = false;
+            });
+          }
+        },
+        child: _ticketsLoading
+            ? const CircularProgressIndicator()
+            : BlocBuilder<TicketBloc, TicketState>(
+          builder: (blocContext, TicketState state) {
+            return SingleChildScrollView(
+              child: Column(
+                children: state.tickets
+                    .map(
+                      (ticket) => TicketWidget(ticket: ticket),
+                )
+                    .toList(),
+              ),
+            );
+          },
+        ),
     );
   }
 }
