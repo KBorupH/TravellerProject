@@ -3,6 +3,8 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:graphview/GraphView.dart';
 
+import 'app_graph.dart';
+
 class AppGraph extends StatefulWidget {
   const AppGraph({super.key});
 
@@ -11,25 +13,34 @@ class AppGraph extends StatefulWidget {
 }
 
 class _AppGraphState extends State<AppGraph> {
-  final Graph graph = Graph()..isTree = true;
+  final Graph graph = Graph()
+    ..isTree = true;
   BuchheimWalkerConfiguration builder = BuchheimWalkerConfiguration();
+  List<Team> teams = [
+    Team("1", AssetImage('assets/images/Logo.png'), "Beavers", 1),
+    Team("2", AssetImage('assets/images/Logo.png'), "Bulls", 3),
+    Team("3", AssetImage('assets/images/Logo.png'), "Cats", 4),
+    Team("4", AssetImage('assets/images/Logo.png'), "Guns", 4),
+  ];
+
+  late final List<Fight> fights;
+
 
   @override
   void initState() {
     super.initState();
-    List<Team> teams = [
-      Team("1", AssetImage('assets/images/Logo.png'), "Beavers", 1),
-      Team("2", AssetImage('assets/images/Logo.png'), "Bulls", 3),
-      Team("3", AssetImage('assets/images/Logo.png'), "Cats", 4),
-      Team("4", AssetImage('assets/images/Logo.png'), "Guns", 4),
+
+    fights = [
+      Fight("0", teams[0], teams[1]),
+      Fight("1", teams[2], teams[3]),
+      Fight("2", teams[0], teams[2]),
+      Fight("3", teams[0], teams[0]),
     ];
 
-    var fights = [[1,2],[3,4],[1,3], [1,1]];
+    graph.addEdge(Node.Id(fights[0].id), Node.Id(fights[2].id));
+    graph.addEdge(Node.Id(fights[1].id), Node.Id(fights[2].id));
+    graph.addEdge(Node.Id(fights[2].id), Node.Id(fights[3].id));
 
-    for(var fight in fights){
-      if(fight[0] == fight[1]) graph.addEdge(Node.Id(fight[0]), Node.Id(fight[1]));
-      graph.addEdge(Node.Id(fight[0]), Node.Id(fight[1]));
-    }
 
 
     builder
@@ -49,61 +60,80 @@ class _AppGraphState extends State<AppGraph> {
         maxScale: 5.6,
         child: GraphView(
           graph: graph,
-          algorithm: BuchheimWalkerAlgorithm(builder, TreeEdgeRenderer(builder)),
+          algorithm: BuchheimWalkerAlgorithm(
+              builder, TreeEdgeRenderer(builder)),
           paint: Paint()
             ..color = Colors.green
             ..strokeWidth = 1
             ..style = PaintingStyle.stroke,
           builder: (Node node) {
             // I can decide what widget should be shown here based on the id
-            var a = node.key!.value as int?;
+            var id = node.key!.value as String?;
 
-            return rectangleWidget(a);
+            List<Team> thisTable = [
+              fights.firstWhere((element) => element.id == id).teamA,
+              fights.firstWhere((element) => element.id == id).teamB
+            ];
+
+            return rectangleWidget(thisTable);
           },
         )
     );
   }
 
 
-
   Widget rectangleWidget(List<Team> teams) {
-    return InkWell(
-      onTap: () {
-        print('clicked');
-      },
-      child: Container(
-          padding: EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(4),
-            boxShadow: [
-              BoxShadow(color: Colors.blue[100]!, spreadRadius: 1),
-            ],
-          ),
-          child:  SingleChildScrollView(
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                  Text("image"),
-                  Text("Name"),
-                  Text("Score"),
-                ],),
-                Divider(
-                  height: 20,
-                  thickness: 5,
-                  color: Colors.black,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                  Text("image"),
-                  Text("Name"),
-                  Text("Score"),
-                ],),
-            ],),)),
+    return Container(
+        padding: EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(4),
+          boxShadow: [
+            BoxShadow(color: Colors.blue[100]!, spreadRadius: 1),
+          ],
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: getTable(teams),),)
     );
   }
+
+  List<Widget>  getTable(List<Team> teams) {
+    List<Widget> teamWidgets = [];
+    for (Team team in teams) {
+      teamWidgets.add(
+          InkWell(
+            onTap: () {},
+            child:
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Image(image: team.Logo),
+                Text(team.Name),
+                Text(team.Score.toString()),
+              ],),)
+      );
+
+      teamWidgets.add(
+          const Divider(
+            height: 20,
+            thickness: 5,
+            color: Colors.black,
+          )
+      );
+    }
+    for (var i = 0; i < teams.length; i++) {
+
+    }
+    return teamWidgets;
+  }
+}
+
+class Fight {
+  Fight(this.id, this.teamA, this.teamB);
+
+  late String id;
+  final Team teamA;
+  final Team teamB;
 }
 
 class Team {
