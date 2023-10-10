@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Text;
 using System;
 using Npgsql;
+using NpgsqlTypes;
 
 namespace Admin_website.Model
 {
@@ -29,7 +30,7 @@ namespace Admin_website.Model
                 try
                 {
                     conn.Open();
-                    
+
                     using (NpgsqlDataReader reader = cmd.ExecuteReader())
                     {
                         
