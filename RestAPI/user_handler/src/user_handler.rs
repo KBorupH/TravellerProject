@@ -1,4 +1,5 @@
 use std::panic::catch_unwind;
+use crate::entity::prelude::*;
 use std::thread::Thread;
 use anyhow::Result;
 use chrono::{DateTime, Duration, Local, Utc};
@@ -39,7 +40,7 @@ impl UserHandler {
         //get and save all routeNotifications
 
         let newid = Uuid::parse_str("a1a2a3a4b1b2c1c2d1d2d3d4d5d6d7d8")?;
-        Self.routes : [Route; 1] = [Route::new(newid, Utc::now())];
+        // Self.routes : Vec<Route> =
 
         loop {
             //Continuosly check if a time on the route is getting close to current time.
@@ -63,8 +64,8 @@ impl UserHandler {
                     if notis_time_left.gt(&Duration::minutes(5)) { route_last_notis_state = RouteLastNotisState::Over10Min }
                     else if notis_time_left.gt(&Duration::minutes(1)) { route_last_notis_state = RouteLastNotisState::Over5Min }
                     else if notis_time_left.gt(&Duration::minutes(30)) { route_last_notis_state = RouteLastNotisState::Over1Min }
-                    else if notis_time_left.gt(&Duration::seconds(0)) { route_last_notis_state = RouteLastNotisState::Over30Sec }
-                    else if notis_time_left.lt(&Duration::seconds(0))
+                    else if notis_time_left.gt(&Duration::seconds(5)) { route_last_notis_state = RouteLastNotisState::Over30Sec }
+                    else if notis_time_left.lt(&Duration::seconds(5)) { continue }
                 }
 
 
