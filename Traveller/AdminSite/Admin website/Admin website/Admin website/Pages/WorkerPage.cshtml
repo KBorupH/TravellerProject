@@ -1,0 +1,29 @@
+﻿@page
+@model Admin_website.Pages.WorkerPageModel
+@{
+	ViewData["Title"] = "WorkerPage";
+}
+<Main style="height: 1550px;">
+	<component type="typeof(Pages.CustomComponents.Nav)" render-mode="ServerPrerendered" />
+	<div id="ListOfWorksBox" class="box">
+
+	</div>
+	<div id="WorkerLeftBox">
+		<div class="box">
+			<form method="post">
+				<label for="inputText">Input:</label>
+				<input type="text" name="inputText" id="inputText" placeholder="Name" />
+				<button type="submit" asp-page-handler="Test">Create</button>
+			</form>
+		</div>
+		<div class="box">
+			<form method="post">
+				<label for="inputText">Input:</label>
+				<input type="text" name="inputText" id="inputText" placeholder="uuid" />
+				<input type="text" name="inputText" id="inputText" placeholder="Name" />
+				<button type="submit" asp-page-handler="Test">Create</button>
+				<button type="submit" asp-page-handler="Test">Delete</button>
+			</form>
+		</div>
+	</div>
+</Main>

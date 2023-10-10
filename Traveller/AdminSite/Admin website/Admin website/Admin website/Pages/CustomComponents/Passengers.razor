@@ -1,0 +1,23 @@
+﻿
+<div class="grid-item box">
+    <h1 class="gridText">Passengers</h1>
+    <h1 class="gridText">
+        @GetPassengersCount()
+    </h1>
+</div>
+
+
+@code {
+
+    private int GetPassengersCount()
+    {
+        Model.DataAccess DA = new Model.DataAccess();
+        List<string> result = DA.GetBySubject("SELECT * FROM passenger");
+        if (result.Count() > 0){
+            return result.Count();
+        }
+        return 0;
+
+    }
+
+}

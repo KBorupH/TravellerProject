@@ -15,7 +15,10 @@ namespace Admin_website.Pages
 		{
 			DataAccess DataAccess = new DataAccess();
 			DataAccess.test();
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 			return RedirectToPage("WorkerPage");
 
 		}

@@ -1,0 +1,34 @@
+﻿
+@page
+@model Admin_website.Pages.indexModel
+@{
+	ViewData["Title"] = "Home Page";
+}
+
+
+<Main style="height: 1400px;">
+	<div class="wrapper">
+		<nav>
+			<component type="typeof(Pages.CustomComponents.Nav)" render-mode="ServerPrerendered" />
+		</nav>
+		<div class="StatsBoxes">		
+			
+			<form method="post">
+				<input type="submit" asp-page-handler="GoWorkerPage" value="" class="inputButton">				
+				<component type="typeof(Pages.CustomComponents.Workers)" render-mode="ServerPrerendered" />
+
+			</form>
+			<component type="typeof(Pages.CustomComponents.Trains)" render-mode="ServerPrerendered" />
+			<component type="typeof(Pages.CustomComponents.Tickets)" render-mode="ServerPrerendered" />
+
+			<component type="typeof(Pages.CustomComponents.Passengers)" render-mode="ServerPrerendered" />
+		</div>
+		<component type="typeof(Pages.CustomComponents.TrainLog)" render-mode="ServerPrerendered" />
+
+		<div id="LeftBox">
+			<component type="typeof(Pages.CustomComponents.EarningsGraph)" render-mode="ServerPrerendered" />
+			<component type="typeof(Pages.CustomComponents.TrainRoutes)" render-mode="ServerPrerendered" />
+
+		</div>
+	</div>
+</Main>
