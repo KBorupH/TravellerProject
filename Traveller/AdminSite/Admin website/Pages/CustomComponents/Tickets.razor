@@ -3,7 +3,7 @@
     private int GetTicketsCount()
     {
         Model.DataAccess DA = new Model.DataAccess();
-        List<string> result = DA.GetBySubject("SELECT * FROM ticket");
+        List<string> result = DA.GetBySubject("gettickets");
         if (result.Count() > 0)
         {
             return result.Count();

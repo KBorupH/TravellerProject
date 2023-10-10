@@ -3,7 +3,7 @@
     private int GetTrainsCount()
     {
         Model.DataAccess DA = new Model.DataAccess();
-        List<string> result = DA.GetBySubject("GetTrains");
+        List<string> result = DA.GetBySubject("gettrains");
         if (result.Count() > 0)
         {
             return result.Count();

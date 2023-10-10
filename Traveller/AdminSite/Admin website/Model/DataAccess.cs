@@ -25,10 +25,11 @@ namespace Admin_website.Model
 
             using (NpgsqlCommand cmd = new NpgsqlCommand(subject, conn))
             {
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 try
                 {
                     conn.Open();
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    
                     using (NpgsqlDataReader reader = cmd.ExecuteReader())
                     {
                         
