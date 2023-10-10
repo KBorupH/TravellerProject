@@ -50,5 +50,46 @@ namespace Admin_website.Model
 
             return result;
         }
-    }
+		public Route[] GetAllRoutes()
+		{
+			NpgsqlConnection conn = GetConnection();
+			conn.Open();
+
+			//Conn get listviewdestination.
+
+			//map view to objects
+
+			//return list of objects
+
+			Route[] routes = new Route[5] {
+				new Route("1", "1", new Station[2]
+				{
+					new Station("1", "Køge", 4, "12:43"),
+					new Station("2", "Ringsted", 3, "14:15"),
+				}),
+				new Route("1", "1", new Station[2]
+				{
+					new Station("1", "Køge", 4, "12:43"),
+					new Station("2", "Ringsted", 3, "14:15"),
+				}),
+				new Route("1", "1", new Station[2]
+				{
+					new Station("1", "Køge", 4, "12:43"),
+					new Station("2", "Ringsted", 3, "14:15"),
+				}),
+				new Route("1", "1", new Station[2]
+				{
+					new Station("1", "Køge", 4, "12:43"),
+					new Station("2", "Ringsted", 3, "14:15"),
+				}),
+				new Route("1", "1", new Station[2]
+				{
+					new Station("1", "Køge", 4, "12:43"),
+					new Station("2", "Ringsted", 3, "14:15"),
+				}),
+			};
+
+			return routes;
+		}
+	}
 }

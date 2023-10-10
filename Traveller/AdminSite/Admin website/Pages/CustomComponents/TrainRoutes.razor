@@ -1,9 +1,37 @@
 ﻿<div class="Train-routes box">
+
+	<div class="Test">
+		<h1>Route ID:</h1>
+
+		<h1>Station start:</h1>
+	</div>
+
+
 	<div>
 		<ol>
 		</ol>
 	</div>
 </div>
+
+<style>
+	h1 {
+		font-size: 40px;
+	}
+
+	.Test {
+		width: 100%;
+		height: 150px;
+		margin-top: 100px;
+		display: grid;
+		gap: 3vw;
+		grid-template-columns: 22vw 22vw;
+		padding: 1vw;
+	}
+</style>
+
 @code {
 
+	Model.DataAccess data = new Model.DataAccess();
+
+	//Model.Route[] routes = data.GetAllRoutes();
 }
