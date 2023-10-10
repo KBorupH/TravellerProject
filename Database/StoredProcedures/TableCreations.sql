@@ -19,7 +19,7 @@ CREATE TABLE passenger(
         FOREIGN KEY(person_id) 
             REFERENCES person(id)
 );
-CREATE TABLE trains(
+CREATE TABLE train(
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4()
 );
 
@@ -28,7 +28,7 @@ CREATE TABLE seat(
     train_id UUID NOT NULL,
     reserved BOOL NOT NULL,
     CONSTRAINT pk_seat PRIMARY KEY (id, train_id),
-    CONSTRAINT fk_seat_train_id FOREIGN KEY (train_id) REFERENCES trains(id)
+    CONSTRAINT fk_seat_train_id FOREIGN KEY (train_id) REFERENCES train(id)
 );
 
 
@@ -47,13 +47,13 @@ CREATE TABLE ticket (
 
 
 
-CREATE TABLE stations (
+CREATE TABLE station (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     name VARCHAR(255) NOT NULL,
     platforms int NOT NULL
 );
 
-CREATE TABLE roadmaps (
+CREATE TABLE roadmap (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     destination VARCHAR(255) NOT NULL,
     start VARCHAR(255) NOT NULL,
@@ -68,26 +68,26 @@ CREATE TABLE destination (
     roadmap_id UUID NOT NULL ,
     CONSTRAINT fk_station_id
         FOREIGN KEY (station_id)
-            REFERENCES stations(id),
+            REFERENCES station(id),
     CONSTRAINT fk_roadmap_id 
         FOREIGN KEY (roadmap_id) 
-            REFERENCES roadmaps(id)
+            REFERENCES roadmap(id)
 );
 
 
-CREATE TABLE routes (
+CREATE TABLE route (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     train_id UUID NOT NULL,
     CONSTRAINT fk_train_id
         FOREIGN KEY (train_id) 
-            REFERENCES trains(id)
+            REFERENCES train(id)
 );
 
 CREATE TABLE route_destination(
     route_id UUID NOT NULL,
     destination_id UUID NOT NULL,
     CONSTRAINT pk_route_destination PRIMARY KEY (route_id, destination_id) ,
-    CONSTRAINT fk_route_destination_route FOREIGN KEY (route_id) REFERENCES routes(id),
+    CONSTRAINT fk_route_destination_route FOREIGN KEY (route_id) REFERENCES route(id),
     CONSTRAINT fk_route_destination_destination FOREIGN KEY (destination_id) REFERENCES destination(id)
 );
 
@@ -95,9 +95,9 @@ CREATE TABLE assigned_staff (
     train_id UUID NOT NULL,
     staff_id UUID NOT NULL,
     CONSTRAINT pk_assigned_staff PRIMARY KEY (train_id, staff_id) ,
-    CONSTRAINT fk_assigned_staff_train FOREIGN KEY (train_id) REFERENCES trains(id),
+    CONSTRAINT fk_assigned_staff_train FOREIGN KEY (train_id) REFERENCES train(id),
     CONSTRAINT fk_assigned_staff_staff FOREIGN KEY (staff_id) REFERENCES staff(id)
 );
 
--- DROP TABLE IF EXISTS assigned_staff, route_destination, routes, destination, roadmaps, stations, ticket, seat, trains, passenger, staff, person CASCADE;
+-- DROP TABLE IF EXISTS assigned_staff, route_destination, route, destination, roadmap, station, ticket, seat, train, passenger, staff, person CASCADE;
 -- DROP EXTENSION IF EXISTS "UUID-ossp";

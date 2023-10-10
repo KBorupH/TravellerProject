@@ -17,8 +17,4 @@ TrainRoute _$TrainRouteFromJson(Map<String, dynamic> json) => TrainRoute(
 Map<String, dynamic> _$TrainRouteToJson(TrainRoute instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'start_station': instance.startStation,
-      'end_station': instance.endStation,
-      'start_time': instance.startTime,
-      'end_time': instance.endTime,
     };

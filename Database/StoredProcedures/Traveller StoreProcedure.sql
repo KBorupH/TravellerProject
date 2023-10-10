@@ -8,14 +8,14 @@ INSERT INTO person(name)
 create procedure NewStation(_name VarChar(255), _platforms Int)
 LANGUAGE SQL
         AS $$
-INSERT INTO stations(name, platforms)
+INSERT INTO station(name, platforms)
         VALUES(_name, _platforms);
         $$;
 
-create procedure NewRoadmap(_destination VarChar(255), _start VarChar(255), _estimated_time interval)
+create procedure NewRoadmap(_destination VarChar(255), _start VarChar(255), _estimated_time integer)
 LANGUAGE SQL
         AS $$
-INSERT INTO roadmaps(destination, start, estimated_time)
+INSERT INTO roadmap(destination, start, estimated_time)
         VALUES(_destination, _start, _estimated_time);
         $$;
 
@@ -75,7 +75,7 @@ SELECT * FROM ticket;
 create procedure GetTrains()
 LANGUAGE SQL
         AS $$
-SELECT * FROM trains;
+SELECT * FROM train;
         $$;
 
 create procedure GetStaff()

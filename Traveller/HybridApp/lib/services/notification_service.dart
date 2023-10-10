@@ -31,7 +31,7 @@ class NotificationService {
       } else {
         _initLocalNotification(message);
 
-        if (Platform.isIOS) {
+        if (Platform.isIOS || Platform.isMacOS) {
           _enableiOSForegroundMessage();
         } else if (Platform.isAndroid) {}
 
