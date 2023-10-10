@@ -41,7 +41,7 @@ class _TicketWidgetState extends State<TicketWidget> {
               children: [
                 Text("Platform: ${widget.ticket.platformNr}",
                     style: const TextStyle(fontSize: 25)),
-                Text("Seat Nr: ${widget.ticket.seatNr}",
+                Text("Seat Nr: ${widget.ticket.seatId}",
                     style: const TextStyle(fontSize: 25))
               ],
             ),

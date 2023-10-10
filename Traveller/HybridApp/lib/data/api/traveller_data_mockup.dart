@@ -32,13 +32,12 @@ class TravellerDataMockup implements IApiTraveller {
   @override
   Future<List<Ticket>> getAllTickets() async {
     return await [
-      Ticket("1", "123", "1", "Ringsted", "Køge", "08:20", "08:40", "4", "231"),
-      Ticket("2", "345", "1", "København H", "Odense", "18:30", "20:40", "1",
-          "043"),
-      Ticket("3", "113", "1", "Skagen", "Aarhus", "14:10", "17:50", "5", "114"),
-      Ticket("4", "432", "1", "Sorø", "Næstved", "09:45", "11:15", "2", "325"),
-      Ticket("5", "153", "1", "Næstved", "Sorø", "11:15 ", "09:45", "3", "314"),
-      Ticket("6", "172", "1", "Sorø", "Skagen", "09:45", "15:54", "5", "201")
+      Ticket("1", "123", "1", "Ringsted", "Køge", "08:20", "08:40", "4", ),
+      Ticket("2", "345", "1", "København H", "Odense", "18:30", "20:40", "1"),
+      Ticket("3", "113", "1", "Skagen", "Aarhus", "14:10", "17:50", "5"),
+      Ticket("4", "432", "1", "Sorø", "Næstved", "09:45", "11:15", "2"),
+      Ticket("5", "153", "1", "Næstved", "Sorø", "11:15 ", "09:45", "3"),
+      Ticket("6", "172", "1", "Sorø", "Skagen", "09:45", "15:54", "5")
     ];
   }
 

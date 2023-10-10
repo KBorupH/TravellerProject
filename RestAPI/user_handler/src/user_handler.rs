@@ -60,11 +60,11 @@ impl UserHandler {
                 if Self.route_notifications.route_id == route.id {
                     let notis_time: DateTime<Utc> = Self.route_notifications.last_notif_time;
                     let notis_time_left = notis_time - Utc::now();
-                    if notis_time_left.gt(&Duration::minutes(10)) { continue }
-                    else if notis_time_left.gt(&Duration::minutes(5)) { route_last_notis_state = RouteLastNotisState::Over10Min }
+                    if notis_time_left.gt(&Duration::minutes(5)) { route_last_notis_state = RouteLastNotisState::Over10Min }
                     else if notis_time_left.gt(&Duration::minutes(1)) { route_last_notis_state = RouteLastNotisState::Over5Min }
                     else if notis_time_left.gt(&Duration::minutes(30)) { route_last_notis_state = RouteLastNotisState::Over1Min }
                     else if notis_time_left.gt(&Duration::seconds(0)) { route_last_notis_state = RouteLastNotisState::Over30Sec }
+                    else if notis_time_left.lt(&Duration::seconds(0))
                 }
 
 

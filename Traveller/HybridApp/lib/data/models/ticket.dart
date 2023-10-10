@@ -4,7 +4,7 @@ part 'ticket.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Ticket {
-  Ticket(this.ticketId, this.seatId, this.trainId, this.startStation, this.endStation, this.startTime, this.endTime, this.platformNr, this.seatNr);
+  Ticket(this.ticketId, this.seatId, this.trainId, this.startStation, this.endStation, this.startTime, this.endTime, this.platformNr);
 
   final String ticketId;
   final String seatId;
@@ -15,7 +15,6 @@ class Ticket {
   final String startTime;
   final String endTime;
   final String platformNr;
-  final String seatNr;
 
   factory Ticket.fromJson(Map<String, dynamic> json) => _$TicketFromJson(json);
   Map<String, dynamic> toJson() => _$TicketToJson(this);
