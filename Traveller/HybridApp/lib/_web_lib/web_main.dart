@@ -70,7 +70,7 @@ GoRouter getWebRouter() {
     redirect: (context, state) {
       late bool isLoggedIn = true;
       late bool isGoingToTicket = false;
-      // isGoingToTicket = state.subloc == state.namedLocation(WebPage.ticket.toPath);
+      // isGoingToTicket = state. == state.namedLocation(WebPages.ticket.toPath);
       // isLoggedIn = appService.loginState;
 
       //redirect to home if trying to access ticket without being logged in.

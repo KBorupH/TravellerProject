@@ -97,21 +97,24 @@ impl UserHandler {
 
     pub fn update_route_notifier() {
         //update sqlx
+        Self.routes
     }
 
     async fn notify_users() {
-        let client = fcm::Client::new();
+        // let client = fcm::Client::new();
+        //
+        // let mut notification_builder = fcm::NotificationBuilder::new();
+        // notification_builder.title("TitleFromRest");
+        // notification_builder.body("BodyFromRest");
+        //
+        // let notification = notification_builder.finalize();
+        // let mut message_builder = fcm::MessageBuilder::new("<FCM API Key>", "<registration id>");
+        // message_builder.notification(notification);
+        //
+        // let response = client.send(message_builder.finalize()).await?;
+        // println!("Sent: {:?}", response);
 
-        let mut notification_builder = fcm::NotificationBuilder::new();
-        notification_builder.title("TitleFromRest");
-        notification_builder.body("BodyFromRest");
 
-        let notification = notification_builder.finalize();
-        let mut message_builder = fcm::MessageBuilder::new("<FCM API Key>", "<registration id>");
-        message_builder.notification(notification);
-
-        let response = client.send(message_builder.finalize()).await?;
-        println!("Sent: {:?}", response);
     }
 }
 

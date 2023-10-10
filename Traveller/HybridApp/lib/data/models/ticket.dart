@@ -10,6 +10,7 @@ class Ticket {
   final String seatId;
   final String trainId;
 
+  @JsonKey(includeToJson: false)
   final String startStation;
   final String endStation;
   final String startTime;
