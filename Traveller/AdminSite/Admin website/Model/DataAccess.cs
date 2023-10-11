@@ -32,8 +32,7 @@ namespace Admin_website.Model
                     conn.Open();
 
                     using (NpgsqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        
+                    {                       
                         while (reader.Read())
                         {
                             if (!reader.IsDBNull(0))
@@ -46,7 +45,7 @@ namespace Admin_website.Model
                 }
                 catch (Exception)
                 {
-                    throw; // Handle the exception
+                    throw; // Handles the exception
                 }
             }
 
@@ -93,10 +92,5 @@ namespace Admin_website.Model
 
 			return routes;
 		}
-	}
-
-	public interface IDataAccess
-	{
-		List<string> GetBySubject (string subject);
 	}
 }
