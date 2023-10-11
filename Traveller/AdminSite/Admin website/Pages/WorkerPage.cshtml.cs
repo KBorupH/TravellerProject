@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Npgsql;
-using NpgsqlTypes;
 
 namespace Admin_website.Pages
 {
@@ -16,25 +15,21 @@ namespace Admin_website.Pages
 			Model.DataAccess dataAccess = new Model.DataAccess();
 			NpgsqlConnection conn = dataAccess.GetConnection();
 
-			using (NpgsqlCommand cmd = new NpgsqlCommand("newperson", conn))
+			using (NpgsqlCommand cmd = new NpgsqlCommand($"CALL NewStaff(add_person('{inputNameCreate}'))", conn))
 			{
-				cmd.CommandType = System.Data.CommandType.StoredProcedure;
-				cmd.Parameters.Add(new NpgsqlParameter(inputNameCreate, NpgsqlDbType.Varchar) { Value = "newperson" });
-
+				//cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
 				try
 				{
 					conn.Open();
 					cmd.ExecuteNonQuery();
+					conn.Close();
 				}
-				                        catch (Exception)
+				catch (Exception)
 				{
 					throw; // Handles the exception
 				}
-				finally 
-				{
-					conn.Close(); 
-				}
+
 			}
 		}
     }
