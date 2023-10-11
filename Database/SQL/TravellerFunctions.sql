@@ -101,6 +101,18 @@ CREATE FUNCTION GetTrainsCount()
     $func$
 	LANGUAGE SQL;
 
+CREATE OR REPLACE FUNCTION add_person(_name TEXT)
+RETURNS UUID AS $$
+DECLARE
+    new_id UUID;
+BEGIN
+    INSERT INTO person (name)
+    VALUES (_name)
+    RETURNING id INTO new_id;
+    
+    RETURN new_id;
+END;
+$$ LANGUAGE plpgsql;
 -- CREATE FUNCTION GetPassengers()
 -- 		RETURNS TABLE (passenger_id uuid)
 --         AS 
