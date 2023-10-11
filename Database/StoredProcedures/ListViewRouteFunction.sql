@@ -18,14 +18,14 @@
 create or replace view view_route_destinations as
 	select 	r.id as route_id,
 			r.train_id,
-			s.id as station_id,
-			s.name as station_name, 
-			s.platforms as station_platforms
+			s_orig.id as station_id,
+			s_orig.name as station_name, 
+			s_orig.platforms as station_platforms
 				from route_destination rd 
 					join route r on rd.route_id = r.id
 					join destination d on rd.destination_id = d.id
 					join roadmap rm on d.roadmap_id = rm.id
-					join station s on d.station_id = s.id;
+					join station s_orig on rm.origin_id = s_orig.id;
 
 
 -- Create a function that calls the view and returns the result

@@ -12,11 +12,11 @@ INSERT INTO station(name, platforms)
         VALUES(_name, _platforms);
         $$;
 
-create procedure NewRoadmap(_destination VarChar(255), _start VarChar(255), _estimated_time integer)
+create procedure NewRoadmap(_destination_id uuid, _origin_id uuid, _estimated_time integer)
 LANGUAGE SQL
         AS $$
-INSERT INTO roadmap(destination, start, estimated_time)
-        VALUES(_destination, _start, _estimated_time);
+INSERT INTO roadmap(destination_id, origin_id, estimated_time)
+        VALUES(_destination_id, _origin_id, _estimated_time);
         $$;
 
 create procedure NewPassenger(_id uuid)
