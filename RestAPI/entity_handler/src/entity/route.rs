@@ -4,7 +4,7 @@ use sea_orm::entity::prelude::*;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel, Eq, Serialize, Deserialize)]
-#[sea_orm(table_name = "routes")]
+#[sea_orm(table_name = "route")]
 pub struct Model {
     #[sea_orm(primary_key, auto_increment = false)]
     pub id: Uuid,
@@ -16,13 +16,13 @@ pub enum Relation {
     #[sea_orm(has_many = "super::route_destination::Entity")]
     RouteDestination,
     #[sea_orm(
-        belongs_to = "super::trains::Entity",
+        belongs_to = "super::train::Entity",
         from = "Column::TrainId",
-        to = "super::trains::Column::Id",
+        to = "super::train::Column::Id",
         on_update = "NoAction",
         on_delete = "NoAction"
     )]
-    Trains,
+    Train,
 }
 
 impl Related<super::route_destination::Entity> for Entity {
@@ -31,9 +31,9 @@ impl Related<super::route_destination::Entity> for Entity {
     }
 }
 
-impl Related<super::trains::Entity> for Entity {
+impl Related<super::train::Entity> for Entity {
     fn to() -> RelationDef {
-        Relation::Trains.def()
+        Relation::Train.def()
     }
 }
 
@@ -42,7 +42,7 @@ impl Related<super::destination::Entity> for Entity {
         super::route_destination::Relation::Destination.def()
     }
     fn via() -> Option<RelationDef> {
-        Some(super::route_destination::Relation::Routes.def().rev())
+        Some(super::route_destination::Relation::Route.def().rev())
     }
 }
 

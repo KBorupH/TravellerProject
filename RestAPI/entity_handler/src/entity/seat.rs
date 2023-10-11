@@ -18,13 +18,13 @@ pub enum Relation {
     #[sea_orm(has_many = "super::ticket::Entity")]
     Ticket,
     #[sea_orm(
-        belongs_to = "super::trains::Entity",
+        belongs_to = "super::train::Entity",
         from = "Column::TrainId",
-        to = "super::trains::Column::Id",
+        to = "super::train::Column::Id",
         on_update = "NoAction",
         on_delete = "NoAction"
     )]
-    Trains,
+    Train,
 }
 
 impl Related<super::ticket::Entity> for Entity {
@@ -33,9 +33,9 @@ impl Related<super::ticket::Entity> for Entity {
     }
 }
 
-impl Related<super::trains::Entity> for Entity {
+impl Related<super::train::Entity> for Entity {
     fn to() -> RelationDef {
-        Relation::Trains.def()
+        Relation::Train.def()
     }
 }
 

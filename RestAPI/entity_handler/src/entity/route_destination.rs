@@ -3,13 +3,15 @@
 use sea_orm::entity::prelude::*;
 use serde::{Deserialize, Serialize};
 
-#[derive(Clone, Debug, PartialEq, DeriveEntityModel, Eq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, DeriveEntityModel, Serialize, Deserialize)]
 #[sea_orm(table_name = "route_destination")]
 pub struct Model {
     #[sea_orm(primary_key, auto_increment = false)]
     pub route_id: Uuid,
     #[sea_orm(primary_key, auto_increment = false)]
     pub destination_id: Uuid,
+    #[sea_orm(column_type = "Float")]
+    pub destination_order: f32,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
@@ -23,13 +25,13 @@ pub enum Relation {
     )]
     Destination,
     #[sea_orm(
-        belongs_to = "super::routes::Entity",
+        belongs_to = "super::route::Entity",
         from = "Column::RouteId",
-        to = "super::routes::Column::Id",
+        to = "super::route::Column::Id",
         on_update = "NoAction",
         on_delete = "NoAction"
     )]
-    Routes,
+    Route,
 }
 
 impl Related<super::destination::Entity> for Entity {
@@ -38,9 +40,9 @@ impl Related<super::destination::Entity> for Entity {
     }
 }
 
-impl Related<super::routes::Entity> for Entity {
+impl Related<super::route::Entity> for Entity {
     fn to() -> RelationDef {
-        Relation::Routes.def()
+        Relation::Route.def()
     }
 }
 

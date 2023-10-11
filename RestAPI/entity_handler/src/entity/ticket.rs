@@ -46,9 +46,9 @@ impl Related<super::seat::Entity> for Entity {
     }
 }
 
-impl Related<super::trains::Entity> for Entity {
+impl Related<super::train::Entity> for Entity {
     fn to() -> RelationDef {
-        super::seat::Relation::Trains.def()
+        super::seat::Relation::Train.def()
     }
     fn via() -> Option<RelationDef> {
         Some(super::seat::Relation::Ticket.def().rev())

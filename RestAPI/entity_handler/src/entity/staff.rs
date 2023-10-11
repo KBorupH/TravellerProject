@@ -37,9 +37,9 @@ impl Related<super::person::Entity> for Entity {
     }
 }
 
-impl Related<super::trains::Entity> for Entity {
+impl Related<super::train::Entity> for Entity {
     fn to() -> RelationDef {
-        super::assigned_staff::Relation::Trains.def()
+        super::assigned_staff::Relation::Train.def()
     }
     fn via() -> Option<RelationDef> {
         Some(super::assigned_staff::Relation::Staff.def().rev())
