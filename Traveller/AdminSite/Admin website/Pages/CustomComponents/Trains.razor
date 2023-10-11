@@ -2,6 +2,7 @@
 @code {
     private int GetTrainsCount()
     {
+
         Model.IDataAccess DA = new Model.DataAccess();
         List<string> result = DA.GetBySubject("gettrain");
         if (result.Count() > 0)
