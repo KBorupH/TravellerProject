@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:traveller_app/_app_lib/app_page.dart';
+import 'package:traveller_app/_app_lib/notifiers/app_page_notifier.dart';
 import 'package:traveller_app/_web_lib/web_main.dart';
 import '../../data/bloc/events/ticket_events.dart';
 import '../../data/bloc/ticket_bloc.dart';

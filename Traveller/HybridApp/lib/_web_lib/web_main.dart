@@ -1,12 +1,15 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:go_router/go_router.dart';
-import 'package:toast/toast.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:traveller_app/_web_lib/screens/web_home_screen.dart';
 import 'package:traveller_app/_web_lib/screens/web_ticket_screen.dart';
 import 'package:traveller_app/_web_lib/widgets/web_navigation_bar.dart';
+import 'package:traveller_app/_web_lib/widgets/web_toast_notification_widget.dart';
 import 'package:traveller_app/services/service_locator.dart';
+
 
 import '../data/bloc/route_bloc.dart';
 import '../data/bloc/ticket_bloc.dart';
@@ -17,6 +20,7 @@ class WebMain extends StatefulWidget {
   final String title;
   final ThemeData theme;
 
+
   @override
   State<WebMain> createState() => _WebMainState();
 }
@@ -24,20 +28,33 @@ class WebMain extends StatefulWidget {
 class _WebMainState extends State<WebMain> {
   @override
   void initState() {
-    messageListener(context);
+    messageListener();
     super.initState();
   }
 
-  void messageListener(BuildContext context) {
-    ToastContext().init(context);
+  Future<void> messageListener() async {
+    NotificationSettings settings =
+        await FirebaseMessaging.instance.requestPermission(
+      alert: true,
+      announcement: true,
+      badge: true,
+      carPlay: true,
+      criticalAlert: true,
+      provisional: true,
+      sound: true,
+    );
+
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       RemoteNotification? notification = message.notification;
       String? title = notification?.title;
       String? body = notification?.body;
       if (notification != null && title != null && body != null) {
-      // https://pub.dev/packages/oktoast
-      // https://pub.dev/packages/toast/
-        Toast.show(body, duration: Toast.lengthLong, gravity: Toast.bottom);
+        showToastWidget(
+            WebToastNotificationWidget(title: title, body: body),
+            position: ToastPosition.bottom,
+            duration: const Duration(seconds: 4),
+          dismissOtherToast: true,
+        );
       }
     });
   }
@@ -45,20 +62,24 @@ class _WebMainState extends State<WebMain> {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-        providers: [
-          BlocProvider<RouteBloc>(
-            create: (BuildContext context) => RouteBloc(),
-          ),
-          BlocProvider<TicketBloc>(
-            create: (BuildContext context) => TicketBloc(),
-          ),
-        ],
+      providers: [
+        BlocProvider<RouteBloc>(
+          create: (BuildContext context) => RouteBloc(),
+        ),
+        BlocProvider<TicketBloc>(
+          create: (BuildContext context) => TicketBloc(),
+        ),
+      ],
+      child: OKToast(
+
         child: MaterialApp.router(
           title: widget.title,
           theme: widget.theme,
           debugShowCheckedModeBanner: false,
           routerConfig: getWebRouter(),
-        ));
+        ),
+      ),
+    );
   }
 }
 
@@ -120,11 +141,11 @@ GoRouter getWebRouter() {
               state.error.toString(),
             ),
           ),
-      redirect: (context, state) {
+      redirect: (context, state) async {
         late bool isLoggedIn = true;
         late bool isGoingToTicket = false;
-        // isGoingToTicket = state. == state.namedLocation(WebPages.ticket.toPath);
-        // isLoggedIn = appService.loginState;
+        isGoingToTicket = state.matchedLocation == state.namedLocation(WebPages.ticket.toName);
+        isLoggedIn = await SessionManager().containsKey("tokenKey");
 
         //redirect to home if trying to access ticket without being logged in.
         if (isGoingToTicket && !isLoggedIn) return WebPages.home.toPath;

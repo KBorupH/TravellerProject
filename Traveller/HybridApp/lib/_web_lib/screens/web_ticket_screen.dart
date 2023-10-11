@@ -12,7 +12,6 @@ class WebTicketScreen extends StatefulWidget {
 }
 
 class _WebTicketScreenState extends State<WebTicketScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +26,10 @@ class _WebTicketScreenState extends State<WebTicketScreen> {
             ),
           ),
           child: const FractionallySizedBox(
-              widthFactor: 0.6, child: TicketsScrollWidget()),
+            heightFactor: 1,
+            widthFactor: 0.6,
+            child: TicketsScrollWidget(),
+          ),
         ),
       ),
     );

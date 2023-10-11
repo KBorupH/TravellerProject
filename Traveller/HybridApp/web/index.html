@@ -68,7 +68,24 @@
 
     if ("serviceWorker" in navigator) {
         window.addEventListener('load', function (ev) {
-            navigator.serviceWorker.register("/firebase-messaging-sw.js");
+            navigator.serviceWorker.ready.register("/firebase-messaging-sw.js").then(function (reg) {
+                if(reg.installing) {
+                    console.log('Service worker installing');
+                } else if(reg.waiting) {
+                    console.log('Service worker installed');
+                } else if(reg.active) {
+                    console.log('Service worker active');
+                }
+                if (!('PushManager' in window)) {
+                    console.log('Push messaging isn\'t supported.');
+                    return;
+                }
+                if (Notification.permission === 'denied') {
+                    console.log('The user has blocked notifications.');
+
+                }
+            })
+
             // Download main.dart.js
             _flutter.loader.loadEntrypoint({
                 // entrypointUrl: "/main.dart.js",
@@ -82,7 +99,6 @@
                     });
                 }
             });
-
         });
     }
 

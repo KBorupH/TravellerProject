@@ -95,7 +95,7 @@ class _WebRegisterWidgetState extends State<WebRegisterWidget> {
                     password: ctrPassword.value.text);
 
                 if (await api.register(login)) {
-                  Navigator.pop(context);
+                  Navigator.pop(context, true);
                 }
               }
             }),
