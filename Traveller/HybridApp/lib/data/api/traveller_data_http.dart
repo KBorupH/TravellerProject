@@ -30,7 +30,12 @@ class TravellerDataHttp implements IApiTraveller {
 
   @override
   Future<bool> checkLogin(Login login) async {
-    return await _httpTokenService.getRemoteAccessToken(login);
+    return await _httpTokenService.getRemoteAccessToken(login, false);
+  }
+
+  @override
+  Future<bool> register(Login login) async {
+    return await _httpTokenService.getRemoteAccessToken(login, true);
   }
 
   @override

@@ -2,8 +2,8 @@
 @code {
     private int GetTicketsCount()
     {
-        Model.DataAccess DA = new Model.DataAccess();
-        List<string> result = DA.GetBySubject("SELECT * FROM ticket");
+        Model.IDataAccess DA = new Model.DataAccess();
+        List<string> result = DA.GetBySubject(Consts.TICKETS);
         if (result.Count() > 0)
         {
             return result.Count();

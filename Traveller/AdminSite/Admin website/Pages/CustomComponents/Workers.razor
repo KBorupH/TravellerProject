@@ -1,11 +1,11 @@
-﻿<div class="grid-item box"><h1 class="gridText">Trains</h1><h1 class="gridText">@GetStaffCount()</h1></div>
+﻿<div class="grid-item box"><h1 class="gridText">Workers</h1><h1 class="gridText">@GetStaffCount()</h1></div>
 
 
 @code {
 	private int GetStaffCount()
 	{
-		Model.DataAccess DataAccess = new Model.DataAccess();
-		List<string> result = DataAccess.GetBySubject("SELECT * FROM staff");
+		Model.IDataAccess dataAccess = new Model.DataAccess();
+		List<string> result = dataAccess.GetBySubject(Consts.STAFFS);
 		if (result.Count() > 0)
 		{
 			return result.Count();

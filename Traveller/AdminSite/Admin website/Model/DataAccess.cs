@@ -3,10 +3,11 @@ using System.Diagnostics;
 using System.Text;
 using System;
 using Npgsql;
+using NpgsqlTypes;
 
 namespace Admin_website.Model
 {
-	public class DataAccess
+	public class DataAccess : IDataAccess
 	{
 		// returns connection string for linked database
 		public NpgsqlConnection GetConnection()
@@ -25,13 +26,13 @@ namespace Admin_website.Model
 
             using (NpgsqlCommand cmd = new NpgsqlCommand(subject, conn))
             {
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 try
                 {
                     conn.Open();
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
                     using (NpgsqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        
+                    {                       
                         while (reader.Read())
                         {
                             if (!reader.IsDBNull(0))
@@ -44,7 +45,7 @@ namespace Admin_website.Model
                 }
                 catch (Exception)
                 {
-                    throw; // Handle the exception
+                    throw; // Handles the exception
                 }
             }
 

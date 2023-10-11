@@ -26,8 +26,11 @@ class HttpTokenService{
     return await _readTokenSecureStorage();
   }
 
-  Future<bool> getRemoteAccessToken(Login login) async {
-    var request = await _httpService.httpClient.postUrl(Uri.parse("$_baseUrl/Authentication/Login"));
+  Future<bool> getRemoteAccessToken(Login login, bool register) async {
+    String authEndpoint = "login";
+    if (register) authEndpoint = "register";
+
+    var request = await _httpService.httpClient.postUrl(Uri.parse("$_baseUrl/authentication/$authEndpoint"));
     request.headers.add(HttpHeaders.contentTypeHeader, 'application/json');
     request.add(utf8.encode(json.encode(login.toJson())));
 

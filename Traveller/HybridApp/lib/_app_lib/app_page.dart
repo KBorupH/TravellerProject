@@ -13,7 +13,8 @@ class AppPage with ChangeNotifier {
 enum AppPages {
   home,
   ticket,
-  login
+  login,
+  register
 }
 
 final AppPage appPageNotifier = AppPage();
