@@ -12,7 +12,7 @@
     private int GetPassengersCount()
     {
         Model.IDataAccess DA = new Model.DataAccess();
-        List<string> result = DA.GetBySubject("getpassengers");
+        List<string> result = DA.GetBySubject(Consts.PASSENGERS);
         if (result.Count() > 0){
             return result.Count();
         }

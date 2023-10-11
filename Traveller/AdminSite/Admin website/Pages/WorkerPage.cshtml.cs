@@ -6,14 +6,13 @@ namespace Admin_website.Pages
 {
     public class WorkerPageModel : PageModel
     {
-		public string InputText { get; set; }
 		public void OnGet()
         {
         }
-        public void OnPostTest(string inputText)
+        public void OnPostCreate(string inputuuid, string inputName)
         {
 			// Access the submitted input
-			InputText = inputText;
+			string InputText = inputuuid;
 		}
     }
 }
