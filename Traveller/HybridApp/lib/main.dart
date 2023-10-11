@@ -7,7 +7,6 @@ import 'package:traveller_app/_app_lib/app_main.dart';
 import 'package:traveller_app/_web_lib/web_main.dart';
 import 'package:traveller_app/data/bloc/route_bloc.dart';
 import 'package:traveller_app/data/bloc/ticket_bloc.dart';
-import 'package:traveller_app/services/notification_service.dart';
 import 'package:traveller_app/services/service_locator.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:firebase_core/firebase_core.dart';
@@ -25,7 +24,18 @@ Future<void> main() async {
 
   FirebaseMessaging.onBackgroundMessage(_backgroundMessageHandler);
 
-  notificationInit();
+  NotificationSettings settings =
+  await FirebaseMessaging.instance.requestPermission(
+    alert: true,
+    announcement: true,
+    badge: true,
+    carPlay: true,
+    criticalAlert: true,
+    provisional: true,
+    sound: true,
+  );
+  print("Device Firebase Token: ${await FirebaseMessaging.instance.getToken()}");
+
   setupApi();
 
   const String title = "Traveller";
@@ -36,37 +46,9 @@ Future<void> main() async {
   if (kIsWeb) {
     // running on the web!
     setUrlStrategy(PathUrlStrategy());
-    runApp(
-      MultiBlocProvider(providers: [
-        BlocProvider<RouteBloc>(
-          create: (BuildContext context) => RouteBloc(),
-        ),
-        BlocProvider<TicketBloc>(
-          create: (BuildContext context) => TicketBloc(),
-        ),
-      ], child: MaterialApp.router(
-        title: title,
-        theme: themeData,
-        debugShowCheckedModeBanner: false,
-        routerConfig: getWebRouter(),
-      )),
-    );
+    runApp(WebMain(title: title, theme: themeData));
   } else {
-    runApp(
-      MultiBlocProvider(providers: [
-        BlocProvider<RouteBloc>(
-          create: (BuildContext context) => RouteBloc(),
-        ),
-        BlocProvider<TicketBloc>(
-          create: (BuildContext context) => TicketBloc(),
-        ),
-      ], child: MaterialApp(
-        title: title,
-        theme: themeData,
-        debugShowCheckedModeBanner: false,
-        home: const AppMain(),
-      )),
-    );
+    runApp(AppMain(title: title, theme: themeData));
   }
 }
 

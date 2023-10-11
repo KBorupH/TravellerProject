@@ -1,34 +1,29 @@
-importScripts("https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js");
-importScripts("https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js");
+importScripts('https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js');
+importScripts('https://www.gstatic.com/firebasejs/8.10.1/firebase-messaging.js');
 
-firebase.initializeApp({
-  apiKey: "...",
-  authDomain: "...",
-  databaseURL: "...",
-  projectId: "...",
-  storageBucket: "...",
-  messagingSenderId: "...",
-  appId: "...",
-});
+const firebaseConfig = {
+    apiKey: "AIzaSyBcEj68F_jBw6B06vEguWiq8SEAayMWtJg",
+    authDomain: "traveller-35de6.firebaseapp.com",
+    projectId: "traveller-35de6",
+    storageBucket: "traveller-35de6.appspot.com",
+    messagingSenderId: "713539644947",
+    appId: "1:713539644947:web:9ee1969f6cf6a4ea40d9e6",
+};
+
+firebase.initializeApp(firebaseConfig);
 
 const messaging = firebase.messaging();
+messaging.onBackgroundMessage((payload) => {
+    console.log(
+        '[firebase-messaging-sw.js] Received background message ',
+        payload
+    );
+    // Customize notification here
+    const notificationTitle = payload.notification.title;
+    const notificationOptions = {
+        body: payload.notification.body,
+        icon: payload.notification.icon
+    };
 
-messaging.setBackgroundMessageHandler(function (payload) {
-       console.log('setBackgroundMessageHandler background message ', payload);
-
-       const promiseChain = clients
-          .matchAll({
-              type: "window",
-              includeUncontrolled: true
-          })
-         .then(windowClients => {
-              for (let i = 0; i < windowClients.length; i++) {
-                 const windowClient = windowClients[i];
-                 windowClient.postMessage(payload);
-              }
-         })
-         .then(() => {
-              return self.registration.showNotification("my notification title");
-          });
-         return promiseChain;
-     });
+    self.registration.showNotification(notificationTitle, notificationOptions);
+});
