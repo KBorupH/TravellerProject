@@ -10,10 +10,9 @@ import 'package:traveller_app/data/bloc/ticket_bloc.dart';
 import 'package:traveller_app/services/notification_service.dart';
 import 'package:traveller_app/services/service_locator.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:url_strategy/url_strategy.dart';
-import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,7 +35,7 @@ Future<void> main() async {
 
   if (kIsWeb) {
     // running on the web!
-    setPathUrlStrategy();
+    setUrlStrategy(PathUrlStrategy());
     runApp(
       MultiBlocProvider(providers: [
         BlocProvider<RouteBloc>(
