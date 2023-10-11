@@ -59,4 +59,9 @@ class TravellerDataMockup implements IApiTraveller {
     if (login.email == "test" && login.password == "test") return await true;
     return false;
   }
+
+  @override
+  Future<bool> register(Login login) async {
+    return await true;
+  }
 }

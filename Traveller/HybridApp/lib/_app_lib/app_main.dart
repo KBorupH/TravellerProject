@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:traveller_app/_app_lib/app_page.dart';
 import 'package:traveller_app/_app_lib/screens/app_home_screen.dart';
 import 'package:traveller_app/_app_lib/screens/app_login_screen.dart';
+import 'package:traveller_app/_app_lib/screens/app_register_screen.dart';
 import 'package:traveller_app/_app_lib/screens/app_ticket_screen.dart';
 
 import '../data/bloc/route_bloc.dart';
@@ -49,7 +50,8 @@ class _AppMainState extends State<AppMain> {
     List<Widget> widgetScreens = <Widget>[
       const AppHomeScreen(),
       const AppTicketScreen(),
-      const AppLoginScreen()
+      const AppLoginScreen(),
+      const AppRegisterScreen()
     ];
 
     return Scaffold(
@@ -126,6 +128,16 @@ class _AppMainState extends State<AppMain> {
                 // Navigate to other page and pop drawer
                 toggleDrawer();
                 _onItemTapped(AppPages.login);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.app_registration),
+              title: const Text("Register"),
+              selected: appPageNotifier.currentPage.index == 3,
+              onTap: () {
+                // Navigate to other page and pop drawer
+                toggleDrawer();
+                _onItemTapped(AppPages.register);
               },
             )
           ],
