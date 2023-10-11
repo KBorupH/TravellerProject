@@ -4,8 +4,8 @@
 @code {
 	private int GetStaffCount()
 	{
-		Model.DataAccess DataAccess = new Model.DataAccess();
-		List<string> result = DataAccess.GetBySubject("getstaff");
+		Model.DataAccess dataAccess = new Model.DataAccess();
+		List<string> result = dataAccess.GetBySubject("getstaff");
 		if (result.Count() > 0)
 		{
 			return result.Count();

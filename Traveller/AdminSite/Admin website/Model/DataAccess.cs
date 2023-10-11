@@ -7,7 +7,7 @@ using NpgsqlTypes;
 
 namespace Admin_website.Model
 {
-	public class DataAccess
+	public class DataAccess : IDataAccess
 	{
 		// returns connection string for linked database
 		public NpgsqlConnection GetConnection()
@@ -93,5 +93,10 @@ namespace Admin_website.Model
 
 			return routes;
 		}
+	}
+
+	public interface IDataAccess
+	{
+		List<string> GetBySubject (string subject);
 	}
 }
