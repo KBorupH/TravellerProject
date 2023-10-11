@@ -31,16 +31,6 @@ LANGUAGE SQL
 INSERT INTO staff(person_id) SELECT "id" FROM person WHERE ("id" = _id);
         $$;
 
-create procedure FindStaffByName(_name VarChar(100))
-LANGUAGE SQL
-        AS $$
-SELECT 
-person.name, staff.id
-FROM person, staff
-WHERE ("name" = _name) 
-AND (staff.person_id = person.id) ;
-        $$;
-
 create procedure UpdateStaffNameById(_id UUID, _name VarChar(100))
 LANGUAGE SQL
         AS $$
@@ -58,28 +48,4 @@ LANGUAGE SQL
 DELETE
 FROM staff
 WHERE (staff.id = _id) ;
-        $$;
-
-create procedure GetPassengers()
-LANGUAGE SQL
-        AS $$
-SELECT * FROM passenger;
-        $$;
-
-create procedure GetTickets()
-LANGUAGE SQL
-        AS $$
-SELECT * FROM ticket;
-        $$;
-
-create procedure GetTrains()
-LANGUAGE SQL
-        AS $$
-SELECT * FROM train;
-        $$;
-
-create procedure GetStaff()
-LANGUAGE SQL
-        AS $$
-SELECT * FROM staff;
         $$;

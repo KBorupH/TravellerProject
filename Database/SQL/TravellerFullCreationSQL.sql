@@ -146,16 +146,6 @@ LANGUAGE SQL
 INSERT INTO staff(person_id) SELECT "id" FROM person WHERE ("id" = _id);
         $$;
 
-create procedure FindStaffByName(_name VarChar(100))
-LANGUAGE SQL
-        AS $$
-SELECT 
-person.name, staff.id
-FROM person, staff
-WHERE ("name" = _name) 
-AND (staff.person_id = person.id) ;
-        $$;
-
 create procedure UpdateStaffNameById(_id UUID, _name VarChar(100))
 LANGUAGE SQL
         AS $$
@@ -173,30 +163,6 @@ LANGUAGE SQL
 DELETE
 FROM staff
 WHERE (staff.id = _id) ;
-        $$;
-
-create procedure GetPassengers()
-LANGUAGE SQL
-        AS $$
-SELECT * FROM passenger;
-        $$;
-
-create procedure GetTickets()
-LANGUAGE SQL
-        AS $$
-SELECT * FROM ticket;
-        $$;
-
-create procedure GetTrains()
-LANGUAGE SQL
-        AS $$
-SELECT * FROM train;
-        $$;
-
-create procedure GetStaff()
-LANGUAGE SQL
-        AS $$
-SELECT * FROM staff;
         $$;
 
 
@@ -231,19 +197,101 @@ create or replace view view_route_destinations as
 
 -- Create a function that calls the view and returns the result
 DROP FUNCTION IF EXISTS list_route_destinations();
+
 CREATE FUNCTION list_route_destinations()
-RETURNS TABLE (
-    route_id UUID,
-    train_id UUID,
-    station_id UUID,
-    station_name VARCHAR(255),
-    station_platforms INT
-) AS $$
-BEGIN
-    RETURN QUERY
-	SELECT * FROM view_route_destinations;
-END;
-$$ LANGUAGE plpgsql;
+	RETURNS TABLE (
+		route_id UUID,
+		train_id UUID,
+		station_id UUID,
+		station_name VARCHAR(255),
+		station_platforms INT) 
+	AS 
+	$func$
+		SELECT * FROM view_route_destinations;
+	$func$ 
+	LANGUAGE SQL;
+
+CREATE FUNCTION FindStaffByName(_name VarChar(100))
+	RETURNS TABLE (person_name VarChar, staff_id uuid)
+    AS 
+	$func$
+		SELECT person.name, staff.id
+			FROM person, staff
+			WHERE ("name" = _name) 
+			AND (staff.person_id = person.id);
+	$func$
+	LANGUAGE SQL;
+
+CREATE FUNCTION GetStaff()
+	RETURNS TABLE (person_name VarChar, staff_id uuid)
+    AS 
+	$func$
+		SELECT person.name, staff.id
+			FROM person, staff
+			WHERE (staff.person_id = person.id);
+    $func$
+	LANGUAGE SQL;
+
+CREATE FUNCTION GetStaffCount()
+	RETURNS INTEGER
+    AS 
+	$func$
+		SELECT COUNT(*)
+			FROM staff;
+    $func$
+	LANGUAGE SQL;
+
+CREATE FUNCTION GetPassengersCount()
+	RETURNS INTEGER
+    AS 
+	$func$
+		SELECT COUNT(*)
+			FROM passenger;
+    $func$
+	LANGUAGE SQL;
+
+CREATE FUNCTION GetTicketsCount()
+	RETURNS INTEGER
+    AS 
+	$func$
+		SELECT COUNT(*)
+			FROM ticket;
+    $func$
+	LANGUAGE SQL;
+
+CREATE FUNCTION GetTrainsCount()
+	RETURNS INTEGER
+    AS 
+	$func$
+		SELECT COUNT(*)
+			FROM train;
+    $func$
+	LANGUAGE SQL;
+
+-- CREATE FUNCTION GetPassengers()
+-- 		RETURNS TABLE (passenger_id uuid)
+--         AS 
+-- 		$func$
+-- 			SELECT person_id FROM passenger;
+--         $func$
+-- 		LANGUAGE SQL;
+
+-- CREATE FUNCTION GetTickets()
+-- 		RETURNS TABLE ()
+--         AS 
+-- 		$func$
+-- 			SELECT * FROM ticket;
+--         $func$
+-- 		LANGUAGE SQL;
+
+-- CREATE FUNCTION GetTrains()
+--         AS 
+-- 		$func$
+-- 			SELECT * FROM train;
+--         $func$
+-- 		LANGUAGE SQL;
+
+
 
 -- Inserting sample data
 
