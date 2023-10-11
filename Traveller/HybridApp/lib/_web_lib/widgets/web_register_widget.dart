@@ -1,35 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:traveller_app/_app_lib/app_page.dart';
+import 'package:traveller_app/data/models/login.dart';
 
-import '../../data/models/login.dart';
 import '../../interfaces/i_api_traveller.dart';
 import '../../services/service_locator.dart';
 
-class AppRegisterScreen extends StatefulWidget {
-  const AppRegisterScreen({super.key});
+class WebRegisterWidget extends StatefulWidget {
+  const WebRegisterWidget({super.key});
 
   @override
-  State<AppRegisterScreen> createState() => _AppRegisterScreenState();
+  State<WebRegisterWidget> createState() => _WebRegisterWidgetState();
 }
 
-class _AppRegisterScreenState extends State<AppRegisterScreen> {
-  final _formLoginKey = GlobalKey<FormState>();
+class _WebRegisterWidgetState extends State<WebRegisterWidget> {
+  final _formKey = GlobalKey<FormState>();
   final ctrEmail = TextEditingController();
   final ctrPassword = TextEditingController();
   final ctrRepeatedPassword = TextEditingController();
 
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Form(
-      key: _formLoginKey,
-      child: Center(
-        child: FractionallySizedBox(
-          widthFactor: 0.7,
+    return AlertDialog(
+      scrollable: true,
+      title: const Text('Register'),
+      content: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Form(
+          key: _formKey,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               TextFormField(
                 controller: ctrEmail,
@@ -74,26 +73,34 @@ class _AppRegisterScreenState extends State<AppRegisterScreen> {
                   return null;
                 },
               ),
-              ElevatedButton(
-                  child: const Text("Submit"),
-                  onPressed: () async {
-                    if (_formLoginKey.currentState!.validate()) {
-                      final api = locator<
-                          IApiTraveller>(); //Using the locator to get the Api interface
-
-                      final login = Login(
-                          email: ctrEmail.value.text,
-                          password: ctrPassword.value.text);
-
-                      if (await api.register(login)) {
-                        appPageNotifier.changePage(AppPages.home);
-                      }
-                    }
-                  })
             ],
           ),
         ),
       ),
-    ));
+      actions: [
+        ElevatedButton(
+            child: const Text("Cancel"),
+            onPressed: () {
+              Navigator.of(context, rootNavigator: true).pop();
+            }),
+        ElevatedButton(
+            child: const Text("Submit"),
+            onPressed: () async {
+              if (_formKey.currentState!.validate()) {
+                final api = locator<
+                    IApiTraveller>(); //Using the locator to get the Api interface
+
+                final login = Login(
+                    email: ctrEmail.value.text,
+                    password: ctrPassword.value.text);
+
+                if (await api.register(login)) {
+                  Navigator.pop(context);
+                }
+              }
+            }),
+      ],
+      actionsAlignment: MainAxisAlignment.spaceBetween,
+    );
   }
 }

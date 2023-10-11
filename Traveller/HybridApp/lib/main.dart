@@ -26,9 +26,6 @@ Future<void> main() async {
 
   FirebaseMessaging.onBackgroundMessage(_backgroundMessageHandler);
 
-
-  late final MaterialApp platformApp;
-
   notificationInit();
   setupApi();
 
@@ -40,31 +37,38 @@ Future<void> main() async {
   if (kIsWeb) {
     // running on the web!
     setPathUrlStrategy();
-    platformApp = MaterialApp.router(
-      title: title,
-      theme: themeData,
-      debugShowCheckedModeBanner: false,
-      routerConfig: getWebRouter(),
+    runApp(
+      MultiBlocProvider(providers: [
+        BlocProvider<RouteBloc>(
+          create: (BuildContext context) => RouteBloc(),
+        ),
+        BlocProvider<TicketBloc>(
+          create: (BuildContext context) => TicketBloc(),
+        ),
+      ], child: MaterialApp.router(
+        title: title,
+        theme: themeData,
+        debugShowCheckedModeBanner: false,
+        routerConfig: getWebRouter(),
+      )),
     );
   } else {
-    platformApp = MaterialApp(
-      title: title,
-      theme: themeData,
-      debugShowCheckedModeBanner: false,
-      home: const AppMain(),
+    runApp(
+      MultiBlocProvider(providers: [
+        BlocProvider<RouteBloc>(
+          create: (BuildContext context) => RouteBloc(),
+        ),
+        BlocProvider<TicketBloc>(
+          create: (BuildContext context) => TicketBloc(),
+        ),
+      ], child: MaterialApp(
+        title: title,
+        theme: themeData,
+        debugShowCheckedModeBanner: false,
+        home: const AppMain(),
+      )),
     );
   }
-
-  runApp(
-    MultiBlocProvider(providers: [
-      BlocProvider<RouteBloc>(
-        create: (BuildContext context) => locator<RouteBloc>(),
-      ),
-      BlocProvider<TicketBloc>(
-        create: (BuildContext context) => locator<TicketBloc>(),
-      ),
-    ], child: platformApp),
-  );
 }
 
 @pragma('vm:entry-point')
