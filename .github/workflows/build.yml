@@ -17,8 +17,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       
+      - name: Install dependencies
+        run: sudo apt-get install -y gcc
+        
       - name: Build Rust Projects with Cross
         uses: houseabsolute/actions-rust-cross@v0.0.9
         with:
           target: ${{ matrix.target }}
-          working-directory: ./RestAPI
+          working-directory: ./RestApi
+
