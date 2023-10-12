@@ -1,0 +1,36 @@
+name: Build RestApi
+
+on:
+  push:
+    paths:
+      - 'RestAPI/**'
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        target: [x86_64-unknown-linux-gnu, x86_64-pc-windows-msvc, x86_64-apple-darwin]
+    runs-on: ${{ matrix.os }}
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Install dependencies
+        run: |
+          if [[ "${{ runner.os }}" == "Linux" ]]; then
+            sudo apt-get install -y gcc
+          elif [[ "${{ runner.os }}" == "Windows" ]]; then
+            choco install mingw --version 8.1.0 -y
+          elif [[ "${{ runner.os }}" == "macOS" ]]; then
+            brew install gcc
+          fi
+
+        
+      - name: Build Rust Projects with Cross
+        uses: houseabsolute/actions-rust-cross@v0.0.9
+        with:
+          target: ${{ matrix.target }}
+          working-directory: ./RestAPI
+
