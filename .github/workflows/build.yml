@@ -3,7 +3,7 @@ name: Build RestApi
 on:
   push:
     paths:
-      - 'RestApi/**'
+      - 'RestAPI/**'
 
 jobs:
   build:
