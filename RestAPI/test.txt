@@ -1,4 +1,4 @@
-eanrstentity_handler v0.1.0 (/Users/emil/Documents/TravellerProject/RestAPI/entity_handler)
+entity_handler v0.1.0 (/Users/emil/Documents/TravellerProject/RestAPI/entity_handler)
 ├── sea-orm v0.12.3
 │   ├── async-stream v0.3.5
 │   │   ├── async-stream-impl v0.3.5 (proc-macro)
