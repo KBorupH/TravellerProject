@@ -26,7 +26,7 @@ class HttpTokenService{
     String authEndpoint = "login";
     if (register) authEndpoint = "register";
 
-    var request = await _httpService.httpClient.postUrl(Uri.parse("$_baseUrl/authentication/$authEndpoint"));
+    var request = await _httpService.httpClient.postUrl(Uri.parse("$_baseUrl/authenticate/$authEndpoint"));
     request.headers.add(HttpHeaders.contentTypeHeader, 'application/json');
     request.add(utf8.encode(json.encode(login.toJson())));
 

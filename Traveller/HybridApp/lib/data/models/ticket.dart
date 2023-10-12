@@ -12,9 +12,13 @@ class Ticket {
 
   @JsonKey(includeToJson: false)
   final String startStation;
+  @JsonKey(includeToJson: false)
   final String endStation;
+  @JsonKey(includeToJson: false)
   final String startTime;
+  @JsonKey(includeToJson: false)
   final String endTime;
+  @JsonKey(includeToJson: false)
   final String platformNr;
 
   factory Ticket.fromJson(Map<String, dynamic> json) => _$TicketFromJson(json);
