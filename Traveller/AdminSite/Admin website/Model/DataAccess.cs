@@ -13,7 +13,7 @@ namespace Admin_website.Model
 		// returns connection string for linked database
 		public NpgsqlConnection GetConnection()
 		{
-			return new NpgsqlConnection(@"Server = 192.168.1.128;Port=5432; User Id=DataBaseAdmin;Password=Kode1234!;Database = TravellerDB;");
+			return new NpgsqlConnection(@"Server = 10.108.146.8;Port=5432; User Id=DataBaseAdmin;Password=Kode1234!;Database = TravellerDB;");
 		}
         /// <summary>
         /// Gets the data from the data base from a subject the subject can be a
@@ -75,25 +75,33 @@ namespace Admin_website.Model
 		}
 		public List<string> GetListBySubject(string subject)
 		{
-			List<string> result = new List<string>();
 			NpgsqlConnection conn = GetConnection();
-
+			List<string> result = new List<string>();
 			using (NpgsqlCommand cmd = new NpgsqlCommand(subject, conn))
 			{
 				try
 				{
 					conn.Open();
-                    using (NpgsqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            for (int i = 0; i < reader.FieldCount; i++)
-                            {
-                                result.Add(reader[i].ToString());
-                            }
-                        }
-                    }
-                }
+
+					using (NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM GetStaff()", conn))
+					{
+						using (NpgsqlDataReader reader = command.ExecuteReader())
+						{
+							if (reader.HasRows)
+							{
+								while (reader.Read())
+								{
+									string personName = reader["person_name"].ToString();
+									string staffId = reader["staff_id"].ToString();
+
+									// Concatenate the person name and staff ID and add to the result list
+									string resultString = $"{personName} - {staffId}";
+									result.Add(resultString);
+								}
+							}
+						}
+					}
+				}
 				catch (Exception)
 				{
 					throw; // Handles the exception
