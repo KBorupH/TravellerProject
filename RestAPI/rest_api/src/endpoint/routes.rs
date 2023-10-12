@@ -25,6 +25,8 @@ pub async fn get_routes(
     State(state): State<DatabaseConnection>,
     Json(payload): Json<Arguments>,
 ) -> Result<Json<Vec<ReturnRoute>>, ApiError> {
+    println!("/routes/all has been entered!");
+
     let Some(passenger) = Passenger::find_by_id(payload.passenger_id)
         .one(&state)
         .await?

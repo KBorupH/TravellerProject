@@ -35,6 +35,8 @@ pub async fn obtain_token(
     State(state): State<DatabaseConnection>,
     Json(payload): Json<Credentials>,
 ) -> Result<Json<TokenResponse>, ApiError> {
+    println!("/authenticate/register has been entered!");
+
     let token_request = TokenRequest {
         client_id: "EQUvFoiKGWJDCZTz6TE0MaJJsWTNi6du".to_string(),
         client_secret: "DPXtJHdjFmGEgvDjtkt9ryGMO36HlWMdJxWorXLabnquLsWwfmneqgackt3nKo4u"
