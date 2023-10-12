@@ -16,7 +16,6 @@ impl jwt::CoreClaims for CustomClaims {
     fn nbf(&self) -> Option<UnixTime> {
         None
     }
-
     fn exp(&self) -> Option<UnixTime> {
         None
     }
