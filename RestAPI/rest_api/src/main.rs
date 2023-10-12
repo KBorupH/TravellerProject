@@ -34,10 +34,14 @@ async fn main() -> Result<()> {
 
     let config = RustlsConfig::from_pem(SERVER_CERT.into(), SERVER_KEY.into()).await?;
 
+    let listener = "10.108.149.13:3000".parse().unwrap();
+
     // binds the REST API  for usage later.
-    axum_server::bind_rustls("10.108.149.13:3000".parse().unwrap(), config)
-        .serve(app.into_make_service())
-        .await?;
+    let server = axum_server::bind_rustls(listener, config);
+
+    println!("listening on {}", listener);
+
+    server.serve(app.into_make_service()).await?;
 
     Ok(())
 }

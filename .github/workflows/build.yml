@@ -28,4 +28,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: restapi-binary-${{ matrix.os }}
-          path: ./RestAPI/target/x86_64-pc-windows-msvc/release
+          path: ./RestAPI/target/x86_64-pc-windows-msvc/release/rest_api.exe
