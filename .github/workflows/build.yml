@@ -17,17 +17,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       
-      - name: Install dependencies
-        run: |
       - name: Build Rust Projects with Cross
         uses: houseabsolute/actions-rust-cross@v0.0.9
         with:
           target: ${{ matrix.target }}
           working-directory: ./RestAPI
-
+          args: --release
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
           name: restapi-binary-${{ matrix.os }}
-          path: ./RestAPI/target/*
+          path: ./RestAPI/target/x86_64-pc-windows-msvc/release
