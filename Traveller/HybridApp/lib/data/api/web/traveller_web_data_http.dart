@@ -1,22 +1,21 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:traveller_app/data/api/web/token_web_http_service.dart';
 import 'package:traveller_app/data/models/login.dart';
 import 'package:traveller_app/data/models/train_route.dart';
 import 'package:traveller_app/data/models/ticket.dart';
 import 'package:traveller_app/interfaces/i_api_traveller.dart';
 
-import '../models/search.dart';
-import 'http_client_service.dart';
-import 'http_token_service.dart';
+import 'package:http/http.dart' as http;
+import '../../models/search.dart';
 
-class TravellerDataHttp implements IApiTraveller {
+class TravellerWebDataHttp implements IApiTraveller {
 
-  late final HttpClientService _httpClientService;
-  late final HttpTokenService _httpTokenService;
+  late final TokenWebHttpService _httpTokenService;
   late bool _isHttpInitialized = false;
 
-  final String _baseURL = "http://10.108.149.13:3000/";
+  final String _baseURL = "https://10.108.149.13:3000/";
 
   final String _routesCtr = "routes/";
   final String _allRouteEndPoint = "all";
@@ -28,9 +27,7 @@ class TravellerDataHttp implements IApiTraveller {
 
   Future<void> _initializeHttpService() async {
     if (_isHttpInitialized) return;
-
-    _httpClientService = await HttpClientService().init();
-    _httpTokenService = HttpTokenService(_httpClientService, _baseURL);
+    _httpTokenService = TokenWebHttpService(_httpClientService, _baseURL);
     _isHttpInitialized = true;
   }
 
@@ -46,7 +43,16 @@ class TravellerDataHttp implements IApiTraveller {
 
   @override
   Future<List<TrainRoute>> getAllRoutes() async {
-    await _initializeHttpService();
+
+    var response = await http.get(url);
+    if (response.statusCode == 200) {
+      var jsonResponse =
+      convert.jsonDecode(response.body) as Map<String, dynamic>;
+      var itemCount = jsonResponse['totalItems'];
+      print('Number of books about http: $itemCount.');
+    } else {
+      print('Request failed with status: ${response.statusCode}.');
+    }
     final request = await _httpClientService.httpClient.getUrl(Uri.parse(_baseURL + _routesCtr + _allRouteEndPoint));
     request.headers.add(HttpHeaders.contentTypeHeader, 'application/json');
 

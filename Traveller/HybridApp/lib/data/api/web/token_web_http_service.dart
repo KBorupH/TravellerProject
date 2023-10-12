@@ -2,21 +2,18 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_session_manager/flutter_session_manager.dart';
-import 'package:traveller_app/data/api/http_client_service.dart';
+import 'package:traveller_app/data/api/app/client_app_http_service.dart';
 
-import '../models/login.dart';
+import '../../models/login.dart';
 
-class HttpTokenService{
-  HttpTokenService(HttpClientService httpService, String baseUrl){
-    _httpService = httpService;
+
+class TokenWebHttpService{
+  TokenWebHttpService(String baseUrl){
     _baseUrl = baseUrl;
   }
 
   final String _storageTokenKey = "tokenKey";
-
-  late final HttpClientService _httpService;
   late final String _baseUrl;
-
 
   Future<String> getLocalAccessToken() async {
     return await _readTokenSecureStorage();
