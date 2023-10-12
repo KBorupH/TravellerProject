@@ -15,8 +15,6 @@ use std::env;
 const SERVER_CERT: &[u8] = include_bytes!("../keys/cert.pem");
 const SERVER_KEY: &[u8] = include_bytes!("../keys/key.pem");
 
-const AUDIENCE: &'static str = "0.0.0.0";
-
 #[tokio::main]
 async fn main() -> Result<()> {
     // let authority = construct_authority().await?;
@@ -28,15 +26,16 @@ async fn main() -> Result<()> {
     let db = setup_database().await?;
 
     let app = Router::new()
-        .route("/routes", get(train_route::get_train_route))
-        .route("/login", post(login::obtain_token))
-        .route("/register", post(register::obtain_token))
+        .route("/routes/all", get(train_route::get_train_route))
+        .route("/authenticate/login", post(login::obtain_token))
+        .route("/authenticate/register", post(register::obtain_token))
         .with_state(db);
     // .layer(authorizer.jwt_layer(authority));
 
     let config = RustlsConfig::from_pem(SERVER_CERT.into(), SERVER_KEY.into()).await?;
 
-    axum_server::bind_rustls("0.0.0.0:3000".parse().unwrap(), config)
+    // binds the REST API  for usage later.
+    axum_server::bind_rustls("10.108.149.13:3000".parse().unwrap(), config)
         .serve(app.into_make_service())
         .await?;
 
@@ -45,7 +44,7 @@ async fn main() -> Result<()> {
 
 async fn setup_database() -> Result<DatabaseConnection> {
     dotenv().ok();
-    let db_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
+    let db_url = env::var("TRAVELLER_DB_URL").expect("DATABASE_URL must be set");
     let db = Database::connect(&db_url).await?;
     Ok(db)
 }

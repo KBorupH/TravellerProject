@@ -55,9 +55,3 @@ pub async fn obtain_token(
 
     Ok(Json(token_response))
 }
-
-// async fn verify_token(client: &Client, token: &str) -> Result<bool, reqwest::Error> {
-//     // Your verification logic here
-//     // ...
-//     Ok(true) // Placeholder
-// }
