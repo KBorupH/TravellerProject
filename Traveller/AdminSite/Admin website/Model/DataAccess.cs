@@ -4,6 +4,7 @@ using System.Text;
 using System;
 using Npgsql;
 using NpgsqlTypes;
+using System.Data;
 
 namespace Admin_website.Model
 {
@@ -19,38 +20,92 @@ namespace Admin_website.Model
         /// </summary>
         /// <param name="subject"></param>
         /// <returns></returns>
-        public List<string> GetBySubject(string subject)
+        public void DoBySubject(string subject)
         {
-            List<string> result = new List<string>();
-            NpgsqlConnection conn = GetConnection();
+			Model.DataAccess dataAccess = new Model.DataAccess();
+			NpgsqlConnection conn = dataAccess.GetConnection();
 
-            using (NpgsqlCommand cmd = new NpgsqlCommand(subject, conn))
-            {
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                try
-                {
-                    conn.Open();
+			using (NpgsqlCommand cmd = new NpgsqlCommand(subject, conn))
+			{
+				//cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
+				try
+				{
+					conn.Open();
+					cmd.ExecuteNonQuery();
+
+				}
+				catch (Exception)
+				{
+					throw; // Handles the exception
+				}
+				finally 
+				{
+					conn.Close(); 
+				}
+			}
+		}
+		public int GetBySubjectCount(string subject) 
+		{
+			int result = 0;
+			NpgsqlConnection conn = GetConnection();
+
+			using (NpgsqlCommand cmd = new NpgsqlCommand(subject, conn))
+			{
+				try
+				{
+					conn.Open();
+					object countResult = cmd.ExecuteScalar();
+                    if (countResult != null && countResult != DBNull.Value)
+                    {
+                        result = Convert.ToInt32(countResult);
+                    }
+                }
+				catch (Exception)
+				{
+					throw; // Handles the exception
+				}
+				finally
+				{
+					conn.Close();
+				}
+			}
+
+			return result;
+		}
+		public List<string> GetListBySubject(string subject)
+		{
+			List<string> result = new List<string>();
+			NpgsqlConnection conn = GetConnection();
+
+			using (NpgsqlCommand cmd = new NpgsqlCommand(subject, conn))
+			{
+				try
+				{
+					conn.Open();
                     using (NpgsqlDataReader reader = cmd.ExecuteReader())
-                    {                       
+                    {
                         while (reader.Read())
                         {
-                            if (!reader.IsDBNull(0))
+                            for (int i = 0; i < reader.FieldCount; i++)
                             {
-                                string value = reader.GetString(0);
-                                result.Add(value);
+                                result.Add(reader[i].ToString());
                             }
                         }
                     }
                 }
-                catch (Exception)
-                {
-                    throw; // Handles the exception
-                }
-            }
+				catch (Exception)
+				{
+					throw; // Handles the exception
+				}
+				finally
+				{
+					conn.Close();
+				}
+			}
 
-            return result;
-        }
+			return result;
+		}
 		public Route[] GetAllRoutes()
 		{
 			NpgsqlConnection conn = GetConnection();

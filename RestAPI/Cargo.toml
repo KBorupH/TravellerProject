@@ -3,5 +3,6 @@ resolver = "2"
 
 members = [
     "rest_api",
-    "user_handler",
+    # "user_handler",
+    "entity_handler",
 ]

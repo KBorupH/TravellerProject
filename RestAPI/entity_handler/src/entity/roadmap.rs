@@ -4,12 +4,12 @@ use sea_orm::entity::prelude::*;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel, Eq, Serialize, Deserialize)]
-#[sea_orm(table_name = "roadmaps")]
+#[sea_orm(table_name = "roadmap")]
 pub struct Model {
     #[sea_orm(primary_key, auto_increment = false)]
     pub id: Uuid,
-    pub destination: String,
-    pub start: String,
+    pub origin_id: Uuid,
+    pub destination_id: Uuid,
     pub estimated_time: i32,
 }
 
@@ -17,6 +17,22 @@ pub struct Model {
 pub enum Relation {
     #[sea_orm(has_many = "super::destination::Entity")]
     Destination,
+    #[sea_orm(
+        belongs_to = "super::station::Entity",
+        from = "Column::DestinationId",
+        to = "super::station::Column::Id",
+        on_update = "NoAction",
+        on_delete = "NoAction"
+    )]
+    Station2,
+    #[sea_orm(
+        belongs_to = "super::station::Entity",
+        from = "Column::OriginId",
+        to = "super::station::Column::Id",
+        on_update = "NoAction",
+        on_delete = "NoAction"
+    )]
+    Station1,
 }
 
 impl Related<super::destination::Entity> for Entity {

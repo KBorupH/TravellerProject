@@ -8,37 +8,28 @@ use serde::{Deserialize, Serialize};
 pub struct Model {
     #[sea_orm(primary_key, auto_increment = false)]
     pub id: Uuid,
-    pub departure: String,
-    pub arrival: String,
-    pub station_id: Uuid,
+    pub departure: DateTime,
+    pub arrival: DateTime,
     pub roadmap_id: Uuid,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
 pub enum Relation {
     #[sea_orm(
-        belongs_to = "super::roadmaps::Entity",
+        belongs_to = "super::roadmap::Entity",
         from = "Column::RoadmapId",
-        to = "super::roadmaps::Column::Id",
+        to = "super::roadmap::Column::Id",
         on_update = "NoAction",
         on_delete = "NoAction"
     )]
-    Roadmaps,
+    Roadmap,
     #[sea_orm(has_many = "super::route_destination::Entity")]
     RouteDestination,
-    #[sea_orm(
-        belongs_to = "super::stations::Entity",
-        from = "Column::StationId",
-        to = "super::stations::Column::Id",
-        on_update = "NoAction",
-        on_delete = "NoAction"
-    )]
-    Stations,
 }
 
-impl Related<super::roadmaps::Entity> for Entity {
+impl Related<super::roadmap::Entity> for Entity {
     fn to() -> RelationDef {
-        Relation::Roadmaps.def()
+        Relation::Roadmap.def()
     }
 }
 
@@ -48,15 +39,9 @@ impl Related<super::route_destination::Entity> for Entity {
     }
 }
 
-impl Related<super::stations::Entity> for Entity {
+impl Related<super::route::Entity> for Entity {
     fn to() -> RelationDef {
-        Relation::Stations.def()
-    }
-}
-
-impl Related<super::routes::Entity> for Entity {
-    fn to() -> RelationDef {
-        super::route_destination::Relation::Routes.def()
+        super::route_destination::Relation::Route.def()
     }
     fn via() -> Option<RelationDef> {
         Some(super::route_destination::Relation::Destination.def().rev())
