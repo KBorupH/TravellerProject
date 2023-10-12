@@ -1,59 +1,107 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
+    <!--
+      If you are serving your web app in a path other than the root, change the
+      href value below to reflect the base path you are serving from.
 
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
+      The path provided below has to start and end with a slash "/" in order for
+      it to work correctly.
 
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+      For more details:
+      * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
 
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
-  <base href="$FLUTTER_BASE_HREF">
+      This is a placeholder for base href that will be replaced by the value of
+      the `--base-href` argument provided to `flutter build`.
+    -->
+    <base href="$FLUTTER_BASE_HREF">
 
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A public transport communication app">
+    <meta charset="UTF-8">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+    <meta name="description" content="A public transport communication app">
 
-  <!-- iOS meta tags & icons -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="traveller_app">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+    <!-- iOS meta tags & icons -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="traveller_app">
+    <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png"/>
 
-  <title>traveller_app</title>
-  <link rel="manifest" href="manifest.json">
+    <title>traveller_app</title>
+    <link rel="manifest" href="manifest.json">
 
-  <script>
-    // The value below is injected by flutter build, do not touch.
-    const serviceWorkerVersion = null;
-  </script>
-  <!-- This script adds the flutter initialization JS code -->
-  <script src="flutter.js" defer></script>
+    <script>
+        // The value below is injected by flutter build, do not touch.
+        const serviceWorkerVersion = null;
+
+    </script>
+    <!-- This script adds the flutter initialization JS code -->
+    <script src="flutter.js" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-messaging.js"></script>
 </head>
 <body>
-  <script>
-    window.addEventListener('load', function(ev) {
-      // Download main.dart.js
-      _flutter.loader.loadEntrypoint({
-        serviceWorker: {
-          serviceWorkerVersion: serviceWorkerVersion,
-        },
-        onEntrypointLoaded: function(engineInitializer) {
-          engineInitializer.initializeEngine().then(function(appRunner) {
-            appRunner.runApp();
-          });
-        }
-      });
-    });
-  </script>
+<!--https://codingwithtashi.medium.com/flutter-web-push-notification-with-firebase-cloud-messaging-adc788dc621d-->
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyBcEj68F_jBw6B06vEguWiq8SEAayMWtJg",
+        authDomain: "traveller-35de6.firebaseapp.com",
+        projectId: "traveller-35de6",
+        storageBucket: "traveller-35de6.appspot.com",
+        messagingSenderId: "713539644947",
+        appId: "1:713539644947:web:9ee1969f6cf6a4ea40d9e6",
+    };
+    firebase.initializeApp(firebaseConfig);
+</script>
+<script src="main.dart.js" type="application/javascript"></script>
+<script>
+    // if ("serviceWorker" in navigator) {
+    //     navigator.serviceWorker.register('../firebase-messaging-sw.js')
+    //         .then(function (registration) {
+    //                 console.log("Service Worker Registered");
+    //                 messaging.useServiceWorker(registration);
+    //             }
+    //         );
+    // }
+
+    if ("serviceWorker" in navigator) {
+        window.addEventListener('load', function (ev) {
+            navigator.serviceWorker.ready.register("/firebase-messaging-sw.js").then(function (reg) {
+                if(reg.installing) {
+                    console.log('Service worker installing');
+                } else if(reg.waiting) {
+                    console.log('Service worker installed');
+                } else if(reg.active) {
+                    console.log('Service worker active');
+                }
+                if (!('PushManager' in window)) {
+                    console.log('Push messaging isn\'t supported.');
+                    return;
+                }
+                if (Notification.permission === 'denied') {
+                    console.log('The user has blocked notifications.');
+
+                }
+            })
+
+            // Download main.dart.js
+            _flutter.loader.loadEntrypoint({
+                // entrypointUrl: "/main.dart.js",
+                serviceWorker: {
+                    serviceWorkerVersion: serviceWorkerVersion,
+                    serviceWorkerUrl: "/flutter_service_worker.js?v=",
+                },
+                onEntrypointLoaded: function (engineInitializer) {
+                    engineInitializer.initializeEngine().then(function (appRunner) {
+                        appRunner.runApp();
+                    });
+                }
+            });
+        });
+    }
+
+</script>
 </body>
 </html>

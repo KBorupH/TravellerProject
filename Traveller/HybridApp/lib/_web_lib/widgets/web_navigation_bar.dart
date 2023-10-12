@@ -2,11 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:traveller_app/_web_lib/web_main.dart';
 import 'package:traveller_app/_web_lib/widgets/web_login_widget.dart';
+import 'package:traveller_app/_web_lib/widgets/web_register_widget.dart';
 
-class WebNavigationBar extends StatelessWidget {
+class WebNavigationBar extends StatefulWidget {
   const WebNavigationBar({super.key, required this.body});
 
   final Widget body;
+
+  @override
+  State<WebNavigationBar> createState() => _WebNavigationBarState();
+}
+
+class _WebNavigationBarState extends State<WebNavigationBar> {
+  bool loggedIn = false;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +53,15 @@ class WebNavigationBar extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
             child: ElevatedButton(
-              onPressed: () => context.go(WebPages.ticket.toPath),
+              onPressed:
+                  loggedIn ? () => context.go(WebPages.ticket.toPath) : null,
+              style: ButtonStyle(backgroundColor:
+                  MaterialStateProperty.resolveWith(
+                      (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled))
+                  return Theme.of(context).colorScheme.background.withOpacity(0.5);
+                return null; // Use the component's default.
+              })),
               child: const Row(
                 children: [
                   Icon(Icons.sticky_note_2),
@@ -54,15 +70,19 @@ class WebNavigationBar extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
+          Visibility(
+            visible: !loggedIn,
+            child: Padding(
               padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
               child: ElevatedButton(
-                onPressed: () {
-                  showDialog(
+                onPressed: () async {
+                  loggedIn = await showDialog(
                       context: context,
                       builder: (dialogContext) {
                         return const WebLoginWidget();
                       });
+                  //Needed to make the navigation bar reactive. Setstate has no effect, probably locked by GoRouter
+                  context.go(GoRouterState.of(context).matchedLocation);
                 },
                 child: const Row(
                   children: [
@@ -70,11 +90,51 @@ class WebNavigationBar extends StatelessWidget {
                     Text("Login"),
                   ],
                 ),
-              )),
+              ),
+            ),
+          ),
+          Visibility(
+            visible: !loggedIn,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
+              child: ElevatedButton(
+                onPressed: () async {
+                  loggedIn = await showDialog(
+                      context: context,
+                      builder: (dialogContext) {
+                        return const WebRegisterWidget();
+                      });
+                  //Needed to make the navigation bar reactive. Setstate has no effect, probably locked by GoRouter
+                  context.go(GoRouterState.of(context).matchedLocation);
+                },
+                child: const Row(
+                  children: [
+                    Icon(Icons.app_registration),
+                    Text("Register"),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Visibility(
+            visible: loggedIn,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
+              child: ElevatedButton(
+                onPressed: () {},
+                child: const Row(
+                  children: [
+                    Icon(Icons.account_circle_rounded),
+                    Text("Account"),
+                  ],
+                ),
+              ),
+            ),
+          ),
         ],
       ),
       body: SafeArea(
-        child: body,
+        child: widget.body,
       ),
     );
   }

@@ -27,6 +27,7 @@ class _WebHomeScreenState extends State<WebHomeScreen> {
             ),
           ),
           child: const Column(
+            mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               FractionallySizedBox(

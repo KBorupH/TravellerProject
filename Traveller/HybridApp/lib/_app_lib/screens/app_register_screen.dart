@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:traveller_app/_app_lib/app_page.dart';
+import 'package:traveller_app/_app_lib/notifiers/app_page_notifier.dart';
 
 import '../../data/models/login.dart';
 import '../../interfaces/i_api_traveller.dart';
 import '../../services/service_locator.dart';
+import '../notifiers/app_drawer_notifier.dart';
 
-class AppLoginScreen extends StatefulWidget {
-  const AppLoginScreen({super.key});
+class AppRegisterScreen extends StatefulWidget {
+  const AppRegisterScreen({super.key});
 
   @override
-  State<AppLoginScreen> createState() => _AppLoginScreenState();
+  State<AppRegisterScreen> createState() => _AppRegisterScreenState();
 }
 
-class _AppLoginScreenState extends State<AppLoginScreen> {
+class _AppRegisterScreenState extends State<AppRegisterScreen> {
   final _formLoginKey = GlobalKey<FormState>();
   final ctrEmail = TextEditingController();
   final ctrPassword = TextEditingController();
-  final ctrPassword = TextEditingController();
+  final ctrRepeatedPassword = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +59,7 @@ class _AppLoginScreenState extends State<AppLoginScreen> {
                 },
               ),
               TextFormField(
-                controller: ctrPassword,
+                controller: ctrRepeatedPassword,
                 decoration: const InputDecoration(
                   labelText: 'Confirm Password',
                   hintText: "Insert repeated password",
@@ -67,6 +68,10 @@ class _AppLoginScreenState extends State<AppLoginScreen> {
                 validator: (value) {
                   if (value == null || value.isEmpty)
                     return "Please repeated insert password";
+
+                  if (value != ctrPassword.value.text)
+                    return "Passwords doesn't match";
+
                   return null;
                 },
               ),
@@ -74,15 +79,16 @@ class _AppLoginScreenState extends State<AppLoginScreen> {
                   child: const Text("Submit"),
                   onPressed: () async {
                     if (_formLoginKey.currentState!.validate()) {
-                      final _api = locator<
+                      final api = locator<
                           IApiTraveller>(); //Using the locator to get the Api interface
 
                       final login = Login(
                           email: ctrEmail.value.text,
                           password: ctrPassword.value.text);
 
-                      if (await _api.checkLogin(login)) {
+                      if (await api.register(login)) {
                         appPageNotifier.changePage(AppPages.home);
+                        appDrawerNotifier.changeLoginState(true);
                       }
                     }
                   })

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AppPage with ChangeNotifier {
+class AppPageNotifier with ChangeNotifier {
   AppPages _currentPage = AppPages.home;
   AppPages get currentPage => _currentPage;
 
@@ -13,7 +13,8 @@ class AppPage with ChangeNotifier {
 enum AppPages {
   home,
   ticket,
-  login
+  login,
+  register
 }
 
-final AppPage appPageNotifier = AppPage();
+final AppPageNotifier appPageNotifier = AppPageNotifier();

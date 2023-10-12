@@ -5,23 +5,25 @@ import 'package:traveller_app/data/models/login.dart';
 import '../../interfaces/i_api_traveller.dart';
 import '../../services/service_locator.dart';
 
-class WebLoginWidget extends StatefulWidget {
-  const WebLoginWidget({super.key});
+class WebRegisterWidget extends StatefulWidget {
+  const WebRegisterWidget({super.key});
 
   @override
-  State<WebLoginWidget> createState() => _WebLoginWidgetState();
+  State<WebRegisterWidget> createState() => _WebRegisterWidgetState();
 }
 
-class _WebLoginWidgetState extends State<WebLoginWidget> {
+class _WebRegisterWidgetState extends State<WebRegisterWidget> {
   final _formKey = GlobalKey<FormState>();
   final ctrEmail = TextEditingController();
   final ctrPassword = TextEditingController();
+  final ctrRepeatedPassword = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       scrollable: true,
-      title: const Text('Login'),
+      title: const Text('Register'),
       content: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Form(
@@ -54,6 +56,23 @@ class _WebLoginWidgetState extends State<WebLoginWidget> {
                   return null;
                 },
               ),
+              TextFormField(
+                controller: ctrRepeatedPassword,
+                decoration: const InputDecoration(
+                  labelText: 'Confirm Password',
+                  hintText: "Insert repeated password",
+                  icon: Icon(Icons.password),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty)
+                    return "Please repeated insert password";
+
+                  if (value != ctrPassword.value.text)
+                    return "Passwords doesn't match";
+
+                  return null;
+                },
+              ),
             ],
           ),
         ),
@@ -68,14 +87,14 @@ class _WebLoginWidgetState extends State<WebLoginWidget> {
             child: const Text("Submit"),
             onPressed: () async {
               if (_formKey.currentState!.validate()) {
-                final _api = locator<
+                final api = locator<
                     IApiTraveller>(); //Using the locator to get the Api interface
 
                 final login = Login(
                     email: ctrEmail.value.text,
                     password: ctrPassword.value.text);
 
-                if (await _api.checkLogin(login)) {
+                if (await api.register(login)) {
                   Navigator.pop(context, true);
                 }
               }

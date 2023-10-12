@@ -10,5 +10,6 @@ abstract class IApiTraveller {
   Future<void> purchaseTicket(String routeId);
   Future<List<Ticket>> getAllTickets();
   Future<bool> checkLogin(Login login);
+  Future<bool> register(Login login);
 }
 

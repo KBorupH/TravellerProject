@@ -7,7 +7,7 @@ using NpgsqlTypes;
 
 namespace Admin_website.Model
 {
-	public class DataAccess
+	public class DataAccess : IDataAccess
 	{
 		// returns connection string for linked database
 		public NpgsqlConnection GetConnection()
@@ -19,21 +19,23 @@ namespace Admin_website.Model
         /// </summary>
         /// <param name="subject"></param>
         /// <returns></returns>
-        public List<string> GetBySubject(string subject)
+        public List<string> GetBySubject(string subject, bool isStoredprocedure)
         {
             List<string> result = new List<string>();
             NpgsqlConnection conn = GetConnection();
 
             using (NpgsqlCommand cmd = new NpgsqlCommand(subject, conn))
             {
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+				if (isStoredprocedure)
+				{
+					cmd.CommandType = System.Data.CommandType.StoredProcedure;
+				}                
                 try
                 {
                     conn.Open();
 
                     using (NpgsqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        
+                    {                       
                         while (reader.Read())
                         {
                             if (!reader.IsDBNull(0))
@@ -46,7 +48,7 @@ namespace Admin_website.Model
                 }
                 catch (Exception)
                 {
-                    throw; // Handle the exception
+                    throw; // Handles the exception
                 }
             }
 
