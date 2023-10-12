@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:traveller_app/_app_lib/app_page.dart';
+import 'package:traveller_app/_app_lib/notifiers/app_drawer_notifier.dart';
+import 'package:traveller_app/_app_lib/notifiers/app_page_notifier.dart';
 
 import '../../data/models/login.dart';
 import '../../interfaces/i_api_traveller.dart';
@@ -69,6 +70,7 @@ class _AppLoginScreenState extends State<AppLoginScreen> {
 
                       if (await _api.checkLogin(login)) {
                         appPageNotifier.changePage(AppPages.home);
+                        appDrawerNotifier.changeLoginState(true);
                       }
                     }
                   })

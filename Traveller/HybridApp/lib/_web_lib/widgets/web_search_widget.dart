@@ -67,8 +67,11 @@ class _WebSearchWidgetState extends State<WebSearchWidget> {
     return Container(
       margin: const EdgeInsets.all(15.0),
       padding: const EdgeInsets.all(20.0),
-      decoration:
-          BoxDecoration(border: Border.all(color: Colors.blueAccent, width: 5)),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        border:
+            Border.all(color: Theme.of(context).colorScheme.primary, width: 5),
+      ),
       child: Form(
         key: _formSearchKey,
         child: Column(

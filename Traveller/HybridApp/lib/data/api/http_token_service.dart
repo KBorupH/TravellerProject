@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:traveller_app/data/api/http_client_service.dart';
 
 import '../models/login.dart';
@@ -12,10 +12,6 @@ class HttpTokenService{
     _baseUrl = baseUrl;
   }
 
-  AndroidOptions _getAndroidOptions() => const AndroidOptions(
-    encryptedSharedPreferences: true,
-  );
-  late final _storage = FlutterSecureStorage(aOptions: _getAndroidOptions());
   final String _storageTokenKey = "tokenKey";
 
   late final HttpClientService _httpService;
@@ -53,11 +49,13 @@ class HttpTokenService{
   }
 
   Future<void> _writeTokenSecureStorage(String token) async {
-    await _storage.write(key: _storageTokenKey, value: token);
+    await SessionManager().set(_storageTokenKey, token);
   }
 
   Future<String> _readTokenSecureStorage() async {
-    return await _storage.read(key: _storageTokenKey) ?? "";
+    if (await SessionManager().containsKey(_storageTokenKey))
+      return await SessionManager().get(_storageTokenKey);
+    return "";
   }
 
   Map<String, dynamic> _parseJwt(String token) {
