@@ -150,7 +150,7 @@ CREATE TABLE IF NOT EXISTS route_notifications (
         let routeRows = sqlx::query("SELECT * FROM route").fetch_all(&u_handler.sq_pg_traveller_db).await?;
         let routes: Vec<Route> = routeRows
             .iter()
-            .map(|r| Route::new(r.get::<uuid, _>("route_id"), DateTime::parse_from_str(&*r.get::<String, _>("last_notif_time"), "").into()))
+            .map(|r| Route::new(r.get::<uuid, _>("id"), *r.get::<DateTime<Utc>, _>("departure_time").into()))
             .collect();
 
         for route in routes {
@@ -165,7 +165,7 @@ CREATE TABLE IF NOT EXISTS route_notifications (
         let routeNotisRows = sqlx::query("SELECT * FROM route_notification").fetch_all(&u_handler.sq_pg_traveller_op_db).await?;
         let route_notis: Vec<RouteNotification> = routeNotisRows
             .iter()
-            .map(|r| Route::new(r.get::<uuid, _>("route_id"), DateTime::parse_from_str(&*r.get::<String, _>("last_notif_time"), "").into()))
+            .map(|r| Route::new(r.get::<uuid, _>("route_id"), *r.get::<DateTime<Utc>, _>("last_notif_time").into()))
             .collect();
 
         for notis in route_notis {

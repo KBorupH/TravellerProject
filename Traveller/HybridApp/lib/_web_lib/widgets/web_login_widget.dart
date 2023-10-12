@@ -76,7 +76,7 @@ class _WebLoginWidgetState extends State<WebLoginWidget> {
                     password: ctrPassword.value.text);
 
                 if (await _api.checkLogin(login)) {
-                  Navigator.pop(context);
+                  Navigator.pop(context, true);
                 }
               }
             }),

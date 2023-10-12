@@ -1,18 +1,16 @@
-import 'dart:io';
-
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:traveller_app/_app_lib/app_main.dart';
 import 'package:traveller_app/_web_lib/web_main.dart';
-import 'package:traveller_app/data/bloc/route_bloc.dart';
-import 'package:traveller_app/data/bloc/ticket_bloc.dart';
-import 'package:traveller_app/services/notification_service.dart';
 import 'package:traveller_app/services/service_locator.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-import 'package:flutter_web_plugins/flutter_web_plugins.dart';
+
+//Conditional imports to avoid conflicts of packages between app and web
+import 'package:traveller_app/platform_configs/urlstrategy.dart' // A stub, only present to expose the setUrlPathing method.
+if (dart.library.io) 'package:traveller_app/platform_configs/urlstrategy_mobile.dart' //Is exposed to mobile, i.e. a functionless method
+if (dart.library.js) 'package:traveller_app/platform_configs/urlstrategy_web.dart'; //Is exposed to web, actual pathing method.
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,9 +21,8 @@ Future<void> main() async {
   //SubscribeToTopic not allowed on web
   if(!kIsWeb) FirebaseMessaging.instance.subscribeToTopic("route_status");
 
-  FirebaseMessaging.onBackgroundMessage(_backgroundMessageHandler);
+  print("Device Firebase Token: ${await FirebaseMessaging.instance.getToken()}");
 
-  notificationInit();
   setupApi();
 
   const String title = "Traveller";
@@ -33,45 +30,25 @@ Future<void> main() async {
       colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xff003366)),
       useMaterial3: true);
 
-  if (kIsWeb) {
-    // running on the web!
-    setUrlStrategy(PathUrlStrategy());
-    runApp(
-      MultiBlocProvider(providers: [
-        BlocProvider<RouteBloc>(
-          create: (BuildContext context) => RouteBloc(),
-        ),
-        BlocProvider<TicketBloc>(
-          create: (BuildContext context) => TicketBloc(),
-        ),
-      ], child: MaterialApp.router(
-        title: title,
-        theme: themeData,
-        debugShowCheckedModeBanner: false,
-        routerConfig: getWebRouter(),
-      )),
-    );
+  if (kIsWeb) { // running on the web!
+
+    // Even while in this condition or further in the webmain widgets,
+    // the import is still loaded, and should be conditional,
+    // even if mobile shouldn't reach this line.
+    setUrlPathing();
+    runApp(WebMain(title: title, theme: themeData));
   } else {
-    runApp(
-      MultiBlocProvider(providers: [
-        BlocProvider<RouteBloc>(
-          create: (BuildContext context) => RouteBloc(),
-        ),
-        BlocProvider<TicketBloc>(
-          create: (BuildContext context) => TicketBloc(),
-        ),
-      ], child: MaterialApp(
-        title: title,
-        theme: themeData,
-        debugShowCheckedModeBanner: false,
-        home: const AppMain(),
-      )),
+    NotificationSettings settings =
+    await FirebaseMessaging.instance.requestPermission(
+      alert: true,
+      announcement: true,
+      badge: true,
+      carPlay: true,
+      criticalAlert: true,
+      provisional: true,
+      sound: true,
     );
+
+    runApp(AppMain(title: title, theme: themeData));
   }
-}
-
-@pragma('vm:entry-point')
-Future<void> _backgroundMessageHandler(RemoteMessage message) async {
-  //Do something outside of the app on notification
-
 }

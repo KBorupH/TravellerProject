@@ -33,36 +33,75 @@
     <link rel="manifest" href="manifest.json">
 
     <script>
-    // The value below is injected by flutter build, do not touch.
-    const serviceWorkerVersion = null;
+        // The value below is injected by flutter build, do not touch.
+        const serviceWorkerVersion = null;
 
     </script>
     <!-- This script adds the flutter initialization JS code -->
     <script src="flutter.js" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-messaging.js"></script>
 </head>
 <body>
-<!-- https://firebase.flutter.dev/docs/messaging/usage/#background-messages -->
+<!--https://codingwithtashi.medium.com/flutter-web-push-notification-with-firebase-cloud-messaging-adc788dc621d-->
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyBcEj68F_jBw6B06vEguWiq8SEAayMWtJg",
+        authDomain: "traveller-35de6.firebaseapp.com",
+        projectId: "traveller-35de6",
+        storageBucket: "traveller-35de6.appspot.com",
+        messagingSenderId: "713539644947",
+        appId: "1:713539644947:web:9ee1969f6cf6a4ea40d9e6",
+    };
+    firebase.initializeApp(firebaseConfig);
+</script>
 <script src="main.dart.js" type="application/javascript"></script>
 <script>
-if ('serviceWorker' in navigator) {
+    // if ("serviceWorker" in navigator) {
+    //     navigator.serviceWorker.register('../firebase-messaging-sw.js')
+    //         .then(function (registration) {
+    //                 console.log("Service Worker Registered");
+    //                 messaging.useServiceWorker(registration);
+    //             }
+    //         );
+    // }
 
-    window.addEventListener('load', function(ev) {
-      // Download main.dart.js
+    if ("serviceWorker" in navigator) {
+        window.addEventListener('load', function (ev) {
+            navigator.serviceWorker.ready.register("/firebase-messaging-sw.js").then(function (reg) {
+                if(reg.installing) {
+                    console.log('Service worker installing');
+                } else if(reg.waiting) {
+                    console.log('Service worker installed');
+                } else if(reg.active) {
+                    console.log('Service worker active');
+                }
+                if (!('PushManager' in window)) {
+                    console.log('Push messaging isn\'t supported.');
+                    return;
+                }
+                if (Notification.permission === 'denied') {
+                    console.log('The user has blocked notifications.');
 
-      _flutter.loader.loadEntrypoint({
-        serviceWorker: {
-          serviceWorkerVersion: serviceWorkerVersion,
-        },
-        onEntrypointLoaded: function(engineInitializer) {
-          engineInitializer.initializeEngine().then(function(appRunner) {
-            appRunner.runApp();
-          });
-        }
-      });
+                }
+            })
 
-      navigator.serviceWorker.register('/firebase-messaging-sw.js');
-    });
-}
+            // Download main.dart.js
+            _flutter.loader.loadEntrypoint({
+                // entrypointUrl: "/main.dart.js",
+                serviceWorker: {
+                    serviceWorkerVersion: serviceWorkerVersion,
+                    serviceWorkerUrl: "/flutter_service_worker.js?v=",
+                },
+                onEntrypointLoaded: function (engineInitializer) {
+                    engineInitializer.initializeEngine().then(function (appRunner) {
+                        appRunner.runApp();
+                    });
+                }
+            });
+        });
+    }
+
 </script>
 </body>
 </html>

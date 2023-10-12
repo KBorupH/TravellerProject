@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:traveller_app/_app_lib/app_page.dart';
+import 'package:traveller_app/_app_lib/notifiers/app_page_notifier.dart';
 
 import '../../data/models/login.dart';
 import '../../interfaces/i_api_traveller.dart';
 import '../../services/service_locator.dart';
+import '../notifiers/app_drawer_notifier.dart';
 
 class AppRegisterScreen extends StatefulWidget {
   const AppRegisterScreen({super.key});
@@ -87,6 +88,7 @@ class _AppRegisterScreenState extends State<AppRegisterScreen> {
 
                       if (await api.register(login)) {
                         appPageNotifier.changePage(AppPages.home);
+                        appDrawerNotifier.changeLoginState(true);
                       }
                     }
                   })

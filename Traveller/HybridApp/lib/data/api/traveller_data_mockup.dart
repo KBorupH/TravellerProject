@@ -1,3 +1,5 @@
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:traveller_app/data/models/login.dart';
 import 'package:traveller_app/data/models/search.dart';
 import 'package:traveller_app/data/models/train_route.dart';
@@ -54,14 +56,28 @@ class TravellerDataMockup implements IApiTraveller {
   @override
   Future<void> purchaseTicket(String routeId) async {}
 
+  AndroidOptions _getAndroidOptions() => const AndroidOptions(
+    encryptedSharedPreferences: true,
+  );
+
   @override
   Future<bool> checkLogin(Login login) async {
-    if (login.email == "test" && login.password == "test") return await true;
+
+
+    if (login.email == "test" && login.password == "test") {
+      final storage = FlutterSecureStorage(aOptions: _getAndroidOptions());
+      storage.write(key: "key", value: "value");
+      await SessionManager().set("tokenKey", "test");
+      return await true;
+    }
     return false;
   }
 
   @override
   Future<bool> register(Login login) async {
+    final storage = FlutterSecureStorage(aOptions: _getAndroidOptions());
+
+    await SessionManager().set("tokenKey", "test");
     return await true;
   }
 }
