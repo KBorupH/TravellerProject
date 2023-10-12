@@ -8,11 +8,6 @@ edition = "2021"
 [dependencies]
 entity_handler = { path = "../entity_handler" }
 
-aliri = "0.6.2"
-aliri_axum = "0.3.0"
-aliri_clock = "0.1.4"
-aliri_oauth2 = "0.10.0"
-aliri_tower = "0.5.0"
 anyhow = "1.0.75"
 axum = { version = "0.6.20", features = ["http2", "headers", "macros"] }
 axum-server = { version = "0.5.1", features = ["tls-rustls"] }

@@ -1,14 +1,14 @@
 mod authorizer;
 mod endpoint;
-mod scope;
+// mod scope;
 
-use crate::scope::CustomClaims;
-use aliri::{
-    jwa::Algorithm,
-    jwt::{Audience, CoreValidator},
-};
-use aliri_oauth2::Authority;
-use aliri_tower::Oauth2Authorizer;
+// use crate::scope::CustomClaims;
+// use aliri::{
+//     jwa::Algorithm,
+//     jwt::{Audience, CoreValidator},
+// };
+// use aliri_oauth2::Authority;
+// use aliri_tower::Oauth2Authorizer;
 use anyhow::Result;
 use axum::{
     http::StatusCode,
