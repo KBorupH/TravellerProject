@@ -1,6 +1,8 @@
 use crate::ApiError;
 use axum::{extract::State, Json};
 use entity_handler::entity::prelude::*;
+use entity_handler::entity::*;
+use rayon::prelude::*;
 use sea_orm::prelude::*;
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
@@ -24,8 +26,19 @@ pub struct Arguments {
 
 pub async fn get_tickets(
     State(state): State<DatabaseConnection>,
-    user_id: Json<Arguments>,
+    Json(user_id): Json<Arguments>,
 ) -> Result<Json<Vec<ReturnTicket>>, ApiError> {
+    println!("/routes/all has been entered!");
+
+    let tickets = Ticket::find()
+        .filter(ticket::Column::PassengerId.eq(user_id.user_id))
+        .all(&state)
+        .await?;
+
+    let mut seat = ();
+
+    for ticket in tickets.into_iter() {}
+
     todo!()
 }
 // let tickets = Ticket::find()
