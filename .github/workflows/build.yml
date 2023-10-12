@@ -1,0 +1,24 @@
+name: Build RestApi
+
+on:
+  push:
+    paths:
+      - 'RestApi/**'
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        target: [x86_64-unknown-linux-gnu, x86_64-pc-windows-msvc, x86_64-apple-darwin]
+    runs-on: ${{ matrix.os }}
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Build Rust Projects with Cross
+        uses: houseabsolute/actions-rust-cross@v0.0.9
+        with:
+          target: ${{ matrix.target }}
+          working-directory: ./RestApi
