@@ -107,24 +107,11 @@
     height: 1000px;
 }
 
-
-
 nav {
     /*position: fixed;
     width: 100%;
     z-index: 999;*/
 }
-
-
-
-
-
-
-
-
-
-
-
 
 #WorkerLeftBox {
     position: absolute;
@@ -132,10 +119,10 @@ nav {
     width: 800px;
     margin-top: 150px;
     left: 1vw;
-    background: red;
 }
 .WorkerBoxInList {
-    width: 100%;
+    width: 80%;
     padding: 10px;
-    margin: 5px;
+    margin: 15px;
+    padding-top: 1vw;
 }
