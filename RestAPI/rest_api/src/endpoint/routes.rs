@@ -21,7 +21,7 @@ pub struct ReturnRoute {
 pub struct Arguments {
     passenger_id: Uuid,
 }
-pub async fn get_train_route(
+pub async fn get_routes(
     State(state): State<DatabaseConnection>,
     Json(payload): Json<Arguments>,
 ) -> Result<Json<Vec<ReturnRoute>>, ApiError> {

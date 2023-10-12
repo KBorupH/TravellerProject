@@ -26,7 +26,7 @@ async fn main() -> Result<()> {
     let db = setup_database().await?;
 
     let app = Router::new()
-        .route("/routes/all", get(train_route::get_train_route))
+        .route("/routes/all", get(routes::get_routes))
         .route("/authenticate/login", post(login::obtain_token))
         .route("/authenticate/register", post(register::obtain_token))
         .with_state(db);

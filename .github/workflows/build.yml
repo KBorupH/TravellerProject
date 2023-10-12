@@ -30,4 +30,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: restapi-binary-${{ matrix.os }}
-          path: ./RestAPI/target/${{ matrix.target }}/release/*
+          path: ./RestAPI/target/release/rest_api
