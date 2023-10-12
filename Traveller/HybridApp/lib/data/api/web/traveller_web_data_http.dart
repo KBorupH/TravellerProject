@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:traveller_app/data/api/web/token_web_http_service.dart';
 import 'package:traveller_app/data/models/login.dart';
@@ -7,11 +6,12 @@ import 'package:traveller_app/data/models/train_route.dart';
 import 'package:traveller_app/data/models/ticket.dart';
 import 'package:traveller_app/interfaces/i_api_traveller.dart';
 
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import '../../models/search.dart';
 
 class TravellerWebDataHttp implements IApiTraveller {
 
+  final Client _httpClient = Client();
   late final TokenWebHttpService _httpTokenService;
   late bool _isHttpInitialized = false;
 
@@ -27,7 +27,7 @@ class TravellerWebDataHttp implements IApiTraveller {
 
   Future<void> _initializeHttpService() async {
     if (_isHttpInitialized) return;
-    _httpTokenService = TokenWebHttpService(_httpClientService, _baseURL);
+    _httpTokenService = TokenWebHttpService(_httpClient, _baseURL);
     _isHttpInitialized = true;
   }
 
@@ -43,16 +43,6 @@ class TravellerWebDataHttp implements IApiTraveller {
 
   @override
   Future<List<TrainRoute>> getAllRoutes() async {
-
-    var response = await http.get(url);
-    if (response.statusCode == 200) {
-      var jsonResponse =
-      convert.jsonDecode(response.body) as Map<String, dynamic>;
-      var itemCount = jsonResponse['totalItems'];
-      print('Number of books about http: $itemCount.');
-    } else {
-      print('Request failed with status: ${response.statusCode}.');
-    }
     final request = await _httpClientService.httpClient.getUrl(Uri.parse(_baseURL + _routesCtr + _allRouteEndPoint));
     request.headers.add(HttpHeaders.contentTypeHeader, 'application/json');
 

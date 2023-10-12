@@ -1,17 +1,18 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:traveller_app/data/api/app/client_app_http_service.dart';
 
+import 'package:http/http.dart';
 import '../../models/login.dart';
 
-
-class TokenWebHttpService{
-  TokenWebHttpService(String baseUrl){
+class TokenWebHttpService {
+  TokenWebHttpService(Client httpClient, String baseUrl) {
+    _httpClient = httpClient;
     _baseUrl = baseUrl;
   }
 
+  late final Client _httpClient;
   final String _storageTokenKey = "tokenKey";
   late final String _baseUrl;
 
@@ -23,14 +24,18 @@ class TokenWebHttpService{
     String authEndpoint = "login";
     if (register) authEndpoint = "register";
 
-    var request = await _httpService.httpClient.postUrl(Uri.parse("$_baseUrl/authenticate/$authEndpoint"));
-    request.headers.add(HttpHeaders.contentTypeHeader, 'application/json');
-    request.add(utf8.encode(json.encode(login.toJson())));
+    Uri requestUri = Uri.parse("$_baseUrl/authenticate/$authEndpoint");
+    Map<String, String> requestHeader = {
+      "Content-Type": "application/json",
+    };
 
-    var response = await request.close();
+    var response = await _httpClient.post(requestUri,
+        headers: requestHeader,
+        body: json.encode(login.toJson()),
+        encoding: Encoding.getByName("UTF-8"));
+
     if (response.statusCode == 200) {
-      String responseBody = await response.transform(utf8.decoder).join();
-      String token = json.decode(responseBody)['fullToken'];
+      String token = json.decode(utf8.decode(response.bodyBytes))['access_token'];
 
       _writeTokenSecureStorage(token);
 
@@ -88,6 +93,4 @@ class TokenWebHttpService{
 
     return utf8.decode(base64Url.decode(output));
   }
-
-
 }
