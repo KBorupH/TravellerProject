@@ -12,17 +12,11 @@ use endpoint::prelude::*;
 use sea_orm::{Database, DatabaseConnection};
 use std::env;
 
-const SERVER_CERT: &[u8] = include_bytes!("../keys/cert.pem");
-const SERVER_KEY: &[u8] = include_bytes!("../keys/key.pem");
+const SERVER_CERT: &[u8] = include_bytes!("../../../Certificates/Server/localhost+3.pem");
+const SERVER_KEY: &[u8] = include_bytes!("../../../Certificates/Server/localhost+3-key.pem");
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    // let authority = construct_authority().await?;
-
-    // let authorizer = Oauth2Authorizer::new()
-    //     .with_claims::<CustomClaims>()
-    //     .with_terse_error_handler();
-
     let db = setup_database().await?;
 
     let app = Router::new()
@@ -50,6 +44,7 @@ async fn setup_database() -> Result<DatabaseConnection> {
     dotenv().ok();
     let db_url = env::var("TRAVELLER_DB_URL").expect("DATABASE_URL must be set");
     let db = Database::connect(&db_url).await?;
+    println!("Connected to database!");
     Ok(db)
 }
 
