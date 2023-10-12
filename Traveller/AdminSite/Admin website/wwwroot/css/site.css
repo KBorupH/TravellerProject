@@ -134,6 +134,10 @@ nav {
     left: 1vw;
     background: red;
 }
-.WorkerBoxInList{
+.WorkerBoxInList {
     width: 100%;
+    display: grid;
+    gap: 3vw;
+    grid-template-columns: 40% 40%;
+    padding: 1vw;
 }

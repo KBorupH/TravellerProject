@@ -1,8 +1,8 @@
 ﻿@{
 	List<string> staffList = GetListOfStaff();
-	for (int i = 0; i < staffList.Count() && i > 30; i += 2)
+	for (int i = 0; i < staffList.Count(); i += 2)
 	{
-		<div id="WorkerBoxInList" class="box">
+		<div class="box WorkerBoxInList">
 			<h1>@staffList[i]</h1>
 			<h1>@staffList[i + 1]</h1>
 		</div>
@@ -12,8 +12,10 @@
 @code {
 	private List<string> GetListOfStaff()
 	{
+
 		Model.IDataAccess DataAccess = new Model.DataAccess();
-		List<string> result = DataAccess.GetBySubject(Consts.STAFFS, true);
+		string cmd = "SELECT GetStaff()";
+		List<string> result = DataAccess.GetListBySubject(cmd);
 		return result;
 
 	}

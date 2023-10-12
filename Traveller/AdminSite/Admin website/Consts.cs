@@ -2,9 +2,9 @@
 {
     public static class Consts
     {
-        public const string TRAINS = "gettrains";
-        public const string STAFFS = "getstaff";
-        public const string TICKETS = "gettickets";
-        public const string PASSENGERS = "getpassengers";
+        public const string TRAINS = "SELECT GetTrainsCount()";
+        public const string STAFFS = "SELECT GetStaffCount()";
+        public const string TICKETS = "SELECT GetTicketsCount()";
+        public const string PASSENGERS = "SELECT GetPassengersCount()";
     }
 }

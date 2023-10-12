@@ -3,12 +3,8 @@
     private int GetTicketsCount()
     {
         Model.IDataAccess DA = new Model.DataAccess();
-        List<string> result = DA.GetBySubject(Consts.TICKETS, true);
-        if (result.Count() > 0)
-        {
-            return result.Count();
-        }
-        return 0;
+        int result = DA.GetBySubjectCount(Consts.TICKETS);
+        return result;
 
     }
 }

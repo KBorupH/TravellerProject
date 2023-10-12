@@ -2,6 +2,8 @@
 {
     public interface IDataAccess
     {
-        List<string> GetBySubject(string subject, bool isStoredprocedure);
+        void DoBySubject(string subject);
+        List<string> GetListBySubject(string subject);
+        int GetBySubjectCount(string subject);
     }
 }
