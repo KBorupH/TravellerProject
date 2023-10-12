@@ -109,8 +109,8 @@ class _AppMainState extends State<AppMain> {
       AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
           androidChannel.id.toString(), androidChannel.name.toString(),
           channelAction: AndroidNotificationChannelAction.update,
-          importance: Importance.high,
-          priority: Priority.high);
+          importance: Importance.max,
+          priority: Priority.max);
 
       notificationDetails = NotificationDetails(android: androidDetails);
     } else if (Platform.isIOS) {
@@ -130,10 +130,8 @@ class _AppMainState extends State<AppMain> {
       ext += '|';
     }
 
-    Future.delayed(Duration.zero, () {
-      _flutterLocalNotificationsPlugin.show(0, message.notification?.title,
-          message.notification?.body, notificationDetails,
-          payload: ext);
-    });
+    _flutterLocalNotificationsPlugin.show(0, message.notification?.title,
+        message.notification?.body, notificationDetails,
+        payload: ext);
   }
 }

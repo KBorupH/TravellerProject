@@ -5,7 +5,6 @@ import 'package:traveller_app/data/models/login.dart';
 import 'package:traveller_app/data/models/train_route.dart';
 import 'package:traveller_app/data/models/ticket.dart';
 import 'package:traveller_app/interfaces/i_api_traveller.dart';
-import 'package:http/http.dart' as http;
 
 import '../models/search.dart';
 import 'http_client_service.dart';
@@ -17,8 +16,15 @@ class TravellerDataHttp implements IApiTraveller {
   late final HttpTokenService _httpTokenService;
   late bool _isHttpInitialized = false;
 
-  final String _baseURL = "http://test:20/";
-  final String _routeEndPoint = "/route";
+  final String _baseURL = "http://10.108.149.13:3000/";
+
+  final String _routesCtr = "routes/";
+  final String _allRouteEndPoint = "all";
+  final String _searchRoutesEndPoint = "search";
+
+  final String _ticketsCtr = "tickets/";
+  final String _allTicketsEndPoint = "all";
+  final String _purchaseTicketEndPoint = "purchase";
 
   Future<void> _initializeHttpService() async {
     if (_isHttpInitialized) return;
@@ -41,7 +47,7 @@ class TravellerDataHttp implements IApiTraveller {
   @override
   Future<List<TrainRoute>> getAllRoutes() async {
     await _initializeHttpService();
-    final request = await _httpClientService.httpClient.getUrl(Uri.parse(_baseURL + _routeEndPoint));
+    final request = await _httpClientService.httpClient.getUrl(Uri.parse(_baseURL + _routesCtr + _allRouteEndPoint));
     request.headers.add(HttpHeaders.contentTypeHeader, 'application/json');
 
     var response = await request.close();
@@ -66,7 +72,7 @@ class TravellerDataHttp implements IApiTraveller {
   @override
   Future<List<TrainRoute>> getRelevantRoutes(Search search) async {
     await _initializeHttpService();
-    final request = await _httpClientService.httpClient.getUrl(Uri.parse(_baseURL + _routeEndPoint));
+    final request = await _httpClientService.httpClient.getUrl(Uri.parse(_baseURL + _routesCtr + _searchRoutesEndPoint));
     request.headers.add(HttpHeaders.contentTypeHeader, 'application/json');
     request.add(utf8.encode(json.encode(search.toJson())));
 
@@ -93,7 +99,7 @@ class TravellerDataHttp implements IApiTraveller {
   Future<List<Ticket>> getAllTickets() async {
     await _initializeHttpService();
     String token = await _httpTokenService.getLocalAccessToken();
-    final request = await _httpClientService.httpClient.getUrl(Uri.parse(_baseURL + _routeEndPoint));
+    final request = await _httpClientService.httpClient.getUrl(Uri.parse(_baseURL + _ticketsCtr + _allTicketsEndPoint));
     request.headers.add(HttpHeaders.contentTypeHeader, 'application/json');
     request.headers.add(HttpHeaders.authorizationHeader, "Bearer $token");
 
@@ -122,7 +128,7 @@ class TravellerDataHttp implements IApiTraveller {
   Future<void> purchaseTicket(String routeId) async {
     await _initializeHttpService();
     String token = await _httpTokenService.getLocalAccessToken();
-    final request = await _httpClientService.httpClient.postUrl(Uri.parse(_baseURL + _routeEndPoint));
+    final request = await _httpClientService.httpClient.postUrl(Uri.parse(_baseURL + _ticketsCtr + _purchaseTicketEndPoint));
     request.headers.add(HttpHeaders.contentTypeHeader, 'application/json');
     request.headers.add(HttpHeaders.authorizationHeader, "Bearer $token");
 

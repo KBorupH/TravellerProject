@@ -28,36 +28,11 @@ class WebMain extends StatefulWidget {
 class _WebMainState extends State<WebMain> {
   @override
   void initState() {
-    messageListener();
     super.initState();
   }
 
-  Future<void> messageListener() async {
-    NotificationSettings settings =
-        await FirebaseMessaging.instance.requestPermission(
-      alert: true,
-      announcement: true,
-      badge: true,
-      carPlay: true,
-      criticalAlert: true,
-      provisional: true,
-      sound: true,
-    );
 
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      RemoteNotification? notification = message.notification;
-      String? title = notification?.title;
-      String? body = notification?.body;
-      if (notification != null && title != null && body != null) {
-        showToastWidget(
-            WebToastNotificationWidget(title: title, body: body),
-            position: ToastPosition.bottom,
-            duration: const Duration(seconds: 4),
-          dismissOtherToast: true,
-        );
-      }
-    });
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -83,11 +58,40 @@ class _WebMainState extends State<WebMain> {
   }
 }
 
+Future<void> messageListener() async {
+  NotificationSettings settings =
+  await FirebaseMessaging.instance.requestPermission(
+    alert: true,
+    announcement: true,
+    badge: true,
+    carPlay: true,
+    criticalAlert: true,
+    provisional: true,
+    sound: true,
+  );
+
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    RemoteNotification? notification = message.notification;
+    String? title = notification?.title;
+    String? body = notification?.body;
+    if (notification != null && title != null && body != null) {
+      showToastWidget(
+        WebToastNotificationWidget(title: title, body: body),
+        position: ToastPosition.bottom,
+        duration: const Duration(seconds: 4),
+        dismissOtherToast: true,
+      );
+    }
+  });
+}
+
 GoRouter getWebRouter() {
   final GlobalKey<NavigatorState> _rootNavigatorKey =
       GlobalKey<NavigatorState>();
   final GlobalKey<NavigatorState> _shellNavigatorKey =
       GlobalKey<NavigatorState>();
+
+  messageListener();
 
   final TicketBloc ticketBloc = locator<TicketBloc>();
   final RouteBloc routeBloc = locator<RouteBloc>();
