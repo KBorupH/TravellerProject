@@ -1,10 +1,9 @@
 ﻿@{
 	List<string> staffList = GetListOfStaff();
-	for (int i = 0; i < staffList.Count(); i += 2)
+	for (int i = 0; i < staffList.Count(); i ++)
 	{
 		<div class="box WorkerBoxInList">
-			<h1>@staffList[i]</h1>
-			<h1>@staffList[i + 1]</h1>
+			<h1 style="font-size:1vw">@staffList[i]</h1>
 		</div>
 
 	}
