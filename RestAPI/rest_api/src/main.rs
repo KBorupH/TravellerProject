@@ -1,14 +1,4 @@
-// mod authorizer;
 mod endpoint;
-// mod scope;
-
-// use crate::scope::CustomClaims;
-// use aliri::{
-//     jwa::Algorithm,
-//     jwt::{Audience, CoreValidator},
-// };
-// use aliri_oauth2::Authority;
-// use aliri_tower::Oauth2Authorizer;
 use anyhow::Result;
 use axum::{
     http::StatusCode,
@@ -40,6 +30,7 @@ async fn main() -> Result<()> {
     let app = Router::new()
         .route("/routes", get(train_route::get_train_route))
         .route("/login", post(login::obtain_token))
+        .route("/register", post(register::obtain_token))
         .with_state(db);
     // .layer(authorizer.jwt_layer(authority));
 
