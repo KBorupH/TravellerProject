@@ -55,3 +55,34 @@ impl Linked for PassengerToRoute {
         ]
     }
 }
+
+pub struct RouteToRoadmap;
+
+impl Linked for RouteToRoadmap {
+    type FromEntity = Route;
+
+    type ToEntity = Roadmap;
+
+    fn link(&self) -> Vec<RelationDef> {
+        vec![
+            entity::route_destination::Relation::Route.def(),
+            entity::route_destination::Relation::Destination.def(),
+            entity::destination::Relation::Roadmap.def(),
+        ]
+    }
+}
+
+pub struct RouteDestinationToRoadmap;
+
+impl Linked for RouteDestinationToRoadmap {
+    type FromEntity = RouteDestination;
+
+    type ToEntity = Roadmap;
+
+    fn link(&self) -> Vec<RelationDef> {
+        vec![
+            entity::route_destination::Relation::Destination.def(),
+            entity::destination::Relation::Roadmap.def(),
+        ]
+    }
+}
