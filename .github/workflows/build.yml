@@ -19,15 +19,7 @@ jobs:
       
       - name: Install dependencies
         run: |
-          if [[ "${{ runner.os }}" == "Linux" ]]; then
-            sudo apt-get install -y gcc
-          elif [[ "${{ runner.os }}" == "Windows" ]]; then
-            choco install mingw --version 8.1.0 -y
-          elif [[ "${{ runner.os }}" == "macOS" ]]; then
-            brew install gcc
-          fi
-
-        
+          choco install mingw --version 8.1.0 -y
       - name: Build Rust Projects with Cross
         uses: houseabsolute/actions-rust-cross@v0.0.9
         with:
