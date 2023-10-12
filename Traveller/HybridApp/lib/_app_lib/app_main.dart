@@ -4,8 +4,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
-import 'package:traveller_app/_web_lib/widgets/web_toast_notification_widget.dart';
 import '../data/bloc/route_bloc.dart';
 import '../data/bloc/ticket_bloc.dart';
 import 'app_start.dart';
@@ -95,7 +93,7 @@ class _AppMainState extends State<AppMain> {
   }
 
   void _showNotification(RemoteMessage message) {
-    NotificationDetails notificationDetails = NotificationDetails();
+    NotificationDetails notificationDetails = const NotificationDetails();
     if (Platform.isAndroid) {
       AndroidNotificationChannel androidChannel = AndroidNotificationChannel(
         message.notification!.android!.channelId.toString(),

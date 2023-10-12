@@ -43,15 +43,21 @@ class TravellerWebDataHttp implements IApiTraveller {
 
   @override
   Future<List<TrainRoute>> getAllRoutes() async {
-    final request = await _httpClientService.httpClient.getUrl(Uri.parse(_baseURL + _routesCtr + _allRouteEndPoint));
-    request.headers.add(HttpHeaders.contentTypeHeader, 'application/json');
+    await _initializeHttpService();
 
-    var response = await request.close();
+    Uri requestUri = Uri.parse(_baseURL + _routesCtr + _allRouteEndPoint);
+    Map<String, String> requestHeader = {
+      "Content-Type": "application/json",
+    };
+
+    var response = await _httpClient.get(
+        requestUri,
+        headers: requestHeader);
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
-      String responseBody = await response.transform(utf8.decoder).join();
+      String responseBody = json.decode(utf8.decode(response.bodyBytes));
 
       List<TrainRoute> trainRoutes = (json.decode(responseBody) as List)
           .map((i) => TrainRoute.fromJson(i)).toList();
@@ -68,16 +74,22 @@ class TravellerWebDataHttp implements IApiTraveller {
   @override
   Future<List<TrainRoute>> getRelevantRoutes(Search search) async {
     await _initializeHttpService();
-    final request = await _httpClientService.httpClient.getUrl(Uri.parse(_baseURL + _routesCtr + _searchRoutesEndPoint));
-    request.headers.add(HttpHeaders.contentTypeHeader, 'application/json');
-    request.add(utf8.encode(json.encode(search.toJson())));
 
-    var response = await request.close();
+    Uri requestUri = Uri.parse(_baseURL + _routesCtr + _searchRoutesEndPoint);
+    Map<String, String> requestHeader = {
+      "Content-Type": "application/json",
+    };
+
+    var response = await _httpClient.post(
+        requestUri,
+        headers: requestHeader,
+        body: json.encode(search.toJson()),
+        encoding: Encoding.getByName("UTF-8"));
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
-      String responseBody = await response.transform(utf8.decoder).join();
+      String responseBody = json.decode(utf8.decode(response.bodyBytes));
 
       List<TrainRoute> trainRoutes = (json.decode(responseBody) as List)
           .map((i) => TrainRoute.fromJson(i)).toList();
@@ -95,16 +107,22 @@ class TravellerWebDataHttp implements IApiTraveller {
   Future<List<Ticket>> getAllTickets() async {
     await _initializeHttpService();
     String token = await _httpTokenService.getLocalAccessToken();
-    final request = await _httpClientService.httpClient.getUrl(Uri.parse(_baseURL + _ticketsCtr + _allTicketsEndPoint));
-    request.headers.add(HttpHeaders.contentTypeHeader, 'application/json');
-    request.headers.add(HttpHeaders.authorizationHeader, "Bearer $token");
 
-    var response = await request.close();
+    Uri requestUri = Uri.parse(_baseURL + _ticketsCtr + _allTicketsEndPoint);
+    Map<String, String> requestHeader = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer $token",
+    };
+
+    var response = await _httpClient.get(
+        requestUri,
+        headers: requestHeader);
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
-      String responseBody = await response.transform(utf8.decoder).join();
+      String responseBody = json.decode(utf8.decode(response.bodyBytes));
+
       List<Ticket> tickets = (json.decode(responseBody) as List)
           .map((i) => Ticket.fromJson(i)).toList();
 
@@ -124,12 +142,18 @@ class TravellerWebDataHttp implements IApiTraveller {
   Future<void> purchaseTicket(String routeId) async {
     await _initializeHttpService();
     String token = await _httpTokenService.getLocalAccessToken();
-    final request = await _httpClientService.httpClient.postUrl(Uri.parse(_baseURL + _ticketsCtr + _purchaseTicketEndPoint));
-    request.headers.add(HttpHeaders.contentTypeHeader, 'application/json');
-    request.headers.add(HttpHeaders.authorizationHeader, "Bearer $token");
 
-    var response = await request.close();
+    Uri requestUri = Uri.parse(_baseURL + _ticketsCtr + _purchaseTicketEndPoint);
+    Map<String, String> requestHeader = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer $token",
+    };
 
+    var response = await _httpClient.post(
+        requestUri,
+        headers: requestHeader,
+        body: json.encode(routeId),
+        encoding: Encoding.getByName("UTF-8"));
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response

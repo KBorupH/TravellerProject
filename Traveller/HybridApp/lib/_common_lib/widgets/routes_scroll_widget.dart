@@ -5,7 +5,6 @@ import 'package:traveller_app/data/bloc/events/route_events.dart';
 import 'package:traveller_app/data/bloc/states/route_states.dart';
 
 import '../../data/bloc/route_bloc.dart';
-import '../../data/models/train_route.dart';
 
 class RoutesScrollWidget extends StatefulWidget {
   const RoutesScrollWidget({super.key});

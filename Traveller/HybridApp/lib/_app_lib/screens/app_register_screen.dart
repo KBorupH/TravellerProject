@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:traveller_app/_app_lib/notifiers/app_page_notifier.dart';
 
 import '../../data/models/login.dart';

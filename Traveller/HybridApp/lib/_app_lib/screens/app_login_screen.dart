@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:traveller_app/_app_lib/notifiers/app_drawer_notifier.dart';
 import 'package:traveller_app/_app_lib/notifiers/app_page_notifier.dart';
 
@@ -61,14 +60,14 @@ class _AppLoginScreenState extends State<AppLoginScreen> {
                   child: const Text("Submit"),
                   onPressed: () async {
                     if (_formLoginKey.currentState!.validate()) {
-                      final _api = locator<
+                      final api = locator<
                           IApiTraveller>(); //Using the locator to get the Api interface
 
                       final login = Login(
                           email: ctrEmail.value.text,
                           password: ctrPassword.value.text);
 
-                      if (await _api.checkLogin(login)) {
+                      if (await api.checkLogin(login)) {
                         appPageNotifier.changePage(AppPages.home);
                         appDrawerNotifier.changeLoginState(true);
                       }

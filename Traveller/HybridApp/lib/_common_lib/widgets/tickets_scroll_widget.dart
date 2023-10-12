@@ -5,7 +5,6 @@ import 'package:traveller_app/data/bloc/states/ticket_states.dart';
 
 import '../../data/bloc/events/ticket_events.dart';
 import '../../data/bloc/ticket_bloc.dart';
-import '../../data/models/ticket.dart';
 
 class TicketsScrollWidget extends StatefulWidget {
   const TicketsScrollWidget({super.key});

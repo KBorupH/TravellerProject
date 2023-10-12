@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:traveller_app/_common_lib/widgets/route_widget.dart';
 import 'package:traveller_app/_common_lib/widgets/routes_scroll_widget.dart';
 import 'package:traveller_app/_web_lib/widgets/web_search_widget.dart';
-
-import '../../data/models/train_route.dart';
 
 class WebHomeScreen extends StatefulWidget {
   const WebHomeScreen({super.key});

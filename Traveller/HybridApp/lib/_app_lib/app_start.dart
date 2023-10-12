@@ -33,7 +33,7 @@ class _AppStartState extends State<AppStart> {
     final RouteBloc routeBloc = BlocProvider.of<RouteBloc>(context);
 
     // Method to open and close menu drawer.
-    // Miniminzes Context pops.
+    // Minimizes Context pops.
     toggleDrawer() async {
       if (_scaffoldKey.currentState != null) {
         if (_scaffoldKey.currentState!.isDrawerOpen) {

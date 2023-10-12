@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:traveller_app/_common_lib/widgets/routes_scroll_widget.dart';
 
-import '../../_common_lib/widgets/route_widget.dart';
 import '../widgets/app_search_widget.dart';
-import '../../data/models/train_route.dart';
 
 class AppHomeScreen extends StatefulWidget {
   const AppHomeScreen({super.key});

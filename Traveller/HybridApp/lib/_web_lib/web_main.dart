@@ -86,9 +86,9 @@ Future<void> messageListener() async {
 }
 
 GoRouter getWebRouter() {
-  final GlobalKey<NavigatorState> _rootNavigatorKey =
+  final GlobalKey<NavigatorState> rootNavigatorKey =
       GlobalKey<NavigatorState>();
-  final GlobalKey<NavigatorState> _shellNavigatorKey =
+  final GlobalKey<NavigatorState> shellNavigatorKey =
       GlobalKey<NavigatorState>();
 
   messageListener();
@@ -97,11 +97,11 @@ GoRouter getWebRouter() {
   final RouteBloc routeBloc = locator<RouteBloc>();
 
   return GoRouter(
-      navigatorKey: _rootNavigatorKey,
+      navigatorKey: rootNavigatorKey,
       initialLocation: WebPages.home.toRoutePath,
       routes: [
         ShellRoute(
-          navigatorKey: _shellNavigatorKey,
+          navigatorKey: shellNavigatorKey,
           builder: (context, state, child) {
             return WebNavigationBar(body: child);
           },

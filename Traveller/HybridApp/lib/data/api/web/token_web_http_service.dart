@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter_session_manager/flutter_session_manager.dart';
-import 'package:traveller_app/data/api/app/client_app_http_service.dart';
 
 import 'package:http/http.dart';
 import '../../models/login.dart';
@@ -29,7 +28,8 @@ class TokenWebHttpService {
       "Content-Type": "application/json",
     };
 
-    var response = await _httpClient.post(requestUri,
+    var response = await _httpClient.post(
+        requestUri,
         headers: requestHeader,
         body: json.encode(login.toJson()),
         encoding: Encoding.getByName("UTF-8"));
