@@ -1,4 +1,9 @@
-﻿<div class="TrainLog box">
+﻿using System;
+using Npgsql;
+using System.Data;
+
+
+<div class="TrainLog box">
     <style>
         .color-box {
             border-radius: 15px;
@@ -12,16 +17,15 @@
         }
     </style>
     <div class="color-box">
-        @for (int i = 0; i < 10; i++)
+    @for (int i = 0; i < 5; i++)
         {
-            <p>This is white text in a black box.</p>
-        }
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <TrainLog>Display Value from Server</TrainLog>
+            </head>
+        </html>
 
+        }
     </div>
 </div>
-
-
-
-@code {
-
-}
