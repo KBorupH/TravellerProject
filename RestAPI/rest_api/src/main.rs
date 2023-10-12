@@ -1,4 +1,4 @@
-mod authorizer;
+// mod authorizer;
 mod endpoint;
 // mod scope;
 
