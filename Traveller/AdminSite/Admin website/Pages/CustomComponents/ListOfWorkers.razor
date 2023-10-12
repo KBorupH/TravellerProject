@@ -13,7 +13,7 @@
 	private List<string> GetListOfStaff()
 	{
 		Model.IDataAccess DataAccess = new Model.DataAccess();
-		List<string> result = DataAccess.GetBySubject(Consts.STAFFS);
+		List<string> result = DataAccess.GetBySubject(Consts.STAFFS, true);
 		return result;
 
 	}

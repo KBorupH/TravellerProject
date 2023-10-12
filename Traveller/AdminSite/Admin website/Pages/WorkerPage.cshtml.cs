@@ -12,25 +12,10 @@ namespace Admin_website.Pages
         }
         public void OnPostCreate(string inputNameCreate)
         {
-			Model.DataAccess dataAccess = new Model.DataAccess();
-			NpgsqlConnection conn = dataAccess.GetConnection();
+			Model.IDataAccess DA = new Model.DataAccess();
+            string cmd = $"CALL NewStaff(add_person('{inputNameCreate}'))";
+			DA.GetBySubject(cmd, false);
 
-			using (NpgsqlCommand cmd = new NpgsqlCommand($"CALL NewStaff(add_person('{inputNameCreate}'))", conn))
-			{
-				//cmd.CommandType = System.Data.CommandType.StoredProcedure;
-
-				try
-				{
-					conn.Open();
-					cmd.ExecuteNonQuery();
-					conn.Close();
-				}
-				catch (Exception)
-				{
-					throw; // Handles the exception
-				}
-
-			}
 		}
     }
 }

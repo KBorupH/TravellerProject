@@ -4,7 +4,7 @@
     {
 
         Model.IDataAccess DA = new Model.DataAccess();
-        List<string> result = DA.GetBySubject(Consts.TRAINS);
+        List<string> result = DA.GetBySubject(Consts.TRAINS, true);
         if (result.Count() > 0)
         {
             return result.Count();

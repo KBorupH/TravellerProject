@@ -2,6 +2,6 @@
 {
     public interface IDataAccess
     {
-        List<string> GetBySubject(string subject);
+        List<string> GetBySubject(string subject, bool isStoredprocedure);
     }
 }

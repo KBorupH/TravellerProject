@@ -19,14 +19,17 @@ namespace Admin_website.Model
         /// </summary>
         /// <param name="subject"></param>
         /// <returns></returns>
-        public List<string> GetBySubject(string subject)
+        public List<string> GetBySubject(string subject, bool isStoredprocedure)
         {
             List<string> result = new List<string>();
             NpgsqlConnection conn = GetConnection();
 
             using (NpgsqlCommand cmd = new NpgsqlCommand(subject, conn))
             {
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+				if (isStoredprocedure)
+				{
+					cmd.CommandType = System.Data.CommandType.StoredProcedure;
+				}                
                 try
                 {
                     conn.Open();
