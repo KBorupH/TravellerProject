@@ -475,224 +475,26 @@ entity_handler v0.1.0 (/Users/emil/Documents/TravellerProject/RestAPI/entity_han
 └── serde v1.0.188 (*)
 
 rest_api v0.1.0 (/Users/emil/Documents/TravellerProject/RestAPI/rest_api)
-├── aliri v0.6.2
-│   ├── aliri_base64 v0.1.7
-│   │   ├── base64 v0.21.4
-│   │   └── serde v1.0.188 (*)
-│   ├── aliri_braid v0.4.0
-│   │   └── aliri_braid_impl v0.4.0 (proc-macro)
-│   │       ├── proc-macro2 v1.0.69 (*)
-│   │       ├── quote v1.0.33 (*)
-│   │       └── syn v2.0.38 (*)
-│   ├── aliri_clock v0.1.4
-│   │   └── serde v1.0.188 (*)
-│   ├── once_cell v1.18.0
-│   ├── regex v1.9.6
-│   │   ├── aho-corasick v1.1.1
-│   │   │   └── memchr v2.6.4
-│   │   ├── memchr v2.6.4
-│   │   ├── regex-automata v0.3.9
-│   │   │   ├── aho-corasick v1.1.1 (*)
-│   │   │   ├── memchr v2.6.4
-│   │   │   └── regex-syntax v0.7.5
-│   │   └── regex-syntax v0.7.5
-│   ├── ring v0.16.20
-│   │   ├── spin v0.5.2
-│   │   └── untrusted v0.7.1
-│   │   [build-dependencies]
-│   │   └── cc v1.0.83 (*)
-│   ├── serde v1.0.188 (*)
-│   ├── serde_json v1.0.107 (*)
-│   └── thiserror v1.0.49 (*)
-├── aliri_axum v0.3.0
-│   ├── aliri v0.6.2 (*)
-│   ├── aliri_oauth2 v0.10.0
-│   │   ├── aliri v0.6.2 (*)
-│   │   ├── aliri_braid v0.4.0 (*)
-│   │   ├── aliri_clock v0.1.4 (*)
-│   │   ├── aliri_traits v0.1.1
-│   │   ├── arc-swap v1.6.0
-│   │   ├── compact_str v0.7.1
-│   │   │   ├── castaway v0.2.2
-│   │   │   │   └── rustversion v1.0.14 (proc-macro)
-│   │   │   ├── cfg-if v1.0.0
-│   │   │   ├── itoa v1.0.9
-│   │   │   ├── ryu v1.0.15
-│   │   │   ├── serde v1.0.188 (*)
-│   │   │   └── static_assertions v1.1.0
-│   │   ├── reqwest v0.11.22
-│   │   │   ├── base64 v0.21.4
-│   │   │   ├── bytes v1.5.0
-│   │   │   ├── encoding_rs v0.8.33
-│   │   │   │   └── cfg-if v1.0.0
-│   │   │   ├── futures-core v0.3.28
-│   │   │   ├── futures-util v0.3.28 (*)
-│   │   │   ├── h2 v0.3.21
-│   │   │   │   ├── bytes v1.5.0
-│   │   │   │   ├── fnv v1.0.7
-│   │   │   │   ├── futures-core v0.3.28
-│   │   │   │   ├── futures-sink v0.3.28
-│   │   │   │   ├── futures-util v0.3.28 (*)
-│   │   │   │   ├── http v0.2.9
-│   │   │   │   │   ├── bytes v1.5.0
-│   │   │   │   │   ├── fnv v1.0.7
-│   │   │   │   │   └── itoa v1.0.9
-│   │   │   │   ├── indexmap v1.9.3
-│   │   │   │   │   └── hashbrown v0.12.3
-│   │   │   │   │   [build-dependencies]
-│   │   │   │   │   └── autocfg v1.1.0
-│   │   │   │   ├── slab v0.4.9 (*)
-│   │   │   │   ├── tokio v1.33.0 (*)
-│   │   │   │   ├── tokio-util v0.7.9
-│   │   │   │   │   ├── bytes v1.5.0
-│   │   │   │   │   ├── futures-core v0.3.28
-│   │   │   │   │   ├── futures-sink v0.3.28
-│   │   │   │   │   ├── pin-project-lite v0.2.13
-│   │   │   │   │   ├── tokio v1.33.0 (*)
-│   │   │   │   │   └── tracing v0.1.37 (*)
-│   │   │   │   └── tracing v0.1.37 (*)
-│   │   │   ├── http v0.2.9 (*)
-│   │   │   ├── http-body v0.4.5
-│   │   │   │   ├── bytes v1.5.0
-│   │   │   │   ├── http v0.2.9 (*)
-│   │   │   │   └── pin-project-lite v0.2.13
-│   │   │   ├── hyper v0.14.27
-│   │   │   │   ├── bytes v1.5.0
-│   │   │   │   ├── futures-channel v0.3.28 (*)
-│   │   │   │   ├── futures-core v0.3.28
-│   │   │   │   ├── futures-util v0.3.28 (*)
-│   │   │   │   ├── h2 v0.3.21 (*)
-│   │   │   │   ├── http v0.2.9 (*)
-│   │   │   │   ├── http-body v0.4.5 (*)
-│   │   │   │   ├── httparse v1.8.0
-│   │   │   │   ├── httpdate v1.0.3
-│   │   │   │   ├── itoa v1.0.9
-│   │   │   │   ├── pin-project-lite v0.2.13
-│   │   │   │   ├── socket2 v0.4.9
-│   │   │   │   │   └── libc v0.2.149
-│   │   │   │   ├── tokio v1.33.0 (*)
-│   │   │   │   ├── tower-service v0.3.2
-│   │   │   │   ├── tracing v0.1.37 (*)
-│   │   │   │   └── want v0.3.1
-│   │   │   │       └── try-lock v0.2.4
-│   │   │   ├── hyper-rustls v0.24.1
-│   │   │   │   ├── futures-util v0.3.28 (*)
-│   │   │   │   ├── http v0.2.9 (*)
-│   │   │   │   ├── hyper v0.14.27 (*)
-│   │   │   │   ├── rustls v0.21.7
-│   │   │   │   │   ├── log v0.4.20
-│   │   │   │   │   ├── ring v0.16.20 (*)
-│   │   │   │   │   ├── rustls-webpki v0.101.6
-│   │   │   │   │   │   ├── ring v0.16.20 (*)
-│   │   │   │   │   │   └── untrusted v0.7.1
-│   │   │   │   │   └── sct v0.7.0
-│   │   │   │   │       ├── ring v0.16.20 (*)
-│   │   │   │   │       └── untrusted v0.7.1
-│   │   │   │   ├── rustls-native-certs v0.6.3
-│   │   │   │   │   ├── rustls-pemfile v1.0.3
-│   │   │   │   │   │   └── base64 v0.21.4
-│   │   │   │   │   └── security-framework v2.9.2
-│   │   │   │   │       ├── bitflags v1.3.2
-│   │   │   │   │       ├── core-foundation v0.9.3
-│   │   │   │   │       │   ├── core-foundation-sys v0.8.4
-│   │   │   │   │       │   └── libc v0.2.149
-│   │   │   │   │       ├── core-foundation-sys v0.8.4
-│   │   │   │   │       ├── libc v0.2.149
-│   │   │   │   │       └── security-framework-sys v2.9.1
-│   │   │   │   │           ├── core-foundation-sys v0.8.4
-│   │   │   │   │           └── libc v0.2.149
-│   │   │   │   ├── tokio v1.33.0 (*)
-│   │   │   │   └── tokio-rustls v0.24.1
-│   │   │   │       ├── rustls v0.21.7 (*)
-│   │   │   │       └── tokio v1.33.0 (*)
-│   │   │   ├── hyper-tls v0.5.0
-│   │   │   │   ├── bytes v1.5.0
-│   │   │   │   ├── hyper v0.14.27 (*)
-│   │   │   │   ├── native-tls v0.2.11
-│   │   │   │   │   ├── lazy_static v1.4.0
-│   │   │   │   │   ├── libc v0.2.149
-│   │   │   │   │   ├── security-framework v2.9.2 (*)
-│   │   │   │   │   ├── security-framework-sys v2.9.1 (*)
-│   │   │   │   │   └── tempfile v3.8.0 (*)
-│   │   │   │   ├── tokio v1.33.0 (*)
-│   │   │   │   └── tokio-native-tls v0.3.1
-│   │   │   │       ├── native-tls v0.2.11 (*)
-│   │   │   │       └── tokio v1.33.0 (*)
-│   │   │   ├── ipnet v2.8.0
-│   │   │   ├── log v0.4.20
-│   │   │   ├── mime v0.3.17
-│   │   │   ├── native-tls v0.2.11 (*)
-│   │   │   ├── once_cell v1.18.0
-│   │   │   ├── percent-encoding v2.3.0
-│   │   │   ├── pin-project-lite v0.2.13
-│   │   │   ├── rustls v0.21.7 (*)
-│   │   │   ├── rustls-pemfile v1.0.3 (*)
-│   │   │   ├── serde v1.0.188 (*)
-│   │   │   ├── serde_json v1.0.107 (*)
-│   │   │   ├── serde_urlencoded v0.7.1
-│   │   │   │   ├── form_urlencoded v1.2.0 (*)
-│   │   │   │   ├── itoa v1.0.9
-│   │   │   │   ├── ryu v1.0.15
-│   │   │   │   └── serde v1.0.188 (*)
-│   │   │   ├── system-configuration v0.5.1
-│   │   │   │   ├── bitflags v1.3.2
-│   │   │   │   ├── core-foundation v0.9.3 (*)
-│   │   │   │   └── system-configuration-sys v0.5.0
-│   │   │   │       ├── core-foundation-sys v0.8.4
-│   │   │   │       └── libc v0.2.149
-│   │   │   ├── tokio v1.33.0 (*)
-│   │   │   ├── tokio-native-tls v0.3.1 (*)
-│   │   │   ├── tokio-rustls v0.24.1 (*)
-│   │   │   ├── tower-service v0.3.2
-│   │   │   ├── url v2.4.1 (*)
-│   │   │   └── webpki-roots v0.25.2
-│   │   ├── serde v1.0.188 (*)
-│   │   ├── thiserror v1.0.49 (*)
-│   │   ├── tokio v1.33.0 (*)
-│   │   └── tracing v0.1.37 (*)
-│   ├── aliri_traits v0.1.1
+├── anyhow v1.0.75
+├── axum v0.6.20
+│   ├── async-trait v0.1.73 (proc-macro) (*)
 │   ├── axum-core v0.3.4
 │   │   ├── async-trait v0.1.73 (proc-macro) (*)
 │   │   ├── bytes v1.5.0
 │   │   ├── futures-util v0.3.28 (*)
-│   │   ├── http v0.2.9 (*)
-│   │   ├── http-body v0.4.5 (*)
+│   │   ├── http v0.2.9
+│   │   │   ├── bytes v1.5.0
+│   │   │   ├── fnv v1.0.7
+│   │   │   └── itoa v1.0.9
+│   │   ├── http-body v0.4.5
+│   │   │   ├── bytes v1.5.0
+│   │   │   ├── http v0.2.9 (*)
+│   │   │   └── pin-project-lite v0.2.13
 │   │   ├── mime v0.3.17
 │   │   ├── tower-layer v0.3.2
 │   │   └── tower-service v0.3.2
 │   │   [build-dependencies]
 │   │   └── rustversion v1.0.14 (proc-macro)
-│   ├── http v0.2.9 (*)
-│   └── once_cell v1.18.0
-├── aliri_clock v0.1.4 (*)
-├── aliri_oauth2 v0.10.0 (*)
-├── aliri_tower v0.5.0
-│   ├── aliri v0.6.2 (*)
-│   ├── aliri_oauth2 v0.10.0 (*)
-│   ├── aliri_traits v0.1.1
-│   ├── bytes v1.5.0
-│   ├── http v0.2.9 (*)
-│   ├── http-body v0.4.5 (*)
-│   ├── serde v1.0.188 (*)
-│   ├── thiserror v1.0.49 (*)
-│   ├── tower-http v0.4.4
-│   │   ├── bitflags v2.4.0
-│   │   ├── bytes v1.5.0
-│   │   ├── futures-core v0.3.28
-│   │   ├── futures-util v0.3.28 (*)
-│   │   ├── http v0.2.9 (*)
-│   │   ├── http-body v0.4.5 (*)
-│   │   ├── http-range-header v0.3.1
-│   │   ├── mime v0.3.17
-│   │   ├── pin-project-lite v0.2.13
-│   │   ├── tower-layer v0.3.2
-│   │   └── tower-service v0.3.2
-│   ├── tower-layer v0.3.2
-│   └── tracing v0.1.37 (*)
-├── anyhow v1.0.75
-├── axum v0.6.20
-│   ├── async-trait v0.1.73 (proc-macro) (*)
-│   ├── axum-core v0.3.4 (*)
 │   ├── axum-macros v0.3.8 (proc-macro)
 │   │   ├── heck v0.4.1 (*)
 │   │   ├── proc-macro2 v1.0.69 (*)
@@ -712,7 +514,45 @@ rest_api v0.1.0 (/Users/emil/Documents/TravellerProject/RestAPI/rest_api)
 │   │   └── sha1 v0.10.6 (*)
 │   ├── http v0.2.9 (*)
 │   ├── http-body v0.4.5 (*)
-│   ├── hyper v0.14.27 (*)
+│   ├── hyper v0.14.27
+│   │   ├── bytes v1.5.0
+│   │   ├── futures-channel v0.3.28 (*)
+│   │   ├── futures-core v0.3.28
+│   │   ├── futures-util v0.3.28 (*)
+│   │   ├── h2 v0.3.21
+│   │   │   ├── bytes v1.5.0
+│   │   │   ├── fnv v1.0.7
+│   │   │   ├── futures-core v0.3.28
+│   │   │   ├── futures-sink v0.3.28
+│   │   │   ├── futures-util v0.3.28 (*)
+│   │   │   ├── http v0.2.9 (*)
+│   │   │   ├── indexmap v1.9.3
+│   │   │   │   └── hashbrown v0.12.3
+│   │   │   │   [build-dependencies]
+│   │   │   │   └── autocfg v1.1.0
+│   │   │   ├── slab v0.4.9 (*)
+│   │   │   ├── tokio v1.33.0 (*)
+│   │   │   ├── tokio-util v0.7.9
+│   │   │   │   ├── bytes v1.5.0
+│   │   │   │   ├── futures-core v0.3.28
+│   │   │   │   ├── futures-sink v0.3.28
+│   │   │   │   ├── pin-project-lite v0.2.13
+│   │   │   │   ├── tokio v1.33.0 (*)
+│   │   │   │   └── tracing v0.1.37 (*)
+│   │   │   └── tracing v0.1.37 (*)
+│   │   ├── http v0.2.9 (*)
+│   │   ├── http-body v0.4.5 (*)
+│   │   ├── httparse v1.8.0
+│   │   ├── httpdate v1.0.3
+│   │   ├── itoa v1.0.9
+│   │   ├── pin-project-lite v0.2.13
+│   │   ├── socket2 v0.4.9
+│   │   │   └── libc v0.2.149
+│   │   ├── tokio v1.33.0 (*)
+│   │   ├── tower-service v0.3.2
+│   │   ├── tracing v0.1.37 (*)
+│   │   └── want v0.3.1
+│   │       └── try-lock v0.2.4
 │   ├── itoa v1.0.9
 │   ├── matchit v0.7.3
 │   ├── memchr v2.6.4
@@ -724,7 +564,11 @@ rest_api v0.1.0 (/Users/emil/Documents/TravellerProject/RestAPI/rest_api)
 │   ├── serde_path_to_error v0.1.14
 │   │   ├── itoa v1.0.9
 │   │   └── serde v1.0.188 (*)
-│   ├── serde_urlencoded v0.7.1 (*)
+│   ├── serde_urlencoded v0.7.1
+│   │   ├── form_urlencoded v1.2.0 (*)
+│   │   ├── itoa v1.0.9
+│   │   ├── ryu v1.0.15
+│   │   └── serde v1.0.188 (*)
 │   ├── sync_wrapper v0.1.2
 │   ├── tokio v1.33.0 (*)
 │   ├── tower v0.4.13
@@ -752,10 +596,25 @@ rest_api v0.1.0 (/Users/emil/Documents/TravellerProject/RestAPI/rest_api)
 │   ├── http-body v0.4.5 (*)
 │   ├── hyper v0.14.27 (*)
 │   ├── pin-project-lite v0.2.13
-│   ├── rustls v0.21.7 (*)
-│   ├── rustls-pemfile v1.0.3 (*)
+│   ├── rustls v0.21.7
+│   │   ├── log v0.4.20
+│   │   ├── ring v0.16.20
+│   │   │   ├── spin v0.5.2
+│   │   │   └── untrusted v0.7.1
+│   │   │   [build-dependencies]
+│   │   │   └── cc v1.0.83 (*)
+│   │   ├── rustls-webpki v0.101.6
+│   │   │   ├── ring v0.16.20 (*)
+│   │   │   └── untrusted v0.7.1
+│   │   └── sct v0.7.0
+│   │       ├── ring v0.16.20 (*)
+│   │       └── untrusted v0.7.1
+│   ├── rustls-pemfile v1.0.3
+│   │   └── base64 v0.21.4
 │   ├── tokio v1.33.0 (*)
-│   ├── tokio-rustls v0.24.1 (*)
+│   ├── tokio-rustls v0.24.1
+│   │   ├── rustls v0.21.7 (*)
+│   │   └── tokio v1.33.0 (*)
 │   └── tower-service v0.3.2
 ├── base64 v0.21.4
 ├── chrono v0.4.31 (*)
@@ -832,7 +691,18 @@ rest_api v0.1.0 (/Users/emil/Documents/TravellerProject/RestAPI/rest_api)
 │   │   │   │       │   [build-dependencies]
 │   │   │   │       │   └── cc v1.0.83 (*)
 │   │   │   │       └── untrusted v0.9.0
-│   │   │   ├── rustls-native-certs v0.6.3 (*)
+│   │   │   ├── rustls-native-certs v0.6.3
+│   │   │   │   ├── rustls-pemfile v1.0.3 (*)
+│   │   │   │   └── security-framework v2.9.2
+│   │   │   │       ├── bitflags v1.3.2
+│   │   │   │       ├── core-foundation v0.9.3
+│   │   │   │       │   ├── core-foundation-sys v0.8.4
+│   │   │   │       │   └── libc v0.2.149
+│   │   │   │       ├── core-foundation-sys v0.8.4
+│   │   │   │       ├── libc v0.2.149
+│   │   │   │       └── security-framework-sys v2.9.1
+│   │   │   │           ├── core-foundation-sys v0.8.4
+│   │   │   │           └── libc v0.2.149
 │   │   │   ├── tokio v1.33.0 (*)
 │   │   │   └── tokio-rustls v0.23.4
 │   │   │       ├── rustls v0.20.9 (*)
@@ -856,7 +726,62 @@ rest_api v0.1.0 (/Users/emil/Documents/TravellerProject/RestAPI/rest_api)
 │   │       ├── home v0.5.5
 │   │       └── rustix v0.38.17 (*)
 │   ├── log v0.4.20
-│   ├── reqwest v0.11.22 (*)
+│   ├── reqwest v0.11.22
+│   │   ├── base64 v0.21.4
+│   │   ├── bytes v1.5.0
+│   │   ├── encoding_rs v0.8.33
+│   │   │   └── cfg-if v1.0.0
+│   │   ├── futures-core v0.3.28
+│   │   ├── futures-util v0.3.28 (*)
+│   │   ├── h2 v0.3.21 (*)
+│   │   ├── http v0.2.9 (*)
+│   │   ├── http-body v0.4.5 (*)
+│   │   ├── hyper v0.14.27 (*)
+│   │   ├── hyper-rustls v0.24.1
+│   │   │   ├── futures-util v0.3.28 (*)
+│   │   │   ├── http v0.2.9 (*)
+│   │   │   ├── hyper v0.14.27 (*)
+│   │   │   ├── rustls v0.21.7 (*)
+│   │   │   ├── rustls-native-certs v0.6.3 (*)
+│   │   │   ├── tokio v1.33.0 (*)
+│   │   │   └── tokio-rustls v0.24.1 (*)
+│   │   ├── hyper-tls v0.5.0
+│   │   │   ├── bytes v1.5.0
+│   │   │   ├── hyper v0.14.27 (*)
+│   │   │   ├── native-tls v0.2.11
+│   │   │   │   ├── lazy_static v1.4.0
+│   │   │   │   ├── libc v0.2.149
+│   │   │   │   ├── security-framework v2.9.2 (*)
+│   │   │   │   ├── security-framework-sys v2.9.1 (*)
+│   │   │   │   └── tempfile v3.8.0 (*)
+│   │   │   ├── tokio v1.33.0 (*)
+│   │   │   └── tokio-native-tls v0.3.1
+│   │   │       ├── native-tls v0.2.11 (*)
+│   │   │       └── tokio v1.33.0 (*)
+│   │   ├── ipnet v2.8.0
+│   │   ├── log v0.4.20
+│   │   ├── mime v0.3.17
+│   │   ├── native-tls v0.2.11 (*)
+│   │   ├── once_cell v1.18.0
+│   │   ├── percent-encoding v2.3.0
+│   │   ├── pin-project-lite v0.2.13
+│   │   ├── rustls v0.21.7 (*)
+│   │   ├── rustls-pemfile v1.0.3 (*)
+│   │   ├── serde v1.0.188 (*)
+│   │   ├── serde_json v1.0.107 (*)
+│   │   ├── serde_urlencoded v0.7.1 (*)
+│   │   ├── system-configuration v0.5.1
+│   │   │   ├── bitflags v1.3.2
+│   │   │   ├── core-foundation v0.9.3 (*)
+│   │   │   └── system-configuration-sys v0.5.0
+│   │   │       ├── core-foundation-sys v0.8.4
+│   │   │       └── libc v0.2.149
+│   │   ├── tokio v1.33.0 (*)
+│   │   ├── tokio-native-tls v0.3.1 (*)
+│   │   ├── tokio-rustls v0.24.1 (*)
+│   │   ├── tower-service v0.3.2
+│   │   ├── url v2.4.1 (*)
+│   │   └── webpki-roots v0.25.2
 │   ├── serde v1.0.188 (*)
 │   ├── serde_json v1.0.107 (*)
 │   ├── thiserror v1.0.49 (*)
