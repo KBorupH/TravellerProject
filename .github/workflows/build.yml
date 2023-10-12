@@ -21,4 +21,4 @@ jobs:
         uses: houseabsolute/actions-rust-cross@v0.0.9
         with:
           target: ${{ matrix.target }}
-          working-directory: ./RestApi
+          working-directory: ./RestAPI
