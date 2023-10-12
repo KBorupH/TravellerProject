@@ -5,5 +5,6 @@
         void DoBySubject(string subject);
         List<string> GetListBySubject(string subject);
         int GetBySubjectCount(string subject);
+        Route[] GetAllRoutes();
     }
 }

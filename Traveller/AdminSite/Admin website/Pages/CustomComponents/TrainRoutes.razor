@@ -1,38 +1,119 @@
-﻿<div class="Train-routes box">
-	<div class="Test">
-		<h1>Route ID:</h1>
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        h1, h2, bottom-box {
+            font-size: 24px;
+        }
 
-		<h1>Station start:</h1>
-	</div>
-	@for (int i = 0; i < 2; i++)
-	{
-		<div class="Test">
-			<h1>Route ID:</h1>
+        .bottom-box {
+            width: 60%;
+            height: 120px;
+            margin-top: 100px;
+            display: flex;
+            justify-content: space-between; /* Add space between the headers */
+            align-items: center;
+            padding: 1vw;
+        }
 
-			<h1>Station start:</h1>
-		</div>
-	}
-</div>
+        .Test {
+            width: 100%;
+            height: 120px;
+            margin-top: 5px;
+            display: flex;
+            justify-content: space-between; /* Add space between the headers */
+            align-items: center;
+            display: grid;
+            gap: 4%;
+            grid-template-columns: 45% 45%;
+            padding: 1%;
+        }
 
-<style>
-	h1 {
-		font-size: 40px;
-	}
+        .second-box {
+            width: 100%;
+            height: 20px;
+            margin-top: 1px;
+            display: flex;
+            flex-direction: column; /* Stack titles vertically */
+            align-items: center; /* Center-align titles */
+            display: grid;
+            gap: 1%;
+            grid-template-columns: 33% 66%;
+            padding: 2%;
+        }
+        .header{
+            text-align: center;
+        }
 
-	.Test {
-		width: 100%;
-		height: 150px;
-		margin-top: 100px;
-		display: grid;
-		gap: 3vw;
-		grid-template-columns: 22vw 22vw;
-		padding: 1vw;
-	}
-</style>
+        .title {
+            margin-top: 0.2vw; /* Slightly reduce space between titles and headers */
+            display: grid;
+            gap: 1%;
+            grid-template-columns: 16.6%;
+            font-size: 15px;
+        }
+        #Tester{
+            display: grid;
+            gap: 1%;
+            grid-template-columns: 25% 25% 25% 25%;
+            padding: 1%;
+            margin-top: 5px;
+        }
 
-@code {
+        .data-box {
+            width: 100%;
+            height:180px;
+            margin-top: 1px;
+            display: flex;
+            flex-direction: column; /* Stack titles vertically */
+            align-items: center; /* Center-align titles */
+            display: grid;
+            gap: 1%;
+            grid-template-columns: 16.6% 16.6% 16.6% 16.6% 16.6% 16.6%;
+            padding: 2%;
+        }
+    </style>
+</head>
+<body>
+    <div class="Train-routes box">
+        <div class="Test grid-container">
+            <h1 class="header">Route</h1>
+            <h1 class="header">Station Start</h1>
+        </div>
 
-	Model.DataAccess data = new Model.DataAccess();
+        <div class="second-box">
+            <div class="Test grid-container">
+                <h2 class="title">Route ID:</h2>
+                <h2 class="title">Train ID:</h2>
+               </div>
+            <div class="Test grid-container" id="Tester">
+                
+                <h2 class="title">Route Start ID :</h2>
+              
+                <h2 class="title">Station Start Name:</h2>
+                <h2 class="title">Station Start Platforms:</h2>
+                <h2 class="title">Station Start Departure:</h2>
+            </div>
+        </div>
+        <div class="data-box">
+            @{
+                List<string> bang = new List<string>();
+                bang.Add("1");
+                bang.Add("1");
+                bang.Add("1");
+                bang.Add("Køge");
+                bang.Add("4");
+                bang.Add("12:43");
 
-	//Model.Route[] routes = data.GetAllRoutes();
-}
+                for (int i = 0; i < bang.Count; i++)
+                {
+                        <h2>@bang[i]</h2>
+
+                }
+            }
+        </div>
+    </div>
+</body>
+</html>
+
+
