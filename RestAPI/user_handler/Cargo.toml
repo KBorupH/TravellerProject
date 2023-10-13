@@ -17,3 +17,5 @@ sqlx = { version = "0.7.2", features = ["runtime-tokio", "postgres"] }
 tokio-postgres = "0.7.10"
 uuid = "1.4.1"
 reqwest = "0.11.22"
+ring = "0.17.3"
+base64 = "0.21.4"
