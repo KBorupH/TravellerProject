@@ -44,7 +44,7 @@ async fn main() -> Result<()> {
 
 async fn setup_database() -> Result<DatabaseConnection> {
     dotenv().ok();
-    let db_url = env::var("DATABASE_DEV_URL").expect("DATABASE_URL must be set");
+    let db_url = env::var("TRAVELLER_DB_URL").expect("DATABASE_URL must be set");
     let db = Database::connect(&db_url).await?;
     println!("Connected to database!");
     Ok(db)
