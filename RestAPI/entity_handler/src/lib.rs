@@ -39,6 +39,23 @@ impl Linked for PassengerToRoadmap {
     }
 }
 
+pub struct PersonToRoute;
+
+impl Linked for PersonToRoute {
+    type FromEntity = Person;
+    type ToEntity = Route;
+
+    fn link(&self) -> Vec<RelationDef> {
+        vec![
+            entity::passenger::Relation::Person.def().rev(),
+            entity::ticket::Relation::Passenger.def().rev(),
+            entity::ticket::Relation::Seat.def(),
+            entity::seat::Relation::Train.def(),
+            entity::route::Relation::Train.def().rev(),
+        ]
+    }
+}
+
 pub struct PassengerToRoute;
 
 impl Linked for PassengerToRoute {
@@ -50,8 +67,7 @@ impl Linked for PassengerToRoute {
             entity::ticket::Relation::Passenger.def().rev(),
             entity::ticket::Relation::Seat.def(),
             entity::seat::Relation::Train.def(),
-            entity::route::Relation::Train.def(),
-            entity::route_destination::Relation::Route.def(),
+            entity::route::Relation::Train.def().rev(),
         ]
     }
 }

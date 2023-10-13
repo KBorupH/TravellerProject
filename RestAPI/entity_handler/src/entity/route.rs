@@ -15,6 +15,8 @@ pub struct Model {
 pub enum Relation {
     #[sea_orm(has_many = "super::route_destination::Entity")]
     RouteDestination,
+    #[sea_orm(has_many = "super::route_notification::Entity")]
+    RouteNotification,
     #[sea_orm(
         belongs_to = "super::train::Entity",
         from = "Column::TrainId",
@@ -28,6 +30,12 @@ pub enum Relation {
 impl Related<super::route_destination::Entity> for Entity {
     fn to() -> RelationDef {
         Relation::RouteDestination.def()
+    }
+}
+
+impl Related<super::route_notification::Entity> for Entity {
+    fn to() -> RelationDef {
+        Relation::RouteNotification.def()
     }
 }
 

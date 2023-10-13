@@ -3,12 +3,15 @@
 pub use super::assigned_staff::Entity as AssignedStaff;
 pub use super::destination::Entity as Destination;
 pub use super::passenger::Entity as Passenger;
+pub use super::passenger_creds::Entity as PassengerCreds;
 pub use super::person::Entity as Person;
 pub use super::roadmap::Entity as Roadmap;
 pub use super::route::Entity as Route;
 pub use super::route_destination::Entity as RouteDestination;
+pub use super::route_notification::Entity as RouteNotification;
 pub use super::seat::Entity as Seat;
 pub use super::staff::Entity as Staff;
+pub use super::staff_creds::Entity as StaffCreds;
 pub use super::station::Entity as Station;
 pub use super::ticket::Entity as Ticket;
 pub use super::train::Entity as Train;

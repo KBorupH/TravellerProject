@@ -19,7 +19,7 @@ pub struct ReturnRoute {
 
 #[derive(Deserialize)]
 pub struct Arguments {
-    passenger_id: Uuid,
+    id: Uuid,
 }
 pub async fn get_routes(
     State(state): State<DatabaseConnection>,
@@ -27,23 +27,24 @@ pub async fn get_routes(
 ) -> Result<Json<Vec<ReturnRoute>>, ApiError> {
     println!("/routes/all has been entered!");
 
-    let Some(passenger) = Passenger::find_by_id(payload.passenger_id)
-        .one(&state)
-        .await?
-    else {
+    let Some(person) = Person::find_by_id(payload.id).one(&state).await? else {
         return Err(ApiError(anyhow!(
-            "Could not find you in the list of passengers."
+            "Could not find you in the list of people."
         )));
     };
 
+    println!("{:?}", person);
+
     let mut return_routes: Vec<ReturnRoute> = Vec::new();
 
-    for route in passenger
-        .find_linked(entity_handler::PassengerToRoute)
+    for route in person
+        .find_linked(entity_handler::PersonToRoute)
         .all(&state)
         .await?
         .iter()
     {
+        println!("in the loop");
+
         let route_destinations = route.find_related(RouteDestination).all(&state).await?;
 
         let (first, last) = route_destinations

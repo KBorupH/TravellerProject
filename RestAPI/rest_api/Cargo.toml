@@ -7,6 +7,8 @@ edition = "2021"
 
 [dependencies]
 entity_handler = { path = "../entity_handler" }
+user_handler = { path = "../user_handler" }
+
 
 anyhow = "1.0.75"
 axum = { version = "0.6.20", features = ["http2", "headers", "macros"] }

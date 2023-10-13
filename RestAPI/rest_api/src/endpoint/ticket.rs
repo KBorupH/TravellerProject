@@ -35,9 +35,11 @@ pub async fn get_tickets(
         .all(&state)
         .await?;
 
-    let mut seat = ();
+    let mut seat: Vec<Seat> = Vec::new();
 
-    for ticket in tickets.into_iter() {}
+    for ticket in tickets.into_iter() {
+        let seat = ticket.find_related(Seat).one(&state).await?.unwrap();
+    }
 
     todo!()
 }

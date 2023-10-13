@@ -6,6 +6,7 @@ use sea_orm::DatabaseConnection;
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 use tokio::runtime::Runtime;
+use user_handler::user_handler;
 
 #[derive(Serialize)]
 struct TokenRequest {
@@ -30,32 +31,14 @@ pub struct Credentials {
     email: String,
     password: String,
 }
-
 pub async fn obtain_token(
     State(state): State<DatabaseConnection>,
     Json(payload): Json<Credentials>,
-) -> Result<Json<TokenResponse>, ApiError> {
-    println!("/authenticate/login has been entered!");
-
-    let token_request = TokenRequest {
-        client_id: "EQUvFoiKGWJDCZTz6TE0MaJJsWTNi6du".to_string(),
-        client_secret: "DPXtJHdjFmGEgvDjtkt9ryGMO36HlWMdJxWorXLabnquLsWwfmneqgackt3nKo4u"
-            .to_string(),
-        audience: "traveller".to_string(),
-        grant_type: "client_credentials".to_string(),
-    };
-
-    let client = reqwest::Client::new();
-
-    let res = client
-        .post("https://dev-vtgjrzbo50ktq0do.us.auth0.com/oauth/token")
-        .json(&token_request)
-        .send()
-        .await?;
-
-    let token_response: TokenResponse = res.json().await?;
-
-    Ok(Json(token_response))
+) -> Result<Json<user_handler::TokenResponse>, ApiError> {
+    Ok(Json(user_handler::obtain_token(
+        payload.email,
+        payload.password,
+    ))?)
 }
 
 // async fn verify_token(client: &Client, token: &str) -> Result<bool, reqwest::Error> {
